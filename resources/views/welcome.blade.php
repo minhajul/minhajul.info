@@ -50,19 +50,17 @@
                         <span class="mt-1 block tracking-tight sm:text-5xl xl:text-6xl">
                             <span class="block font-extrabold text-gray-600">I'm Minhajul Islam</span>
                             <span class="block text-normal font-bold text-black text-3xl mt-3">
-                                Software and Applications Engineer at <a target="_blank" class="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a></span>
+                                Software and Applications Engineer at <a target="_blank" class="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a>
+                            </span>
                         </span>
                     </h1>
                     <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                        I mostly write Python, Django, PHP, Laravel, Livewire, Javascript, Alpine.js, Vue.js.
-
                         Experienced Software Engineer with a demonstrated history of working in the software development industry, particularly in backend application development. Skilled in Python, PHP, Django, DRF, Laravel, Javascript, MySQL, Vue.js but confident and capable enough to adapt to any stack, platform or technology.
-
                     </p>
 
                     <p class="mt-6 text-gray-500">
-                        You can also find me on <a class="text-black" href="https://twitter.com/minhaj_cse">Twitter</a> and
-                        <a class="text-black" href="https://github.com/minhajul">Github</a>.
+                        You can also find me on <a class="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a> and
+                        <a class="text-black font-bold" href="https://github.com/minhajul">Github</a>.
                     </p>
                 </div>
                 <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
