@@ -59,8 +59,8 @@
                     </p>
 
                     <p class="mt-6 text-gray-500">
-                        You can also find me on <a class="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a> and
-                        <a class="text-black font-bold" href="https://github.com/minhajul">Github</a>.
+                        You can also find me on <a target="_blank" class="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a> and
+                        <a target="_blank" class="text-black font-bold" href="https://github.com/minhajul">Github</a>.
                     </p>
                 </div>
                 <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
