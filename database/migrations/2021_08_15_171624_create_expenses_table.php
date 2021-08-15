@@ -15,19 +15,13 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->decimal('amount')
-                ->default('0.00');
-            $table->boolean('is_recurring')
-                ->default(false);
-            $table->enum('recurring_period', config('enums.recurring_period'))
-                ->nullable();
-            $table->date('next_payment_date')
-                ->nullable();
-            $table->foreignId('category_id')
-                ->constrained();
+            $table->decimal('amount') ->default('0.00');
+            $table->boolean('is_recurring')->default(false);
+            $table->enum('recurring_period', config('enums.recurring_period'))->nullable();
+            $table->date('next_payment_date')->nullable();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }
