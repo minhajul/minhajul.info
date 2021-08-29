@@ -146,7 +146,7 @@
                     </svg>
                 </button>
                 <!-- Search bar -->
-                <div class="flex-1 px-4 flex justify-between sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+                <div class="flex-1 px-4 flex justify-between lg:max-w-6xl lg:mx-auto">
                     <div class="flex-1 flex">
                         <form class="w-full flex md:ml-0" action="#" method="GET">
                             <label for="search_field" class="sr-only">Search</label>
