@@ -33,7 +33,7 @@
                             </button>
                         </div>
                         <div class="flex-shrink-0 flex items-center px-4">
-                            <a href="{{ route('home') }}">
+                            <a href="{{ route('admin.home') }}">
                                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                             </a>
                         </div>
@@ -83,7 +83,7 @@
                 <!-- Sidebar component, swap this element with another sidebar if you like -->
                 <div class="flex flex-col flex-grow bg-gray-900 pt-5 pb-4 overflow-y-auto">
                     <div class="flex items-center flex-shrink-0 px-4">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('admin.home') }}">
                             <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                         </a>
                     </div>
