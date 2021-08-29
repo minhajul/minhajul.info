@@ -23,6 +23,8 @@ class ExpenseFactory extends Factory
      */
     public function definition(): array
     {
+        $categoryIds = Category::all()->pluck('id')->toArray();
+
         return [
             'user_id' => User::first(),
             'title' => $this->faker->name('male'),
@@ -30,7 +32,7 @@ class ExpenseFactory extends Factory
             'is_recurring' => $this->faker->boolean,
             'recurring_period' => $this->faker->randomElement(config('enums.recurring_period')),
             'next_payment_date' => now(),
-            'category_id' => Category::factory()->create()
+            'category_id' => $this->faker->randomElement($categoryIds)
         ];
     }
 }
