@@ -12,39 +12,46 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
+        'is_admin',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean'
     ];
 
     // Mutator
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    // Methods
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
+    public function isUser(): bool
+    {
+        return !$this->is_admin;
+    }
+
+    public function avatarUrl(): string
+    {
+//        if (!empty($this->avatar_path)) {
+//            return Storage::url($this->avatar_path);
+//        }
+
+        return 'https://via.placeholder.com/150x150';
     }
 }

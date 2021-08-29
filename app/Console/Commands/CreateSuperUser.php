@@ -36,14 +36,14 @@ class CreateSuperUser extends Command
      */
     public function handle(): int
     {
-        if (User::exists()) {
-            $this->error('You have already been created a user, please login using that credentials.');
-            return self::FAILURE;
-        }
-
         $name = $this->ask('Input Your Name:');
 
         $email = $this->ask('Input Your Email:');
+
+        if (User::whereEmail($email)->exists()) {
+            $this->error('You have already been created a user, please login using that credentials.');
+            return self::FAILURE;
+        }
 
         $password = $this->secret('Set Password:');
         $password_confirmation = $this->secret('Write your password again:');
@@ -56,7 +56,9 @@ class CreateSuperUser extends Command
         User::create([
             'name' => $name,
             'email' => $email,
-            'password' => $password
+            'password' => $password,
+            'is_admin' => true,
+            'email_verified_at' => now()
         ]);
 
         $this->info('User has been created. Login using the given credentials.');

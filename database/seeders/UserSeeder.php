@@ -14,6 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(1)->create();
+        User::factory(1)->create([
+            'email' => 'user@gmail.com'
+        ]);
+
+        User::factory(1)->create([
+            'email' => 'admin@gmail.com',
+            'is_admin' => true
+        ]);
     }
 }
