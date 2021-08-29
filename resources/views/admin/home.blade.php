@@ -46,29 +46,22 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" x-description="Heroicon name: scale" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
                                 </svg>
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Account balance
+                                        Monthly Income
                                     </dt>
                                     <dd>
                                         <div class="text-lg font-medium text-gray-900">
-                                            $30,659.45
+                                            ${{ $setting->income ?? 0 }}
                                         </div>
                                     </dd>
                                 </dl>
                             </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-5 py-3">
-                        <div class="text-sm">
-                            <a href="#" class="font-medium text-green-700 hover:text-green-900">
-                                View all
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -77,29 +70,22 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" x-description="Heroicon name: refresh" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                 </svg>
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Pending
+                                        Spending
                                     </dt>
                                     <dd>
                                         <div class="text-lg font-medium text-gray-900">
-                                            -$19,500.00
+                                            ${{ $spending }}
                                         </div>
                                     </dd>
                                 </dl>
                             </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-5 py-3">
-                        <div class="text-sm">
-                            <a href="#" class="font-medium text-green-700 hover:text-green-900">
-                                View all
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -108,29 +94,22 @@
                     <div class="p-5">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <svg class="h-6 w-6 text-gray-400" x-description="Heroicon name: check-circle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
                             <div class="ml-5 w-0 flex-1">
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 truncate">
-                                        Processed (last 30 days)
+                                        Savings (last 30 days)
                                     </dt>
                                     <dd>
                                         <div class="text-lg font-medium text-gray-900">
-                                            $20,000
+                                            $ {{ $currentSavings }}
                                         </div>
                                     </dd>
                                 </dl>
                             </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-5 py-3">
-                        <div class="text-sm">
-                            <a href="#" class="font-medium text-green-700 hover:text-green-900">
-                                View all
-                            </a>
                         </div>
                     </div>
                 </div>
