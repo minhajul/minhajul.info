@@ -20,7 +20,7 @@ class CreateExpensesTable extends Migration
             $table->decimal('amount')->default('0.00');
             $table->boolean('is_recurring')->default(false);
             $table->enum('recurring_period', config('enums.recurring_period'))->nullable();
-            $table->date('next_payment_date')->nullable();
+            $table->string('next_payment_date')->nullable();
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });

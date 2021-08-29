@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Expense;
 use App\Http\Requests\ExpenseRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 
 class ExpenseController extends Controller
@@ -39,6 +40,13 @@ class ExpenseController extends Controller
 
     public function show(Expense $expense)
     {
+        $response = Gate::inspect('view', $expense);
+
+        if (!$response->allowed()) {
+            session()->flash('error', $response->message());
+            return back();
+        }
+
         $categories = Category::all();
 
         return view('admin.expense.show', compact('categories', 'expense'));
@@ -46,6 +54,13 @@ class ExpenseController extends Controller
 
     public function update(ExpenseRequest $request, Expense $expense): RedirectResponse
     {
+        $response = Gate::inspect('update', $expense);
+
+        if (!$response->allowed()) {
+            session()->flash('error', $response->message());
+            return back();
+        }
+
         $expense->update(
             $request->only('title', 'amount', 'category_id')
         );
@@ -56,6 +71,13 @@ class ExpenseController extends Controller
 
     public function destroy(Expense $expense): RedirectResponse
     {
+        $response = Gate::inspect('delete', $expense);
+
+        if (!$response->allowed()) {
+            session()->flash('error', $response->message());
+            return back();
+        }
+
         $expense->delete();
 
         session()->flash('success', 'The expense has been deleted');

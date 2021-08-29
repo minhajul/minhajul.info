@@ -31,7 +31,7 @@ class ExpenseFactory extends Factory
             'amount' => $this->faker->numberBetween(100, 30000),
             'is_recurring' => $this->faker->boolean,
             'recurring_period' => $this->faker->randomElement(config('enums.recurring_period')),
-            'next_payment_date' => now(),
+            'next_payment_date' => now()->addMonth()->format('d'),
             'category_id' => $this->faker->randomElement($categoryIds)
         ];
     }
