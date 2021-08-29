@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -21,7 +22,11 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::put('expense/{expense}', [ExpenseController::class, 'update'])->name('admin.expense.edit');
     Route::delete('expense/{expense}', [ExpenseController::class, 'destroy'])->name('admin.expense.delete');
 
-    // Expenses
+    // Settings
+    Route::get('settings/', [SettingsController::class, 'index'])->name('admin.settings.index');
+    Route::put('settings/{setting}', [SettingsController::class, 'update'])->name('admin.settings.edit');
+
+    // Reports
     Route::get('reports', [ReportsController::class, 'index'])->name('admin.report.index');
 });
 
