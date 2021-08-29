@@ -8,7 +8,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::orderByDesc('created_at')->paginate(20);
+        $expenses = Expense::ofUser(auth()->user())->orderByDesc('created_at')->paginate(20);
 
         return view('admin.home', compact('expenses'));
     }
