@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ConsoleCommandTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function test_admin_user_can_not_be_created_with_wrong_password()
     {
         $this->artisan('admin:create-user')

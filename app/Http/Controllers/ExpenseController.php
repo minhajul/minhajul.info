@@ -56,6 +56,8 @@ class ExpenseController extends Controller
     {
         $expense->delete();
 
+        dd('kkkkk');
+
         session()->flash('success', 'The expense has been deleted');
         return redirect()->back();
     }
