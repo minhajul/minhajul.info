@@ -27,7 +27,9 @@ class ExpenseController extends Controller
 
     public function store(ExpenseRequest $request): RedirectResponse
     {
-        auth()->user()->expenses()->create(
+        $user = auth()->user();
+
+        $user->expenses()->create(
             $request->only('title', 'amount', 'category_id')
         );
 
@@ -55,8 +57,6 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense): RedirectResponse
     {
         $expense->delete();
-
-        dd('kkkkk');
 
         session()->flash('success', 'The expense has been deleted');
         return redirect()->back();

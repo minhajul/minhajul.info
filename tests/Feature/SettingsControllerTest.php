@@ -46,6 +46,7 @@ class SettingsControllerTest extends TestCase
                 'savings' => 20
             ]);
 
-        $response->assertStatus(302);
+        $response->assertSessionHasNoErrors();
+        $this->assertEquals(302, $response->getStatusCode());
     }
 }

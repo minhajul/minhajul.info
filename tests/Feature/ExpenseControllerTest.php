@@ -45,13 +45,16 @@ class ExpenseControllerTest extends TestCase
     {
         $user = $this->getUser();
 
+        Category::factory()->create();
+
         $response = $this->actingAs($user)
-            ->get(route('admin.expense.create'), [
+            ->post(route('admin.expense.store'), [
                 'title' => $this->faker->title,
                 'amount' => $this->faker->numberBetween(100, 30000),
-                'category_id' => Category::factory()
+                'category_id' => Category::first()->id
             ]);
 
+        $this->assertEquals(302, $response->getStatusCode());
         $response->assertSessionHasNoErrors();
     }
 
@@ -59,8 +62,9 @@ class ExpenseControllerTest extends TestCase
     {
         $user = $this->getUser();
 
+        Category::factory()->create();
+
         $expense = Expense::factory()->create([
-            'category_id' => Category::factory(),
             'user_id' => $user->id
         ]);
 
@@ -74,8 +78,9 @@ class ExpenseControllerTest extends TestCase
     {
         $user = $this->getUser();
 
+        Category::factory()->create();
+
         $expense = Expense::factory()->create([
-            'category_id' => Category::factory(),
             'user_id' => $user->id
         ]);
 
@@ -83,9 +88,10 @@ class ExpenseControllerTest extends TestCase
             ->put(route('admin.expense.edit', $expense), [
                 'title' => $this->faker->title,
                 'amount' => $this->faker->numberBetween(100, 30000),
-                'category_id' => Category::factory()
+                'category_id' => Category::first()->id
             ]);
 
+        $this->assertEquals(302, $response->getStatusCode());
         $response->assertSessionHasNoErrors();
     }
 
@@ -93,13 +99,17 @@ class ExpenseControllerTest extends TestCase
     {
         $user = $this->getUser();
 
+        Category::factory()->create();
+
         $expenses = Expense::factory()->count(10)->create([
-            'category_id' => Category::factory(),
             'user_id' => $user->id
         ]);
 
-        $response = $this->delete(route('admin.expense.delete', $expenses->first()));
+        $expense = $expenses->first();
 
+        $response = $this->delete(route('admin.expense.delete', $expense));
+
+        $this->assertEquals(302, $response->getStatusCode());
         $response->assertSessionHasNoErrors();
     }
 
