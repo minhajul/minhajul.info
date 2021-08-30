@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SettingsRequest;
-use App\Models\Setting;
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\SettingsRequest;
 use Illuminate\Support\Facades\Gate;
 
 class SettingsController extends Controller
@@ -17,29 +16,18 @@ class SettingsController extends Controller
 
         $setting = $user->setting;
 
-        $response = Gate::inspect('view', $setting);
-
-        if (!$response->allowed()) {
-            session()->flash('error', $response->message());
-            return back();
-        }
-
         return view('admin.settings.index', compact('setting'));
     }
 
-    public function update(SettingsRequest $request, Setting $setting): RedirectResponse
+    public function update(SettingsRequest $request): RedirectResponse
     {
-        $response = Gate::inspect('update', $setting);
+        $user = User::find(auth()->id());
 
-        if (!$response->allowed()) {
-            session()->flash('error', $response->message());
-            return back();
+        if ($setting = $user->setting) {
+            $setting->update($request->validated());
+        }else{
+            $user->setting()->create($request->validated());
         }
-
-        $setting->update([
-            'income' => $request->input('income'),
-            'savings' => $request->input('savings'),
-        ]);
 
         session()->flash('success', 'The settings has been update');
         return back();

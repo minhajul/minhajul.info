@@ -13,11 +13,14 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        $currencies = config('enums.currencies');
+
+        Schema::create('settings', function (Blueprint $table) use ($currencies) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->unsignedDecimal('income')->default('0.00');;
             $table->unsignedDecimal('savings')->nullable();
+            $table->enum('currency', $currencies)->default($currencies[0]);
             $table->timestamps();
         });
     }

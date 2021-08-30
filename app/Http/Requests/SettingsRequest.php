@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SettingsRequest extends FormRequest
 {
@@ -25,7 +26,8 @@ class SettingsRequest extends FormRequest
     {
         return [
             'income' => ['required', 'gt:0'],
-            'savings' => ['required', 'lte:100']
+            'savings' => ['required', 'lte:100'],
+            'currency' => ['required', Rule::in(config('enums.currencies'))]
         ];
     }
 }

@@ -6,5 +6,11 @@ return [
         'fortnightly',
         'monthly',
         'yearly'
+    ],
+
+    'currencies' => [
+        'BDT',
+        'USD',
+        'AUD'
     ]
 ];

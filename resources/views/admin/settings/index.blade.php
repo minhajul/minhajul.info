@@ -17,7 +17,7 @@
                     @include('flash.message')
 
                     <div class="mt-2 grid grid-cols-1 gap-5">
-                        <form action="{{ route('admin.settings.edit', $setting) }}" method="post">
+                        <form action="{{ route('admin.settings.edit') }}" method="post">
                             @csrf
                             @method('PUT')
 
@@ -28,7 +28,7 @@
                                             Income <span class="text-red-500">*</span>
                                         </label>
 
-                                        <input type="text" name="income" value="{{ old('income', $setting->income ?? 0) }}" class="mt-2 shadow-sm appearance-none border border-gray-200 rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none">
+                                        <input type="text" name="income" value="{{ old('income', $setting->income ?? '') }}" class="mt-2 shadow-sm appearance-none border border-gray-200 rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none">
                                         @error('income') <span class="text-red-500 text-sm italic">{{ $message }}</span> @enderror
                                     </div>
 
@@ -37,8 +37,24 @@
                                             Savings (%) <span class="text-red-500">*</span>
                                         </label>
 
-                                        <input type="text" name="savings" value="{{ old('savings', $setting->savings ?? 0) }}" class="mt-2 shadow-sm appearance-none border border-gray-200 rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none">
+                                        <input type="text" name="savings" value="{{ old('savings', $setting->savings ?? '') }}" class="mt-2 shadow-sm appearance-none border border-gray-200 rounded w-full py-2 px-3 text-sm text-gray-700 leading-tight focus:outline-none">
                                         @error('savings') <span class="text-red-500 text-sm italic">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div class="col-span-6">
+                                        <label class="block font-medium text-sm text-gray-700" for="currency">
+                                            Currency <span class="text-red-500">*</span>
+                                        </label>
+
+                                        <select name="currency" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:outline-none focus:ring-gray-300 focus:border-gray-300 sm:text-sm rounded-md">
+                                            <option selected value="">----</option>
+                                            @foreach(config('enums.currencies') as $currency)
+                                                <option {{ ($setting && $setting->currency == $currency) ? 'selected' : ''  }} value="{{ $currency }}">
+                                                    {{ $currency }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('currency') <span class="text-red-500 text-sm italic">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
 

@@ -23,7 +23,7 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
 
     // Settings
     Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings.index');
-    Route::put('/settings/{setting}', [SettingsController::class, 'update'])->name('admin.settings.edit');
+    Route::put('/settings', [SettingsController::class, 'update'])->name('admin.settings.edit');
 
     // Reports
     Route::get('/reports', [ReportsController::class, 'index'])->name('admin.report.index');

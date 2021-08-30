@@ -24,6 +24,7 @@ class SettingFactory extends Factory
         return [
             'income' => $this->faker->randomNumber(5, 10),
             'savings' => $this->faker->randomDigit(),
+            'currency' => config('enums.currencies')[0]
         ];
     }
 }
