@@ -41,9 +41,10 @@ class SettingsControllerTest extends TestCase
             ]);
 
         $response = $this->actingAs($user)
-            ->put(route('admin.settings.edit', $user->setting), [
+            ->put(route('admin.settings.edit'), [
                 'income' => 10000,
-                'savings' => 20
+                'savings' => 20,
+                'currency' => 'BDT'
             ]);
 
         $response->assertSessionHasNoErrors();
