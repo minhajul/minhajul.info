@@ -25,7 +25,7 @@
                 @include('flash.success')
                 @include('flash.message')
 
-                @include('admin.expense._table', compact('expenses'))
+                @include('admin.expense._table', compact('expenses', 'setting'))
 
             </div>
 

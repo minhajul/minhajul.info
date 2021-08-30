@@ -36,7 +36,7 @@
                         </td>
                         <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
                             <span class="text-gray-900 font-medium">${{ $expense->amount }} </span>
-                            USD
+                            {{ $setting->currency ?? '' }}
                         </td>
                         <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
                             {{ $expense->created_at }}

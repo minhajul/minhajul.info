@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Expense;
 use App\Http\Requests\ExpenseRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 
@@ -12,11 +13,15 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
+        $user = User::find(auth()->id());
+
+        $setting = $user->setting;
 
         $expenses = Expense::ofUser($user)->orderByDesc('created_at')->paginate(20);
 
-        return view('admin.expense.index', compact('expenses'));
+        return view('admin.expense.index', compact(
+            'expenses', 'setting'
+        ));
     }
 
     public function create()

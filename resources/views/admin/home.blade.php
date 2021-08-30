@@ -122,7 +122,7 @@
 
         <div class="hidden sm:block">
             <div class="px-12">
-                @include('admin.expense._table', compact('expenses'))
+                @include('admin.expense._table', compact('expenses', 'setting'))
             </div>
         </div>
 
