@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 
 class UpdatePassword extends Component
@@ -28,7 +29,7 @@ class UpdatePassword extends Component
 
         $user = User::find(auth()->id());
 
-        if (!\Hash::check($this->current_password, $user->password)) {
+        if (!Hash::check($this->current_password, $user->password)) {
             $this->reset();
             session()->flash('error', 'Your current password is wrong!');
             return redirect()->back();
