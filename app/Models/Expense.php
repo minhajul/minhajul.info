@@ -21,10 +21,26 @@ class Expense extends Model
         'category_id'
     ];
 
+    protected $appends = [
+        'dollar_amount'
+    ];
+
+    // Accessor
+    public function getDollarAmountAttribute(): string
+    {
+        return "$" . $this->amount;
+    }
+
     // Scopes
     public function scopeOfUser(Builder $builder, User $user): Builder
     {
         return $builder->where('user_id', $user->id);
+    }
+
+    // Methods
+    public function isRecurring(): bool
+    {
+        return $this->is_recurring;
     }
 
     // Relationships
