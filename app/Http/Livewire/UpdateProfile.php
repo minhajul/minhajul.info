@@ -10,9 +10,10 @@ class UpdateProfile extends Component
 {
     use WithFileUploads;
 
-    public $user, $avatar;
+    public $user;
+    public $avatar;
 
-    protected $rules = [
+    protected array $rules = [
         'user.name' => 'required|string|min:2'
     ];
 

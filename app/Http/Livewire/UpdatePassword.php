@@ -42,7 +42,6 @@ class UpdatePassword extends Component
         $this->reset();
 
         session()->flash('success', 'You have changed your password!');
-        return redirect()->back();
     }
 
     public function render()
