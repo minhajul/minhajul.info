@@ -4,7 +4,7 @@ namespace App\Classes;
 
 use App\Models\Expense;
 
-class Reports
+class ExpenseReports
 {
     public static function getSavings($user): array
     {

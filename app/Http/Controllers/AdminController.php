@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Reports;
+use App\Classes\ExpenseReports;
 use App\Models\Expense;
 use App\Models\User;
 
@@ -14,12 +14,12 @@ class AdminController extends Controller
 
         $expenses = Expense::ofUser($user)->orderByDesc('created_at')->paginate(20);
 
-        list($currentSavings, $expectedSavings) = Reports::getSavings($user);
+        list($currentSavings, $expectedSavings) = ExpenseReports::getSavings($user);
 
         return view('admin.home')->with([
             'expenses' => $expenses,
             'setting' => $user->setting,
-            'spending' => Reports::getExpense($user),
+            'spending' => ExpenseReports::getExpense($user),
             'currentSavings' => $currentSavings,
             'expectedSavings' => $expectedSavings,
         ]);
