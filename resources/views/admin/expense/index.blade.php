@@ -22,8 +22,7 @@
 
             <div class="mt-8">
 
-                @include('flash.success')
-                @include('flash.message')
+                @include('errors.flash')
 
                 @include('admin.expense._table', compact('expenses', 'setting'))
 

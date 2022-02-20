@@ -1,7 +1,7 @@
 <form wire:submit.prevent="update">
     <div class="px-4 py-5 bg-white sm:p-6 shadow rounded-md">
 
-        @include('flash.message')
+        @include('errors.flash')
 
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6">

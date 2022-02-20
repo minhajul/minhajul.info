@@ -7,11 +7,10 @@
 
             <div class="mt-2 grid grid-cols-1 gap-5" x-max="1">
 
-                @include('flash.error')
-                @include('flash.success')
-                @include('flash.message')
+                @include('errors.flash')
 
-                <livewire:update-profile />
+
+                <livewire:profile.info />
 
                 <div class="hidden sm:block">
                     <div class="py-6">
@@ -21,7 +20,7 @@
 
                 <div class="mt-10 sm:mt-0">
                     <div class="xsm:p-4 md:col-span-2">
-                        <livewire:update-password />
+                        <livewire:profile.password />
                     </div>
                 </div>
 

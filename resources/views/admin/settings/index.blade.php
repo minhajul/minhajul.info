@@ -13,8 +13,7 @@
                         </div>
                     </div>
 
-                    @include('flash.success')
-                    @include('flash.message')
+                    @include('errors.flash')
 
                     <div class="mt-2 grid grid-cols-1 gap-5">
                         <form action="{{ route('admin.settings.edit') }}" method="post">

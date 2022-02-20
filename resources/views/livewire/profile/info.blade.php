@@ -2,8 +2,7 @@
     <form wire:submit.prevent="save">
         <div class="px-4 py-5 bg-white sm:p-6 shadow rounded-md">
 
-            @include('flash.message')
-            @include('flash.success')
+            @include('errors.flash')
 
             <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6">

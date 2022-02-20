@@ -7,7 +7,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 
-class UpdatePassword extends Component
+class Password extends Component
 {
     public string $current_password, $password, $password_confirmation;
 
