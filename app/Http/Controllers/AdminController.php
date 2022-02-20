@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $user = User::find(auth()->id());
+        $user = auth()->user();
 
         $expenses = Expense::ofUser($user)->orderByDesc('created_at')->paginate(20);
 
@@ -21,7 +21,7 @@ class AdminController extends Controller
             'setting' => $user->setting,
             'spending' => ExpenseReports::getExpense($user),
             'currentSavings' => $currentSavings,
-            'expectedSavings' => $expectedSavings,
+            'expectedSavings' => $expectedSavings
         ]);
     }
 

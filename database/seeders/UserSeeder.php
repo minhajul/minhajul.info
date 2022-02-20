@@ -20,14 +20,14 @@ class UserSeeder extends Seeder
             ->has(Expense::factory()->count(10))
             ->has(Setting::factory()->count(1))
             ->create([
-                'email' => 'user@gmail.com'
+                'email' => 'user@mail.com'
             ]);
 
         User::factory(1)
             ->has(Expense::factory()->count(10))
             ->has(Setting::factory()->count(1))
             ->create([
-                'email' => 'admin@gmail.com',
+                'email' => 'admin@mail.com',
                 'is_admin' => true
             ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\ExpenseReports;
 use App\Models\Category;
 use App\Models\Expense;
 use App\Models\User;
@@ -12,12 +13,17 @@ class ReportsController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+
         $reports = $this->getDoughnutChartData(auth()->user());
+
+        $expensesByMonth = ExpenseReports::byMonth($user);
 
         return view('admin.report.index')->with([
             'reports' => $reports,
             'categories' => $reports->pluck('category_name'),
             'amounts' => $reports->pluck('total_amount'),
+            'expensesByMonth' => $expensesByMonth,
         ]);
     }
 
