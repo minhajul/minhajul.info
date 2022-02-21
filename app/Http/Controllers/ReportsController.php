@@ -17,13 +17,10 @@ class ReportsController extends Controller
 
         $reports = $this->getDoughnutChartData(auth()->user());
 
-        $expensesByMonth = ExpenseReports::byMonth($user);
-
         return view('admin.report.index')->with([
             'reports' => $reports,
             'categories' => $reports->pluck('category_name'),
             'amounts' => $reports->pluck('total_amount'),
-            'expensesByMonth' => $expensesByMonth,
         ]);
     }
 
