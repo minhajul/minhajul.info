@@ -13,8 +13,6 @@ class Month extends Component
     {
         $expensesByMonth = ExpenseReports::byMonth(auth()->user());
 
-        return view('livewire.expense.month')->with([
-            'expensesByMonth' => $expensesByMonth
-        ]);
+        return view('livewire.expense.month', compact('expensesByMonth'));
     }
 }
