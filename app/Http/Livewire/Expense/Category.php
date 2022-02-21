@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Expense;
 
-use App\Classes\ExpenseReports;
 use App\Models\Expense;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
