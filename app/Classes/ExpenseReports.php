@@ -2,8 +2,7 @@
 
 namespace App\Classes;
 
-use App\Models\Expense;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Expense;;
 
 class ExpenseReports
 {
@@ -31,7 +30,7 @@ class ExpenseReports
         return $expense ?? 0;
     }
 
-    public static function byMonth($user)
+    public static function byMonth($user, $timeFrame = null)
     {
         return Expense::query()
             ->selectRaw("MONTHNAME(created_at) as month_name, sum(amount) AS total")

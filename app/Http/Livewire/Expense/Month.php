@@ -9,6 +9,11 @@ class Month extends Component
 {
     public $filter;
 
+    public function updatedFilter($value)
+    {
+        $this->filter = $value;
+    }
+
     public function render()
     {
         $expensesByMonth = ExpenseReports::byMonth(auth()->user());

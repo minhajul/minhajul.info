@@ -1,5 +1,15 @@
 <div>
-    <canvas id="barChart" width="400" height="400"></canvas>
+    <div class="pb-5">
+        <label for="filter" class="block text-sm font-medium text-gray-700">Filter</label>
+        <select wire:model="filter" id="filter" name="filter" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <option>----</option>
+            <option value="3">Last 3 months</option>
+            <option value="6">Last 6 months</option>
+            <option value="12">Last 12 months</option>
+        </select>
+    </div>
+
+    <canvas id="barChart" width="400" height="350"></canvas>
 </div>
 
 @push('scripts')
@@ -14,16 +24,16 @@
                     label: '# Expense by Month',
                     data: {!! $expensesByMonth->pluck('total') !!},
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)'
+                        'rgb(22 163 74)',
+                        'rgb(45 212 191)',
+                        'rgb(6 182 212)',
+                        'rgb(14 165 233)'
                     ],
                     borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
+                        'rgb(22 163 74)',
+                        'rgb(45 212 191)',
+                        'rgb(6 182 212)',
+                        'rgb(14 165 233)'
                     ],
                     borderWidth: 1
                 }]
