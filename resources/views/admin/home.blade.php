@@ -125,6 +125,5 @@
                 @include('admin.expense._table', compact('expenses', 'setting'))
             </div>
         </div>
-
     </div>
 @endsection

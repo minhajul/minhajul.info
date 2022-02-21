@@ -34,9 +34,9 @@ class ExpenseReports
     public static function byMonth($user)
     {
         return Expense::query()
-            ->selectRaw("MONTHNAME(expenses.created_at) as month_name, sum(expenses.amount) AS total")
+            ->selectRaw("MONTHNAME(created_at) as month_name, sum(amount) AS total")
             ->ofUser($user)
-            ->groupByRaw("MONTH(expenses.created_at)")
+            ->groupByRaw("MONTH(created_at)")
             ->get();
     }
 }

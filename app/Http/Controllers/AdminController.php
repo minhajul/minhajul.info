@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\ExpenseReports;
 use App\Models\Expense;
-use App\Models\User;
+use App\Classes\ExpenseReports;
 
 class AdminController extends Controller
 {
