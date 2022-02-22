@@ -45,28 +45,22 @@ export default function Home() {
                                 <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                                     <h2>
                                         <span className="block text-sm font-normal tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
-                                            Hi
+                                            { "Hi" }
                                         </span>
                                         <span className="mt-1 block tracking-tight sm:text-5xl xl:text-6xl">
-                                            <span className="block font-extrabold text-gray-600">I'm Minhajul Islam</span>
+                                            <span className="block font-extrabold text-gray-600">{"I'm Minhajul Islam"}</span>
                                             <span className="block text-normal font-bold text-black text-3xl mt-3">
-                                            Software and Applications Engineer at <a target="_blank" className="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a>
+                                            {"Software and Applications Engineer at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a>
                                             </span>
                                         </span>
                                     </h2>
                                     <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                                        Experienced Software Engineer with a demonstrated history of working in the
-                                        software development
-                                        industry, particularly in backend application development. Skilled in Python,
-                                        PHP, Django, DRF,
-                                        Laravel, Javascript, MySQL, Vue.js but confident and capable enough to adapt to
-                                        any stack,
-                                        platform or technology.
+                                        {"Experienced Software Engineer with a demonstrated history of working in the software development industry, particularly in backend application development. Skilled in Python, PHP, Django, DRF, Laravel, Javascript, MySQL, Vue.js but confident and capable enough to adapt to any stack, platform or technology."}
                                     </p>
 
                                     <p className="mt-6 text-gray-500">
-                                        You can also find me on <a target="_blank" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a> and
-                                        <a target="_blank" className="text-black font-bold" href="https://github.com/minhajul">Github</a>.
+                                        You can also find me on <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a> and
+                                        <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://github.com/minhajul">Github</a>.
                                     </p>
                                 </div>
 
