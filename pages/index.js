@@ -76,7 +76,14 @@ export default function Home() {
                                     </svg>
                                     <div className="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
                                         <div className="relative block w-full bg-white rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            <Image src={profilePic} alt="Minhajul Islam"/>
+                                            <Image
+                                                src={profilePic}
+                                                alt="Minhajul Islam"
+                                                width="100%"
+                                                height="100%"
+                                                layout="responsive"
+                                                objectFit="contain"
+                                            />
                                         </div>
                                     </div>
                                 </div>
