@@ -55,11 +55,13 @@ export default function Home() {
                                         </span>
                                     </h2>
                                     <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                                        {"Experienced Software Engineer with a demonstrated history of working in the software development industry, particularly in backend application development. Skilled in Python, PHP, Django, DRF, Laravel, Javascript, MySQL, Vue.js but confident and capable enough to adapt to any stack, platform or technology."}
+                                        {"Experienced Software Engineer with a demonstrated history of working in different software companies. Skilled in PHP, Python, JavaScript, Laravel, Livewire, Django, DRF, Vue.js, Alphine.js, MySQL, Tailwind CSS but confident and capable enough to adapt to any stack, platform or technology."}
                                     </p>
 
                                     <p className="mt-6 text-gray-500">
-                                        You can also find me on <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a> and
+                                        You can also find me on
+                                        <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a>,
+                                        <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://www.linkedin.com/in/minhajul52/"> LinkedIn</a> and
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://github.com/minhajul"> Github</a>.
                                     </p>
                                 </div>
