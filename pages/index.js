@@ -55,7 +55,7 @@ export default function Home() {
                                         </span>
                                     </h2>
                                     <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                                        {"Experienced Software Engineer with a demonstrated history of working in different software companies. Skilled in PHP, Python, JavaScript, Laravel, Livewire, Django, DRF, Vue.js, Alphine.js, MySQL, Tailwind CSS but confident and capable enough to adapt to any stack, platform or technology."}
+                                        {"Experienced Software Engineer with a demonstrated history of working in different software companies. Skilled in PHP, Python, JavaScript, Laravel, Livewire, Django, DRF, Vue.js, Alpine.js, MySQL, Tailwind CSS but confident and capable enough to adapt to any stack, platform or technology."}
                                     </p>
 
                                     <p className="mt-6 text-gray-500">
