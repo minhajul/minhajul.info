@@ -17,10 +17,10 @@ export default function Home() {
                 <meta name="twitter:card" content="summary"/>
                 <meta name="twitter:description" content="A full-stack developer at Teleaus"/>
                 <meta name="twitter:site" content="@minhaj_cse"/>
-                <meta name="twitter:image" content={profilePic}/>
+                <meta name="twitter:image" content="/public/minhajul.jpeg"/>
 
                 <meta name="og:site_name" content="A full-stack developer at Teleaus"/>
-                <meta name="og:image" content={profilePic}/>
+                <meta name="og:image" content="/public/minhajul.jpeg"/>
                 <meta name="og:type" content="website"/>
                 <meta name="og:locale" content="en_US"/>
             </Head>
