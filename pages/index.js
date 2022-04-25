@@ -47,10 +47,12 @@ export default function Home() {
                                         <span className="block text-sm font-normal tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
                                             { "Hi" }
                                         </span>
-                                        <span className="mt-1 block tracking-tight sm:text-5xl xl:text-6xl">
-                                            <span className="block font-extrabold text-gray-600">{"I'm Minhajul Islam"}</span>
+                                        <span className="mt-1 block tracking-tight">
+                                            <span className="block mb-5 text-5xl animate-move-bg bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text font-extrabold font-bold text-transparent">
+                                                {"I'm Minhajul Islam"}
+                                            </span>
                                             <span className="block text-normal font-bold text-black text-3xl mt-3">
-                                            {"Software and Applications Engineer at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a>
+                                                {"Software and Applications Engineer at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a>
                                             </span>
                                         </span>
                                     </h2>
