@@ -61,7 +61,7 @@ export default function Home() {
                                     </p>
 
                                     <p className="mt-6 text-gray-500">
-                                        You can also find me on
+                                        You can also find me on 
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a>,
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://www.linkedin.com/in/minhajul52/"> LinkedIn</a> and
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://github.com/minhajul"> Github</a>.
