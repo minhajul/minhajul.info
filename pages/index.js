@@ -9,7 +9,7 @@ export default function Home() {
                 <meta charSet="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-                <title>Minhajul Islam</title>
+                <title>Minhajul Islam - Portfolio </title>
 
                 <meta name="twitter:title" content="Minhajul Islam"/>
                 <meta name="og:title" content="Minhajul Islam"/>
@@ -62,7 +62,7 @@ export default function Home() {
 
                                     <p className="mt-6 text-gray-500">
                                         You can also find me on 
-                                        <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a>,
+                                        <a target="_blank" rel="noreferrer" className="ml-2 text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a>,
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://www.linkedin.com/in/minhajul52/"> LinkedIn</a> and
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://github.com/minhajul"> Github</a>.
                                     </p>
