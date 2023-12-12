@@ -15,7 +15,7 @@ export default function Home() {
                 <meta name="og:title" content="Minhajul Islam"/>
 
                 <meta name="twitter:card" content="summary"/>
-                <meta name="twitter:description" content="A full-stack developer at Teleaus"/>
+                <meta name="twitter:description" content="A full-stack developer at Genofax"/>
                 <meta name="twitter:site" content="@minhaj_cse"/>
                 <meta name="twitter:image" content="/public/minhajul.jpeg"/>
 
@@ -52,7 +52,7 @@ export default function Home() {
                                                 {"I'm Minhajul Islam"}
                                             </span>
                                             <span className="block text-normal font-bold text-black text-3xl mt-3">
-                                                {"Engineering Lead at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://www.genofax.com/">Genofax</a>
+                                                {"Software & Application Lead at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://www.genofax.com/">Genofax</a>
                                             </span>
                                         </span>
                                     </h2>
