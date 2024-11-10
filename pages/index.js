@@ -15,11 +15,11 @@ export default function Home() {
                 <meta name="og:title" content="Minhajul Islam"/>
 
                 <meta name="twitter:card" content="summary"/>
-                <meta name="twitter:description" content="A full-stack developer at Teleaus"/>
+                <meta name="twitter:description" content="A full-stack developer at Genofax"/>
                 <meta name="twitter:site" content="@minhaj_cse"/>
                 <meta name="twitter:image" content="/public/minhajul.jpeg"/>
 
-                <meta name="og:site_name" content="A full-stack developer at Teleaus"/>
+                <meta name="og:site_name" content="A full-stack developer at Genofax"/>
                 <meta name="og:image" content="/public/minhajul.jpeg"/>
                 <meta name="og:type" content="website"/>
                 <meta name="og:locale" content="en_US"/>
@@ -48,21 +48,21 @@ export default function Home() {
                                             { "Hi" }
                                         </span>
                                         <span className="mt-1 block tracking-tight">
-                                            <span className="block mb-5 text-5xl animate-move-bg bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text font-extrabold font-bold text-transparent">
+                                            <span className="block mb-5 text-5xl animate-move-bg bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text font-extrabold text-transparent">
                                                 {"I'm Minhajul Islam"}
                                             </span>
                                             <span className="block text-normal font-bold text-black text-3xl mt-3">
-                                                {"Software and Applications Engineer at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://teleaus.com">TELEAUS</a>
+                                                {"Software & Application Lead at"} <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://genofax.com">Genofax</a>
                                             </span>
                                         </span>
                                     </h2>
                                     <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                                        {"Experienced Software Engineer with a demonstrated history of working in different software companies. Skilled in PHP, Python, JavaScript, Laravel, Livewire, Django, DRF, Vue.js, Alpine.js, MySQL, Tailwind CSS but confident and capable enough to adapt to any stack, platform or technology."}
+                                        {"Experienced Software Engineer with a strong background in backend development and extensive experience in AWS. Skilled in a wide range of technologies, including Python, PHP, Laravel, Django, Django Rest Framework (DRF), JavaScript, MySQL, PostgreSQL, React.js, and Next.js. Adaptable and proficient in navigating diverse technology stacks, platforms, and infrastructures to deliver high-quality, reliable software solutions. Demonstrated expertise in designing, developing, and maintaining scalable backend systems with a strong emphasis on performance, reliability, and cloud-based integration."}
                                     </p>
 
                                     <p className="mt-6 text-gray-500">
                                         You can also find me on
-                                        <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://twitter.com/minhaj_cse">Twitter</a>,
+                                        <a target="_blank" rel="noreferrer" className="text-black font-bold ml-1" href="https://twitter.com/minhaj_cse">Twitter</a>,
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://www.linkedin.com/in/minhajul52/"> LinkedIn</a> and
                                         <a target="_blank" rel="noreferrer" className="text-black font-bold" href="https://github.com/minhajul"> Github</a>.
                                     </p>
