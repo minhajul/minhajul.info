@@ -50,7 +50,7 @@ export default function Home() {
                                             </span>
                                             <span className="block text-normal font-bold text-black text-3xl mt-3">
                                                 {"Software & Application Lead at"}
-                                                <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold"href="https://genofax.com">Genofax</a>
+                                                <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://genofax.com">Genofax</a>
                                             </span>
                                         </span>
                                     </h2>
