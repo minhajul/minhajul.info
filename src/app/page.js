@@ -42,7 +42,7 @@ export default function Home() {
                                 <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                                     <h2>
                                         <span className="block text-sm font-normal tracking-wide text-gray-500 sm:text-base lg:text-sm xl:text-base">
-                                            {"Hi"}
+                                            {"Hello"}
                                         </span>
                                         <span className="mt-1 block tracking-tight">
                                             <span className="block mb-5 text-5xl animate-move-bg bg-gradient-to-r from-indigo-500 via-pink-500 to-indigo-500 bg-[length:400%] bg-clip-text font-extrabold text-transparent">
