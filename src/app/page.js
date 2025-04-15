@@ -1,31 +1,8 @@
 import Image from "next/image";
-import Head from "next/head";
 
 export default function Home() {
     return (
         <div className="personal-blog">
-            <Head>
-                <meta charSet="utf-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-                <title>Portfolio website of Minhajul Islam</title>
-
-                <meta name="twitter:title" content="Minhajul Islam"/>
-                <meta name="og:title" content="Minhajul Islam"/>
-
-                <meta name="twitter:card" content="summary"/>
-                <meta name="twitter:description" content="A full-stack developer at Genofax"/>
-                <meta name="twitter:site" content="@minhaj_cse"/>
-                <meta name="twitter:image" content="/public/minhajul.jpeg"/>
-
-                <meta name="og:site_name" content="A full-stack developer at Genofax"/>
-                <meta name="og:image" content="/public/minhajul.jpeg"/>
-                <meta name="og:type" content="website"/>
-                <meta name="og:locale" content="en_US"/>
-
-                <link rel="shortcut icon" href="/favicon.ico"/>
-            </Head>
-
             <main>
                 <div className="relative bg-white overflow-hidden">
                     <div className="hidden lg:block lg:absolute lg:inset-0" aria-hidden="true">
