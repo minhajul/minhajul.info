@@ -8,7 +8,7 @@ export default function Home() {
                 <meta charSet="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-                <title>Minhajul Islam</title>
+                <title>Portfolio website of Minhajul Islam</title>
 
                 <meta name="twitter:title" content="Minhajul Islam"/>
                 <meta name="og:title" content="Minhajul Islam"/>
