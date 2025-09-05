@@ -1,5 +1,15 @@
 import "./globals.css";
 
+import {Fira_Code} from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+const firaCode = Fira_Code({
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "600", "700"],
+    display: "swap",
+});
+
 export const metadata = {
     title: "Portfolio website of Minhajul Islam",
     description: "A full-stack developer at Genofax",
@@ -25,9 +35,13 @@ export const metadata = {
 export default function RootLayout({children}) {
     return (
         <html lang="en">
-            <body className="antialiased">
-                {children}
-            </body>
+        <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>
+        <Header/>
+
+        {children}
+
+        <Footer/>
+        </body>
         </html>
     );
 }
