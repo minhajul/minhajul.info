@@ -10,7 +10,7 @@ export default function Home() {
                         <Typewriter></Typewriter>
                     </div>
 
-                    <p className="mt-3 text-justify text-lg font-semibold text-slate-300 hover:text-white sm:mt-5">
+                    <p className="mt-3 text-base lg:text-lg font-semibold text-slate-300 hover:text-white sm:mt-5">
                         {"Experienced Software Engineer with a strong background in backend development and extensive experience in AWS. Skilled in a wide range of technologies, including Python, PHP, Laravel, Django, Django Rest Framework (DRF), JavaScript, Node.js, Next.js MySQL and PostgreSQL. Adaptable and proficient in navigating diverse technology stacks, platforms, and infrastructures to deliver high-quality, reliable software solutions. Demonstrated expertise in designing, developing, and maintaining scalable backend systems with a strong emphasis on performance, reliability, and cloud-based integration."}
                     </p>
                 </div>

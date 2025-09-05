@@ -5,14 +5,15 @@ export default function Contact() {
                 <h2 className="font-semibold text-3xl">
                     <span className="text-green-500">/</span>Contact
                 </h2>
-                <p className="mt-5">Get in touch with me</p>
+                <p className="mt-5 text-lg">Get in touch with me</p>
             </div>
 
             <div className="flex flex-col md:flex-row justify-between">
-                <p className="text-base text-slate-300 hover:text-white leading-7">
-                    I am interested in freelance opportunities.
-                    Additionally, I am actively seeking fully funded PhD programs in the fields of systems engineering, robotics, and computer-science.
-                    However, if you have other request or question, do not hesitate to contact me.
+                <p className="text-lg text-slate-300 hover:text-white leading-7">
+                    I am actively seeking freelance or remote opportunities in <strong>software engineering</strong>, <strong>full-stack development</strong>, and <strong>DevOps engineering</strong>.
+                    <span className="bg-green-500 text-white rounded-md p-0.5 mr-1">I am also open to roles offering visa sponsorship.</span>
+
+                    If you have any questions or potential opportunities, please feel free to reach out.
                 </p>
             </div>
 

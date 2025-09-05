@@ -26,7 +26,7 @@ export default function Header() {
                 <div className="flex lg:hidden">
                     <button
                         type="button"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        onClick={() => setMobileMenuOpen(true)}
                         className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-slate-300 hover:text-white"
                     >
                         {mobileMenuOpen ? (
@@ -54,10 +54,14 @@ export default function Header() {
                     </Link>
                 </PopoverGroup>
             </nav>
+
             <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
                 <div className="fixed inset-0 z-50" />
-                <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                    <div className="flex justify-end text-right">
+                <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-800 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <div className="flex justify-between text-right">
+                        <Link href="/" className="text-2xl font-semibold text-slate-300 hover:text-white">
+                            Minhajul
+                        </Link>
                         <button
                             type="button"
                             onClick={() => setMobileMenuOpen(false)}
