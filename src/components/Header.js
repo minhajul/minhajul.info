@@ -19,7 +19,7 @@ export default function Header() {
         <header>
             <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
                 <div className="flex lg:flex-1">
-                    <Link href="/" className="font-semibold text-lg text-slate-300 hover:text-white">
+                    <Link href="/" className="text-2xl font-semibold text-slate-300 hover:text-white">
                         Minhajul
                     </Link>
                 </div>
@@ -49,7 +49,7 @@ export default function Header() {
                         Experiences
                     </Link>
 
-                    <Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
+                    <Link href="/contact" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
                         Contacts
                     </Link>
                 </PopoverGroup>
@@ -82,7 +82,7 @@ export default function Header() {
                                     Experiences
                                 </Link>
 
-                                <Link href="/" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">
+                                <Link href="/contact" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">
                                     Contacts
                                 </Link>
                             </div>
