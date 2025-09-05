@@ -41,13 +41,13 @@ export default function Header() {
                         Me
                     </Link>
 
-                    <Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
-                        Projects
-                    </Link>
+                    {/*<Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">*/}
+                    {/*    Projects*/}
+                    {/*</Link>*/}
 
-                    <Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
-                        Experiences
-                    </Link>
+                    {/*<Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">*/}
+                    {/*    Experiences*/}
+                    {/*</Link>*/}
 
                     <Link href="/contact" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
                         Contacts
@@ -78,13 +78,13 @@ export default function Header() {
                                     Me
                                 </Link>
 
-                                <Link href="/" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">
-                                    Projects
-                                </Link>
+                                {/*<Link href="/" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">*/}
+                                {/*    Projects*/}
+                                {/*</Link>*/}
 
-                                <Link href="/" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">
-                                    Experiences
-                                </Link>
+                                {/*<Link href="/" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">*/}
+                                {/*    Experiences*/}
+                                {/*</Link>*/}
 
                                 <Link href="/contact" className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white">
                                     Contacts
