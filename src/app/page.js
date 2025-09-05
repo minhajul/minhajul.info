@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Header from "@/components/Header";
+import Typewriter from "@/components/Typewriter";
 
 export default function Home() {
     return (
@@ -9,9 +10,10 @@ export default function Home() {
             <div className="mt-10 lg:mt-24 p-6 lg:px-8 mx-auto max-w-7xl">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-14">
                     <div className="col-span-1 lg:col-span-2">
-                        <h2 className="block font-semibold text-slate-300 hover:text-white text-3xl mt-3">
-                            Full Stack Software Engineer
-                        </h2>
+                        <div className="text-center">
+                            <Typewriter></Typewriter>
+                        </div>
+
                         <p className="mt-3 text-justify text-lg font-semibold text-slate-300 hover:text-white sm:mt-5">
                             {"Experienced Software Engineer with a strong background in backend development and extensive experience in AWS. Skilled in a wide range of technologies, including Python, PHP, Laravel, Django, Django Rest Framework (DRF), JavaScript, Node.js, Next.js MySQL and PostgreSQL. Adaptable and proficient in navigating diverse technology stacks, platforms, and infrastructures to deliver high-quality, reliable software solutions. Demonstrated expertise in designing, developing, and maintaining scalable backend systems with a strong emphasis on performance, reliability, and cloud-based integration."}
                         </p>
