@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Typewriter from "@/components/Typewriter";
+import Skills from "@/components/Skills";
 
 export default function Home() {
     return (
@@ -30,6 +31,11 @@ export default function Home() {
                         <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://genofax.com">Genofax</a>
                     </div>
                 </div>
+            </div>
+
+
+            <div className="mt-10 lg:mt-24">
+                <Skills/>
             </div>
         </div>
     );

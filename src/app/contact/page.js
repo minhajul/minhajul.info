@@ -3,9 +3,9 @@ export default function Contact() {
         <div className="mt-10 lg:mt-24 p-6 lg:px-8 mx-auto max-w-7xl">
             <div className="text-white pb-10">
                 <h2 className="font-semibold text-3xl">
-                    <span className="text-green-500">/</span>Contact
+                    Contact
                 </h2>
-                <p className="mt-5 text-lg">Get in touch with me</p>
+                <p className="mt-3 text-lg">Get in touch with me</p>
             </div>
 
             <div className="flex flex-col md:flex-row justify-between">
