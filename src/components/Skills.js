@@ -48,11 +48,11 @@ export default function Skills() {
     }
 
     return (
-        <section className="py-10 lg:py-16 px-6">
+        <section className="py-10 lg:py-16 px-6 mt-10 lg:mt-24">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-20">
                     <div className="inline-block">
-                        <h2 className="text-2xl md:text-3xl font-bold text-slate-300 hover:text-white mb-6">
+                        <h2 className="font-semibold text-slate-300 hover:text-white text-2xl lg:text-4xl mb-6">
                             Skills & Expertise
                         </h2>
                         <div className="h-1 w-32 bg-gradient-to-r from-green-600 to-teal-600 mx-auto rounded-full"></div>
