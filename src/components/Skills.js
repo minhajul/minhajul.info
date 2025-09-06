@@ -32,16 +32,6 @@ const skills = [
 
 const categories = ["Languages", "Frontend", "Backend", "Database", "Tools"]
 
-const CustomBadge = ({ children, className = "" }) => {
-    return (
-        <span
-            className={`px-6 py-2 text-lg font-semibold border-2 border-slate-300 text-slate-300 hover:bg-slate-200 hover:text-slate-900 rounded-md ${className}`}
-        >
-      {children}
-    </span>
-    )
-}
-
 export default function Skills() {
     const getSkillsByCategory = (category) => {
         return skills.filter((skill) => skill.category === category)
@@ -66,7 +56,9 @@ export default function Skills() {
                     {categories.map((category, categoryIndex) => (
                         <div key={category} className="relative">
                             <div className="flex justify-center mb-8">
-                                <CustomBadge>{category}</CustomBadge>
+                                <span className="px-6 py-2 text-lg font-semibold border-2 border-slate-300 text-slate-300 hover:bg-slate-200 hover:text-slate-900 rounded-md">
+                                    {category}
+                                </span>
                             </div>
 
                             <div className="flex flex-wrap justify-center gap-4">
@@ -99,7 +91,7 @@ export default function Skills() {
 
                 <div className="max-w-full lg:max-w-2xl mx-auto text-center mt-16">
                     <p className="border p-1 rounded-md text-slate-300 hover:text-white">
-                    Always learning and exploring new technologies.
+                        Always learning and exploring new technologies.
                     </p>
                 </div>
             </div>
