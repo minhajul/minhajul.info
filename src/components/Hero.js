@@ -25,7 +25,7 @@ export default function Hero(){
 
             <div className="col-span-1 lg:col-span-1">
                 <Image
-                    src="/minhajul.jpeg"
+                    src="/profile-pic.png"
                     alt="Md Minhajul Islam"
                     width="100"
                     height="100"
