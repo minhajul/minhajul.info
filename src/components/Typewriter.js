@@ -4,7 +4,7 @@ import {AnimatePresence, motion} from "framer-motion"
 import {useEffect, useState} from "react";
 
 const sentences = [
-    "Hello, I am Minhajul 👋",
+    "Hello, I am Minhaj 👋",
     "A Full Stack Software Engineer!",
     "DevOps Enthusiast!",
 ]

@@ -20,7 +20,7 @@ export default function Header() {
     }
 
     return (
-        <header className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+        <header className="sticky top-0 z-50 bg-gray-800 backdrop-blur-sm border-b border-gray-800">
             <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
                 <div className="flex lg:flex-1">
                     <Link href="/" className="text-2xl font-semibold text-slate-300 hover:text-white">

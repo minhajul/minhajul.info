@@ -20,7 +20,7 @@ export default function Contact() {
             <div className="flex flex-col md:flex-row justify-between">
                 <p className="text-lg text-slate-300 hover:text-white leading-7">
                     I am actively seeking freelance or remote opportunities in <strong>software engineering</strong>, <strong>full-stack development</strong>, and <strong>DevOps engineering</strong>.
-                    <span className="bg-green-500 text-white rounded-md p-0.5 mr-1">I am also open to roles offering visa sponsorship.</span>
+                    <span className="bg-blue-400 text-white rounded-md p-0.5 mr-1">I am also open to roles offering visa sponsorship.</span>
 
                     If you have any questions or potential opportunities, please feel free to reach out.
                 </p>

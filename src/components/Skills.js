@@ -45,7 +45,7 @@ export default function Skills() {
                         <h2 className="font-semibold text-slate-300 hover:text-white text-2xl lg:text-4xl mb-6">
                             Skills & Expertise
                         </h2>
-                        <div className="h-1 w-32 bg-gradient-to-r from-green-600 to-teal-600 mx-auto rounded-full"></div>
+                        <div className="h-1 w-32 bg-gradient-to-r from-blue-400 to-teal-600 mx-auto rounded-full"></div>
                     </div>
                     <p className="text-xl text-slate-300 hover:text-white max-w-3xl mx-auto mt-5">
                         Technologies and tools I use to bring ideas to life.

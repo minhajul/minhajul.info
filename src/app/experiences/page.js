@@ -1,12 +1,13 @@
 "use client"
 
 import {motion} from "framer-motion"
+import Link from "next/link";
 
 const experiences = [
     {
         "title": "Software & Application Lead",
         "company": "Genofax",
-        "url": "https://www.geofax.com",
+        "url": "https://www.genofax.com",
         "date_of_joining": "Jul 2023 - Running",
         "description": [
             "Providing technical guidance, making critical decisions, and architecting solutions for the projects",
@@ -86,17 +87,19 @@ export default function Experiences() {
                 {experiences.map((experience, index) => (
                     <motion.div
                         key={index}
-                        className="mb-6 border-l-2 border-green-400 pl-6 relative"
+                        className="mb-6 border-l-2 border-blue-400 pl-6 relative"
                         initial={{opacity: 0, x: -30}}
                         whileInView={{opacity: 1, x: 0}}
                         transition={{duration: 0.6, delay: 0.1}}
                         viewport={{once: true}}
                     >
-                        <div className="absolute -left-2 top-0 w-3 h-3 bg-green-400 rounded-full"></div>
+                        <div className="absolute -left-1.5 top-0 w-3 h-3 bg-blue-400 rounded-full"></div>
 
                         <div className="mb-4">
-                            <h3 className="text-xl font-bold text-green-400 mb-2">
-                                {experience.title} at {experience.company}
+                            <h3 className="text-xl font-bold text-blue-400 mb-2">
+                                <Link href={experience.url} target="_blank" rel="noreferrer">
+                                    {experience.title} at {experience.company}
+                                </Link>
                             </h3>
                             <p className="text-gray-400 text-sm">
                                 {experience.date_of_joining}
@@ -112,7 +115,7 @@ export default function Experiences() {
                         >
                             {experience.description.map((item, index) => (
                                 <li key={index} className="flex items-start">
-                                    <span className="text-green-400 mr-2 mt-1">•</span>
+                                    <span className="text-blue-400 mr-2 mt-1">•</span>
                                     <span>{item}</span>
                                 </li>
                             ))}
