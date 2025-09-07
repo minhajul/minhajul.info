@@ -11,8 +11,15 @@ export default function Hero(){
                     <Typewriter></Typewriter>
                 </div>
 
-                <p className="mt-3 text-base lg:text-lg font-semibold text-slate-300 sm:mt-5">
-                    {"Experienced Software Engineer with a strong background in backend development and extensive experience in AWS. Skilled in a wide range of technologies, including Python, PHP, Laravel, Django, Django Rest Framework (DRF), JavaScript, Node.js, Next.js MySQL and PostgreSQL. Adaptable and proficient in navigating diverse technology stacks, platforms, and infrastructures to deliver high-quality, reliable software solutions. Demonstrated expertise in designing, developing, and maintaining scalable backend systems with a strong emphasis on performance, reliability, and cloud-based integration."}
+                <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5">
+                    I am a full-stack software engineer with expertise in system design and DevOps.
+                    I specialize in developing scalable applications using <strong>PHP</strong>, <strong>Javascript</strong>, <strong>Golang</strong>, <strong>Laravel</strong>, <strong>Livewire</strong> and modern JavaScript frameworks such as <strong>Node.js</strong>, <strong>React</strong>, and <strong>Next.js</strong>.
+                    My experience includes implementing <strong>CI/CD</strong> pipelines, <strong>Docker</strong> containerization, and deploying cloud solutions on <strong>AWS</strong>, complemented by strong database management skills in <strong>MySQL</strong> and <strong>PostgreSQL</strong>.
+                    I am particularly focused on architecting distributed systems and microservices that enable business growth and operational efficiency.
+
+                    <span className="block pt-5">
+                        I am eager to apply my technical expertise to deliver impactful solutions while contributing to the success of forward-thinking technology teams.
+                    </span>
                 </p>
             </div>
 
