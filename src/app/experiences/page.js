@@ -22,7 +22,7 @@ const experiences = [
             "Driving adoption of new technologies and best practices to continuously enhance team efficiency and product quality",
             "Monitoring and improving system reliability, security, and scalability on an ongoing basis",
             "Actively contributing to strategic roadmap planning and aligning technical decisions with business objectives",
-        ],
+        ]
     },
     {
         "title": "Software & Application Engineer",
@@ -30,19 +30,18 @@ const experiences = [
         "url": "https://www.tenssor.com",
         "date_of_joining": "Dec 2018 - Jun 2023",
         "description": [
-            "Design and develop highly available backend systems and scale them to serve large volumes of traffic",
-            "Collaborate with management to understand objectives and develop corresponding models",
-            "Provide software specifications, write production-quality code, and engage in algorithm proliferation activities",
-            "Develop RESTful APIs using PHP, Laravel, Python, Django, and Django REST Framework",
-            "Building scalable application using PHP, Laravel, React.js, Next.js, Tailwind CSS, MySQL",
-            "Analyse application and server performance data to recommend improvements",
-            "Utilise various caching technologies, including local and distributed solutions (Nginx, Redis, Memcached)",
-            "Develop and maintain automated CI/CD pipelines for code deployment",
-            "Manage and distribute tasks among the team using JIRA",
-            "Optimise MySQL and PostgreSQL databases for high availability and improved query performance",
-            "Design the architecture and develop the project skeleton",
-            "Manage cloud services (AWS EC2, Route 53, S3, RDS, CodePipeline, CodeDeploy, CodeCommit)"
-        ],
+            "Designed and developed highly available and scalable backend systems to handle large volumes of traffic",
+            "Collaborated with management to align technical solutions with business objectives",
+            "Provided software specifications, wrote production-quality code, and implemented best practices for maintainable and efficient systems",
+            "Developed RESTful APIs and full-stack applications using PHP, Laravel, Python, Django, Node.js, React.js, Next.js, and Tailwind CSS",
+            "Analysed application and server performance data and provided recommendations to optimize efficiency and reliability",
+            "Implemented caching strategies using local and distributed solutions such as Nginx, Redis, and Memcached",
+            "Built and maintained automated CI/CD pipelines to ensure smooth code deployment and testing workflows",
+            "Led task management and project coordination using tools like JIRA",
+            "Optimised MySQL and PostgreSQL databases for high availability, performance, and reliability",
+            "Architected projects by designing robust system skeletons and scalable software structures",
+            "Managed cloud infrastructure and services, including AWS EC2, Route 53, S3, RDS, CodePipeline, CodeDeploy, and CodeCommit",
+        ]
     },
     {
         "title": "Sr Software Engineer",
@@ -60,7 +59,7 @@ const experiences = [
             "Managed project workflows and task distribution using team collaboration tools",
             "Automated cloud infrastructure and virtualized environments using modern tools such as Ansible and Docker",
             "Developed and maintained automated CI/CD pipelines to enforce coding standards, run tests, and streamline deployments"
-        ],
+        ]
     }
 ];
 
@@ -109,10 +108,10 @@ export default function Experiences() {
                             transition={{duration: 0.5, delay: 0.3}}
                             viewport={{once: true}}
                         >
-                            {experience.description.map((item, index) => (
-                                <li key={index} className="flex items-start">
+                            {experience.description.map((responsibility, indexValue) => (
+                                <li key={indexValue} className="flex items-start">
                                     <span className="text-blue-400 mr-2 mt-1">•</span>
-                                    <span>{item}</span>
+                                    <span>{responsibility}</span>
                                 </li>
                             ))}
                         </motion.ul>
