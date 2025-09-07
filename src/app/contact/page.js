@@ -1,12 +1,21 @@
+"use client"
+
+import {motion} from "framer-motion";
+
 export default function Contact() {
     return (
         <div className="mt-10 lg:mt-24 p-6 lg:px-8 mx-auto max-w-7xl">
-            <div className="text-white pb-10">
-                <h2 className="font-semibold text-3xl">
+            <motion.div
+                className="mb-12"
+                initial={{opacity: 0, y: -20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.6}}
+            >
+                <h2 className="text-white font-semibold text-3xl">
                     Contact
                 </h2>
-                <p className="mt-3 text-lg">Get in touch with me</p>
-            </div>
+                <p className="mt-3 text-white text-lg">Get in touch with me</p>
+            </motion.div>
 
             <div className="flex flex-col md:flex-row justify-between">
                 <p className="text-lg text-slate-300 hover:text-white leading-7">
