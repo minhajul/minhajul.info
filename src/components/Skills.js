@@ -90,7 +90,7 @@ export default function Skills() {
                 </div>
 
                 <div className="max-w-full lg:max-w-2xl mx-auto text-center mt-16">
-                    <p className="border p-1 rounded-md text-slate-300 hover:text-white">
+                    <p className="border border-blue-400 p-1 rounded-md text-slate-300 hover:text-white">
                         Always learning and exploring new technologies.
                     </p>
                 </div>
