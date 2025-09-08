@@ -11,7 +11,7 @@ export default function Hero(){
                     <Typewriter></Typewriter>
                 </div>
 
-                <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5">
+                <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5 leading-7">
                     I am a full-stack software engineer with advanced knowledge in DevOps.
                     I specialize in developing scalable applications using <strong>PHP</strong>, <strong>Javascript</strong>, <strong>Golang</strong>, <strong>Laravel</strong>, <strong>Livewire</strong> and JavaScript frameworks such as <strong>Node.js</strong>, <strong>React</strong>, and <strong>Next.js</strong>.
 
