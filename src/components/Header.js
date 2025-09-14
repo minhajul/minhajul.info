@@ -41,9 +41,9 @@ export default function Header() {
                         Me
                     </Link>
 
-                    {/*<Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">*/}
-                    {/*    Projects*/}
-                    {/*</Link>*/}
+                    <Link href="/projects" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
+                        Projects
+                    </Link>
 
                     <Link href="/experiences" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
                         Experiences
@@ -86,13 +86,13 @@ export default function Header() {
                                     Me
                                 </Link>
 
-                                {/*<Link
-                                    href="/"
+                                *<Link
+                                    href="/projects"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white"
                                     onClick={handleMenuClick}
                                 >
                                     Projects
-                                </Link>*/}
+                                </Link>
 
                                 <Link
                                     href="/experiences"
