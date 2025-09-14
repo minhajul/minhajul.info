@@ -15,7 +15,7 @@ export default function Hero(){
                     I am a full-stack software engineer with advanced knowledge in DevOps.
                     I specialize in developing scalable applications using <strong>PHP</strong>, <strong>Javascript</strong>, <strong>Golang</strong>, <strong>Laravel</strong>, <strong>Livewire</strong> and JavaScript frameworks such as <strong>Node.js</strong>, <strong>React</strong>, and <strong>Next.js</strong>.
 
-                    I have hands-on experience with DevOps tools, including <strong>Docker</strong> and <strong>Kubernetes</strong>, to streamline development, deployment, and scaling processes on <strong>AWS</strong>.
+                    I have hands-on experience with DevOps tools, including <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Pulumi</strong>, <strong>Terraform</strong> to streamline development, deployment, and scaling processes on <strong>AWS</strong>.
 
                     My experience also includes designing distributed systems and microservices, as well as managing databases.
 
