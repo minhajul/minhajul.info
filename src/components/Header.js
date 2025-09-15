@@ -60,6 +60,16 @@ export default function Header() {
                         Experiences
                     </Link>
 
+                    <Link href="/projects"
+                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
+                              pathname === "/projects"
+                                  ? "bg-slate-600/20"
+                                  : "hover:bg-slate-600/20"
+                          }`}
+                    >
+                        Projects
+                    </Link>
+
                     <Link href="/contact"
                           className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
                               pathname === "/contact"
@@ -117,6 +127,18 @@ export default function Header() {
                                     }`}
                                 >
                                     Experiences
+                                </Link>
+
+                                <Link
+                                    href="/projects"
+                                    onClick={handleMenuClick}
+                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
+                                        pathname === "/projects"
+                                            ? "bg-slate-600/20"
+                                            : "hover:bg-slate-600/20"
+                                    }`}
+                                >
+                                    Projects
                                 </Link>
 
                                 <Link href="/contact"

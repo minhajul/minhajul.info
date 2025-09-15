@@ -29,10 +29,9 @@ export default function Hero(){
                 <Image
                     src="/profile-pic.png"
                     alt="Md Minhajul Islam"
-                    width="100"
-                    height="100"
-                    layout="responsive"
-                    objectFit="contain"
+                    width="500"
+                    height="300"
+                    style={{ objectFit: 'cover' }}
                 />
 
                 <div className="border text-normal font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
