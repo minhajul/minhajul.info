@@ -8,14 +8,14 @@ const projects = [
     {
         "title": "Laravel Grafana",
         "url": "https://github.com/minhajul/laravel-grafana",
-        "tech": "laravel, Docker, Grafana, Prometheus",
+        "technologies": ['laravel', 'Docker', 'Grafana', 'Prometheus'],
         "image": "/projects/laravel-grafana.png",
         "description": "Monitoring the performance of the Laravel app using Grafana, Prometheus, and Loki. Containerizing the project using Docker."
     },
     {
         "title": "Docker Cleaner",
         "url": "https://github.com/minhajul/docker-cleaner",
-        "tech": "Golang, Docker, Bubbletea, Lipgloss",
+        "technologies": ['Golang', 'Docker', 'Bubbletea', 'Lipgloss'],
         "image": "/projects/docker-cleaner.png",
         "description" : "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
     }
@@ -46,24 +46,29 @@ export default function Projects() {
                         viewport={{once: true}}
                     >
                         <div className="border border-slate-600 rounded-md p-5 flex flex-col h-full">
-                            <h3 className="text-xl font-bold text-blue-400 mb-2">
+                            <h3 className="text-xl font-bold text-blue-400 hover:text-blue-500 transition mb-2">
                                 <Link href={project.url} target="_blank" rel="noreferrer">
                                     {project.title}
                                 </Link>
                             </h3>
-
-                            <div className="py-2">
-                                <Image
-                                    loading="lazy"
-                                    src={project.image}
-                                    alt={project.title}
-                                    width="500"
-                                    height="100"
-                                    className="rounded-lg object-cover"
-                                />
+                            <div className="py-3 flex gap-2">
+                                {project.technologies.map((tech, index) => (
+                                    <p key={index} className="text-sm bg-slate-600/20 text-slate-300 px-2 py-1 rounded-md ">{tech}</p>
+                                ))}
                             </div>
 
-                            <p className="text-gray-400 text-sm">
+                            {/*<div className="py-2">*/}
+                            {/*    <Image*/}
+                            {/*        loading="lazy"*/}
+                            {/*        src={project.image}*/}
+                            {/*        alt={project.title}*/}
+                            {/*        width="500"*/}
+                            {/*        height="500"*/}
+                            {/*        className="rounded-lg object-cover"*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+
+                            <p className="text-gray-400 text-base">
                                 {project.description}
                             </p>
                         </div>
