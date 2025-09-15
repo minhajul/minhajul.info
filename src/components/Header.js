@@ -11,9 +11,12 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+    const pathname = usePathname();
 
     const handleMenuClick = () => {
         setMobileMenuOpen(false)
@@ -36,20 +39,34 @@ export default function Header() {
                         <Bars3Icon aria-hidden="true" className="size-6" />
                     </button>
                 </div>
-                <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-                    <Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
+                <PopoverGroup className="hidden lg:flex lg:gap-x-6">
+                    <Link href="/"
+                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
+                              pathname === "/"
+                                  ? "bg-slate-600/20"
+                                  : "hover:bg-slate-600/20"
+                          }`}
+                    >
                         Me
                     </Link>
 
-                    {/*<Link href="/" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">*/}
-                    {/*    Projects*/}
-                    {/*</Link>*/}
-
-                    <Link href="/experiences" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
+                    <Link href="/experiences"
+                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
+                              pathname === "/experiences"
+                                  ? "bg-slate-600/20"
+                                  : "hover:bg-slate-600/20"
+                          }`}
+                    >
                         Experiences
                     </Link>
 
-                    <Link href="/contact" className="flex items-center gap-x-1 text-lg font-semibold text-slate-300 hover:text-white">
+                    <Link href="/contact"
+                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
+                              pathname === "/contact"
+                                  ? "bg-slate-600/20"
+                                  : "hover:bg-slate-600/20"
+                          }`}
+                    >
                         Contacts
                     </Link>
                 </PopoverGroup>
@@ -80,32 +97,35 @@ export default function Header() {
                             <div className="space-y-2 py-6">
                                 <Link
                                     href="/"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white"
                                     onClick={handleMenuClick}
+                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
+                                        pathname === "/"
+                                            ? "bg-slate-600/20"
+                                            : "hover:bg-slate-600/20"
+                                    }`}
                                 >
                                     Me
                                 </Link>
 
-                                {/*<Link
-                                    href="/"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white"
-                                    onClick={handleMenuClick}
-                                >
-                                    Projects
-                                </Link>*/}
-
                                 <Link
                                     href="/experiences"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white"
                                     onClick={handleMenuClick}
+                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
+                                        pathname === "/experiences"
+                                            ? "bg-slate-600/20"
+                                            : "hover:bg-slate-600/20"
+                                    }`}
                                 >
                                     Experiences
                                 </Link>
 
-                                <Link
-                                    href="/contact"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-lg font-semibold text-slate-300 hover:text-white"
+                                <Link href="/contact"
                                     onClick={handleMenuClick}
+                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
+                                      pathname === "/contact"
+                                          ? "bg-slate-600/20"
+                                          : "hover:bg-slate-600/20"
+                                    }`}
                                 >
                                     Contacts
                                 </Link>
