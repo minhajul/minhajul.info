@@ -65,7 +65,7 @@ const experiences = [
 
 export default function Experiences() {
     return (
-        <div className="mt-10 lg:mt-24 p-6 lg:px-8 mx-auto max-w-7xl relative">
+        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
             <motion.div
                 className="mb-12"
                 initial={{opacity: 0, y: -20}}
