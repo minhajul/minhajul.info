@@ -38,8 +38,7 @@ const skills = [
             {name: "Docker", text: "text-cyan-300", bg: "bg-cyan-500/10", ring: "ring-cyan-500/20", icon: "docker"},
             {name: "Kubernetes", text: "text-blue-300", bg: "bg-blue-500/10", ring: "ring-blue-500/20", icon: "kubernetes"},
             {name: "Terraform", text: "text-slate-300", bg: "bg-slate-500/10", ring: "ring-slate-500/20", icon: "terraform"},
-            {name: "Pulumi", text: "text-purple-300", bg: "bg-purple-500/10", ring: "ring-purple-500/20", icon: "pulumi"},
-            {name: "GitHub Actions", text: "text-rose-300", bg: "bg-rose-500/10", ring: "ring-rose-500/20", icon: "github_actions"}
+            {name: "Pulumi", text: "text-purple-300", bg: "bg-purple-500/10", ring: "ring-purple-500/20", icon: "pulumi"}
         ]
     },
     {

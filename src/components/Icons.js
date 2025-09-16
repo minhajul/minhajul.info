@@ -25,7 +25,6 @@ const ICONS = {
     kubernetes: "M12 2l6 6l-6 6l-6-6l6-6m0 16l8-8l2 2l-10 10L2 12l2-2l8 8Z",
     terraform: "M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3m0 3.2L6 8.9v6.2l6 2.7l6-2.7V8.9L12 6.2Z",
     pulumi: "M12 3l5 3v6l-5 3l-5-3V6l5-3Z",
-    github_actions: "M12 2v20M2 12h20",
 
     // Databases Technologies
     mysql: "M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3Z",
