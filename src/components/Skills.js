@@ -9,10 +9,10 @@ const skills = [
         icon: "frontend",
         gradient: "from-indigo-500/90 to-fuchsia-500/90",
         technologies: [
-            { name: "React", text: "text-indigo-300", bg: "bg-indigo-500/10", ring: "ring-indigo-500/20", icon: "react" },
-            { name: "Next.js", text: "text-blue-300", bg: "bg-blue-500/10", ring: "ring-blue-500/20", icon: "nextjs" },
-            { name: "Tailwind CSS", text: "text-cyan-300", bg: "bg-cyan-500/10", ring: "ring-cyan-500/20", icon: "tailwind" },
-            { name: "Accessibility", text: "text-emerald-300", bg: "bg-emerald-500/10", ring: "ring-emerald-500/20", icon: "accessibility" }
+            { name: "React", colorCode: "text-indigo-300 bg-indigo-500/10 ring-indigo-500/20"},
+            { name: "Next.js", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
+            { name: "Tailwind CSS", colorCode: "text-cyan-300 bg-cyan-500/10 ring-cyan-500/20"},
+            { name: "Accessibility", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"}
         ]
     },
     {
@@ -21,12 +21,12 @@ const skills = [
         icon: "backend",
         gradient: "from-blue-500/90 to-violet-500/90",
         technologies: [
-            { name: "PHP", text: "text-amber-300", bg: "bg-amber-500/10", ring: "ring-amber-500/20", icon: "php"},
-            { name: "Laravel", text: "text-violet-300", bg: "bg-violet-500/10", ring: "ring-violet-500/20", icon: "laravel"},
-            { name: "Python", text: "text-rose-300", bg: "bg-rose-500/10", ring: "ring-rose-500/20", icon: "python"},
-            { name: "Node.js", text: "text-blue-300", bg: "bg-blue-500/10", ring: "ring-blue-500/20", icon: "nodejs"},
-            { name: "Express", text: "text-indigo-300", bg: "bg-indigo-500/10", ring: "ring-indigo-500/20", icon: "express"},
-            { name: "Golang", text: "text-emerald-300", bg: "bg-emerald-500/10", ring: "ring-emerald-500/20", icon: "golang" }
+            { name: "PHP", colorCode: "text-amber-300 bg-amber-500/10 ring-amber-500/20"},
+            { name: "Laravel", colorCode: "text-violet-300 bg-violet-500/10 ring-violet-500/20"},
+            { name: "Python", colorCode: "text-rose-300 bg-rose-500/10 ring-rose-500/20"},
+            { name: "Node.js", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
+            { name: "Express", colorCode: "text-indigo-300 bg-indigo-500/10 ring-indigo-500/20"},
+            { name: "Golang", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"}
         ]
     },
     {
@@ -35,10 +35,11 @@ const skills = [
         icon: "devops",
         gradient: "from-cyan-500/90 to-blue-600/90",
         technologies: [
-            {name: "Docker", text: "text-cyan-300", bg: "bg-cyan-500/10", ring: "ring-cyan-500/20", icon: "docker"},
-            {name: "Kubernetes", text: "text-blue-300", bg: "bg-blue-500/10", ring: "ring-blue-500/20", icon: "kubernetes"},
-            {name: "Terraform", text: "text-slate-300", bg: "bg-slate-500/10", ring: "ring-slate-500/20", icon: "terraform"},
-            {name: "Pulumi", text: "text-purple-300", bg: "bg-purple-500/10", ring: "ring-purple-500/20", icon: "pulumi"}
+            {name: "Docker", colorCode: "text-cyan-300 bg-cyan-500/10 ring-cyan-500/20"},
+            {name: "Kubernetes", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
+            {name: "Terraform", colorCode: "text-slate-300 bg-slate-500/10 ring-slate-500/20"},
+            {name: "Pulumi", colorCode: "text-purple-300 bg-purple-500/10 ring-purple-500/20"},
+            {name: "GitHub Actions", color: "text-rose-300 bg-rose-500/10 ring-rose-500/20"}
         ]
     },
     {
@@ -47,8 +48,8 @@ const skills = [
         icon: "database",
         gradient: "bg-gradient-to-br from-emerald-500/90",
         technologies: [
-            {name: "MySQL", text: "text-blue-300", bg: "bg-blue-500/10", ring: "ring-blue-500/20", icon: "mysql"},
-            {name: "PostgreSQL", text: "text-emerald-300", bg: "bg-emerald-500/10", ring: "ring-emerald-500/20", icon: "postgresql"}
+            {name: "MySQL", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
+            {name: "PostgreSQL", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"}
         ]
     },
     {
@@ -57,7 +58,7 @@ const skills = [
         icon: "cloud",
         gradient: "from-sky-500/90 to-indigo-500/90",
         technologies: [
-            {name: "AWS", text: "text-amber-300", bg: "bg-amber-500/10", ring: "ring-amber-500/20", icon: "aws"}
+            {name: "AWS", colorCode: "text-amber-300 bg-amber-500/10 ring-amber-500/20"}
         ]
     }
 ];
