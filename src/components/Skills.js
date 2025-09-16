@@ -39,7 +39,7 @@ const skills = [
             {name: "Kubernetes", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
             {name: "Terraform", colorCode: "text-slate-300 bg-slate-500/10 ring-slate-500/20"},
             {name: "Pulumi", colorCode: "text-purple-300 bg-purple-500/10 ring-purple-500/20"},
-            {name: "GitHub Actions", color: "text-rose-300 bg-rose-500/10 ring-rose-500/20"}
+            {name: "GitHub Actions", colorCode: "text-rose-300 bg-rose-500/10 ring-rose-500/20"}
         ]
     },
     {
