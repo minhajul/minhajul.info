@@ -65,7 +65,7 @@ const skills = [
 
 export default function Skills() {
     return (
-        <section className="py-10 lg:py-16 px-6 mt-10 lg:mt-24">
+        <section className="py-10 lg:py-16 mt-10 lg:mt-24">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-20">
                     <div className="inline-block">

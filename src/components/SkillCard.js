@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useState } from "react"
 
 const ICONS = {
     frontend: "M3 4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4H3V4Zm0 6h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10Zm4 3v2h10v-2H7Z",
