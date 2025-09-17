@@ -75,7 +75,7 @@ export default function Skills() {
                         <div className="h-1 w-32 bg-gradient-to-r from-blue-400 to-teal-600 mx-auto rounded-full"></div>
                     </div>
                     <p className="text-xl text-slate-300 hover:text-white max-w-3xl mx-auto mt-5">
-                        Technologies and tools I use to bring ideas to life.
+                        Technologies and tools I use to bring ideas to life
                     </p>
                 </div>
 
@@ -89,7 +89,7 @@ export default function Skills() {
 
                 <div className="max-w-full lg:max-w-2xl mx-auto text-center mt-16">
                     <p className="border border-blue-400 p-1 rounded-md text-slate-300 hover:text-white">
-                        Always learning and exploring new technologies.
+                        Always learning and exploring new technologies
                     </p>
                 </div>
             </div>
