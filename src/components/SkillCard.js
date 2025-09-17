@@ -14,7 +14,7 @@ const ICONS = {
 export default function SkillCard({ skill }) {
     return (
         <motion.article
-            className="group will-reveal rounded-lg p-5 sm:p-6 bg-white/25 ring-1 ring-white/30 backdrop-blur overflow-hidden"
+            className="group will-reveal rounded-2xl p-5 sm:p-6 bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden"
             whileHover="hover"
             initial="initial"
         >
