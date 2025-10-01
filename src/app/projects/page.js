@@ -2,7 +2,6 @@
 
 import {motion} from "framer-motion"
 import Link from "next/link";
-import Image from "next/image";
 
 const projects = [
     {
@@ -66,17 +65,6 @@ export default function Projects() {
                                     </p>
                                 ))}
                             </div>
-
-                            {/*<div className="py-2">*/}
-                            {/*    <Image*/}
-                            {/*        loading="lazy"*/}
-                            {/*        src={project.image}*/}
-                            {/*        alt={project.title}*/}
-                            {/*        width="500"*/}
-                            {/*        height="500"*/}
-                            {/*        className="rounded-lg object-cover"*/}
-                            {/*    />*/}
-                            {/*</div>*/}
 
                             <p className="text-gray-400 text-base">
                                 {project.description}
