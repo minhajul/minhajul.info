@@ -7,7 +7,7 @@
   ],
   "routes": [
     {
-      "pattern": "minhajul.info/*",
+      "pattern": "minhajul.info",
       "custom_domain": true
     }
   ],
