@@ -7,16 +7,20 @@ const projects = [
     {
         "title": "Laravel Grafana",
         "url": "https://github.com/minhajul/laravel-grafana",
-        "technologies": ['laravel', 'Docker', 'Grafana', 'Prometheus'],
-        "image": "/projects/laravel-grafana.png",
+        "technologies": ['Laravel', 'Docker', 'Grafana', 'Prometheus'],
         "description": "Monitoring the performance of the Laravel app using Grafana, Prometheus, and Loki. Containerizing the project using Docker."
     },
     {
         "title": "Docker Cleaner",
         "url": "https://github.com/minhajul/docker-cleaner",
         "technologies": ['Golang', 'Docker', 'Bubbletea', 'Lipgloss'],
-        "image": "/projects/docker-cleaner.png",
         "description" : "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
+    },
+    {
+        "title": "Automate Tailscale with Terraform",
+        "url": "https://github.com/minhajul/automate-tailscale-with-terraform",
+        "technologies": ['AWS', 'Terraform', 'Tailscale'],
+        "description" : "This Terraform project provisions an AWS EC2 instance configured as a Tailscale exit node, along with all necessary networking infrastructure."
     }
 ];
 
