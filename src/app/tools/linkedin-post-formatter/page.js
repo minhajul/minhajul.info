@@ -57,7 +57,7 @@ What's a project you're proud of? Let me know in the comments! 👇`;
     const wordCount = inputText.trim() ? inputText.trim().split(/\s+/).length : 0;
 
     return (
-        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
             <motion.div
                 className="mb-12"
                 initial={{opacity: 0, y: -20}}
