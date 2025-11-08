@@ -124,7 +124,7 @@ What's a project you're proud of? Let me know in the comments! 👇`;
 
             <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-blue-400 hover:text-blue-500">Formatted Post</h2>
+                    <h2 className="text-xl font-semibold text-blue-400">Formatted Post</h2>
                     {formattedText && (
                         <button
                             onClick={copyToClipboard}
@@ -171,7 +171,9 @@ What's a project you're proud of? Let me know in the comments! 👇`;
             </div>
 
             <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 hover:text-blue-500 mb-3">💡 Formatting Tips</h3>
+                <h3 className="text-lg font-semibold text-blue-400 mb-3">
+                    💡 Formatting Tips
+                </h3>
                 <ul className="grid sm:grid-cols-2 gap-3 text-sm text-slate-300">
                     <li className="flex items-start gap-2">
                         <span className="text-slate-300 font-bold">•</span>
