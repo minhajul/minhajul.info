@@ -64,13 +64,13 @@ export default function Projects() {
                             </h3>
                             <div className="py-3 flex flex-wrap gap-2">
                                 {project.technologies.map((tech, index) => (
-                                    <p key={index} className="text-xs bg-slate-600/20 text-slate-300 px-2 py-1 rounded-md">
+                                    <p key={index} className="text-xs bg-slate-600/20 text-gray-300 px-2 py-1 rounded-md">
                                         {tech}
                                     </p>
                                 ))}
                             </div>
 
-                            <p className="text-gray-400 text-base">
+                            <p className="text-gray-300 text-base">
                                 {project.description}
                             </p>
                         </div>

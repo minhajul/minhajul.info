@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { Copy, Check, Sparkles, RotateCcw } from 'lucide-react';
+import {motion} from "framer-motion"
+import {useState} from 'react';
+import {Copy, Check, Sparkles, RotateCcw} from 'lucide-react';
 
 export default function LinkedInPostFormatter() {
     const [inputText, setInputText] = useState('');
@@ -56,137 +57,139 @@ What's a project you're proud of? Let me know in the comments! 👇`;
     const wordCount = inputText.trim() ? inputText.trim().split(/\s+/).length : 0;
 
     return (
-        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
-            <div className="max-w-5xl mx-auto">
-                {/* Header */}
+        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
+            <motion.div
+                className="mb-12"
+                initial={{opacity: 0, y: -20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.6}}
+            >
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
-                        <Sparkles className="w-8 h-8 text-white" />
+                    <div
+                        className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
+                        <Sparkles className="w-8 h-8 text-white"/>
                     </div>
-                    <h1 className="text-4xl font-bold text-slate-900 mb-3">
+                    <h2 className="text-white font-semibold text-3xl mb-3">
                         LinkedIn Post Formatter
-                    </h1>
-                    <p className="text-lg text-slate-600">
+                    </h2>
+                    <p className="mt-3 text-white text-lg">
                         Transform your raw text into polished, professional LinkedIn posts
                     </p>
                 </div>
+            </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-6">
-                    {/* Input Section */}
-                    <div className="bg-white rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-semibold text-slate-800">Write Your Post</h2>
-                            <button
-                                onClick={loadExample}
-                                className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
-                            >
-                                Load Example
-                            </button>
-                        </div>
+            <div className="bg-white/5 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold text-blue-400">
+                        Write Your Post
+                    </h2>
+                    <button
+                        onClick={loadExample}
+                        className="text-sm text-blue-400 font-medium transition-colors"
+                    >
+                        Load Example
+                    </button>
+                </div>
 
-                        <textarea
-                            value={inputText}
-                            onChange={(e) => setInputText(e.target.value)}
-                            placeholder="Write your post here...&#10;&#10;Paste your raw text and click Generate to format it with proper spacing and structure."
-                            className="w-full h-80 p-4 border-2 border-slate-200 rounded-xl resize-none focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all text-slate-700 placeholder:text-slate-400"
-                        />
+                <textarea
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    placeholder="Paste your raw text and click Generate to format it with proper spacing and structure."
+                    className="bg-white/5 w-full h-80 p-4 border-2 border-gray-300 rounded-xl resize-none focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-gray-300 transition-all text-gray-300 placeholder:text-gray-300"
+                />
 
-                        <div className="flex items-center justify-between mt-4">
-                            <div className="text-sm text-slate-500">
-                                {wordCount} words · {charCount} characters
-                            </div>
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={handleClear}
-                                    className="flex items-center gap-2 px-4 py-2 text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-all font-medium"
-                                >
-                                    <RotateCcw className="w-4 h-4" />
-                                    Clear
-                                </button>
-                                <button
-                                    onClick={formatPost}
-                                    disabled={!inputText.trim()}
-                                    className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-lg"
-                                >
-                                    <Sparkles className="w-4 h-4" />
-                                    Generate
-                                </button>
-                            </div>
-                        </div>
+                <div className="flex items-center justify-between mt-4">
+                    <div className="text-base text-gray-300">
+                        {wordCount} words · {charCount} characters
                     </div>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={handleClear}
+                            className="flex items-center gap-2 px-4 py-2 text-gray-300"
+                        >
+                            <RotateCcw className="w-4 h-4"/>
+                            Clear
+                        </button>
+                        <button
+                            onClick={formatPost}
+                            disabled={!inputText.trim()}
+                            className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:text-gray-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-md"
+                        >
+                            <Sparkles className="w-4 h-4"/>
+                            Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                    {/* Output Section */}
-                    <div className="bg-white rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-semibold text-slate-800">Formatted Post</h2>
-                            {formattedText && (
-                                <button
-                                    onClick={copyToClipboard}
-                                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all font-medium shadow-md hover:shadow-lg"
-                                >
-                                    {copied ? (
-                                        <>
-                                            <Check className="w-4 h-4" />
-                                            Copied!
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Copy className="w-4 h-4" />
-                                            Copy
-                                        </>
-                                    )}
-                                </button>
-                            )}
-                        </div>
-
-                        <div className="w-full h-80 p-4 bg-slate-50 border-2 border-slate-200 rounded-xl overflow-y-auto">
-                            {formattedText ? (
-                                <p className="whitespace-pre-wrap text-slate-700 leading-relaxed">
-                                    {formattedText}
-                                </p>
+            <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold text-blue-400 hover:text-blue-500">Formatted Post</h2>
+                    {formattedText && (
+                        <button
+                            onClick={copyToClipboard}
+                            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg transition-all font-medium shadow-md hover:shadow-lg"
+                        >
+                            {copied ? (
+                                <>
+                                    <Check className="w-4 h-4"/>
+                                    Copied!
+                                </>
                             ) : (
-                                <div className="flex items-center justify-center h-full">
-                                    <p className="text-slate-400 text-center">
-                                        Your formatted post will appear here...
-                                        <br />
-                                        <span className="text-sm">Click Generate to see the magic ✨</span>
-                                    </p>
-                                </div>
+                                <>
+                                    <Copy className="w-4 h-4"/>
+                                    Copy
+                                </>
                             )}
+                        </button>
+                    )}
+                </div>
+
+                <div className="w-full h-80 p-4 bg-white/5 border-1 border-slate-400 rounded-xl overflow-y-auto">
+                    {formattedText ? (
+                        <p className="whitespace-pre-wrap text-gray-300 leading-relaxed">
+                            {formattedText}
+                        </p>
+                    ) : (
+                        <div className="flex items-center justify-center h-full">
+                            <p className="text-slate-300 text-center">
+                                Your formatted post will appear here...
+                                <br/>
+                                <span className="text-sm">Click Generate to see the magic ✨</span>
+                            </p>
                         </div>
+                    )}
+                </div>
 
-                        {formattedText && (
-                            <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                                <p className="text-sm text-blue-800">
-                                    ✓ Post formatted with proper spacing and line breaks
-                                </p>
-                            </div>
-                        )}
+                {formattedText && (
+                    <div className="mt-4 p-3 bg-white/5 border border-gray-300 rounded-lg">
+                        <p className="text-sm text-gray-300">
+                            ✓ Post formatted with proper spacing and line breaks
+                        </p>
                     </div>
-                </div>
+                )}
+            </div>
 
-                {/* Tips Section */}
-                <div className="mt-8 bg-white rounded-2xl shadow-lg p-6">
-                    <h3 className="text-lg font-semibold text-slate-800 mb-3">💡 Formatting Tips</h3>
-                    <ul className="grid sm:grid-cols-2 gap-3 text-sm text-slate-600">
-                        <li className="flex items-start gap-2">
-                            <span className="text-blue-600 font-bold">•</span>
-                            <span>Each line break in your input becomes a paragraph</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <span className="text-blue-600 font-bold">•</span>
-                            <span>Extra spaces are automatically cleaned up</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <span className="text-blue-600 font-bold">•</span>
-                            <span>Emojis and special characters are preserved</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <span className="text-blue-600 font-bold">•</span>
-                            <span>Use numbered lists or bullet points for better structure</span>
-                        </li>
-                    </ul>
-                </div>
+            <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6">
+                <h3 className="text-lg font-semibold text-blue-400 hover:text-blue-500 mb-3">💡 Formatting Tips</h3>
+                <ul className="grid sm:grid-cols-2 gap-3 text-sm text-slate-300">
+                    <li className="flex items-start gap-2">
+                        <span className="text-slate-300 font-bold">•</span>
+                        <span>Each line break in your input becomes a paragraph</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                        <span className="text-slate-300 font-bold">•</span>
+                        <span>Extra spaces are automatically cleaned up</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                        <span className="text-slate-300 font-bold">•</span>
+                        <span>Emojis and special characters are preserved</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                        <span className="text-slate-300 font-bold">•</span>
+                        <span>Use numbered lists or bullet points for better structure</span>
+                    </li>
+                </ul>
             </div>
         </div>
     );
