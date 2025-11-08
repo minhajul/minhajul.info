@@ -9,15 +9,14 @@ export default function LinkedInPostFormatter() {
     const [formattedText, setFormattedText] = useState('');
     const [copied, setCopied] = useState(false);
 
-    const examplePost = `
-        I just launched my new project and I'm excited to share it with you all
-        It took 6 months of hard work but we finally made it happen
-        Here are 3 key lessons I learned along the way:
-        1. Consistency beats perfection every time
-        2. Community support is everything
-        3. Small wins lead to big victories
-        What's a project you're proud of? Let me know in the comments! 👇
-    `;
+    const examplePost = `I just launched my new project and I'm excited to share it with you all
+It took 6 months of hard work but we finally made it happen
+Here are 3 key lessons I learned along the way:
+1. Consistency beats perfection every time
+2. Community support is everything
+3. Small wins lead to big victories
+What's a project you're proud of? Let me know in the comments! 👇
+`;
 
     const formatPost = () => {
         if (!inputText.trim()) return;
