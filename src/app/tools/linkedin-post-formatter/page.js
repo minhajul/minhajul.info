@@ -1,7 +1,7 @@
 import LinkedInPostFormatter from "@/components/LinkedInPostFormatter";
 
 export const metadata = {
-    title: "Portfolio of Minhaj - LinkedIn Post Formatter",
+    title: "Portfolio website of Minhaj - LinkedIn Post Formatter",
     description: "Transform your raw text into polished, professional LinkedIn posts"
 };
 

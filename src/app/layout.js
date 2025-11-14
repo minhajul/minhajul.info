@@ -13,17 +13,17 @@ const firaCode = Fira_Code({
 });
 
 export const metadata = {
-    title: "Portfolio website of Minhajul Islam",
+    title: "Portfolio website of Minhaj",
     description: "A full-stack software engineer with advanced knowledge in DevOps.",
     twitter: {
         card: "summary",
-        title: "Portfolio website of Minhajul Islam",
+        title: "Portfolio website of Minhaj",
         description: "A full-stack software engineer with advanced knowledge in DevOps.",
         site: "@minhaj_cse",
         images: ["/profile-pic.png"],
     },
     openGraph: {
-        title: "Portfolio website of Minhajul Islam",
+        title: "Portfolio website of Minhaj",
         siteName: "A full-stack software engineer with advanced knowledge in DevOps.",
         images: ["/profile-pic.png"],
         type: "website",
