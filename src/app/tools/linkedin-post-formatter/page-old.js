@@ -1,23 +1,11 @@
 'use client';
 
 import {motion} from "framer-motion"
-import {useState, useCallback} from 'react';
+import {useState} from 'react';
 import {Copy, Check, Sparkles, RotateCcw} from 'lucide-react';
-import {tiptapJsonToLinkedInText} from "@/components/TiptapToLinkedin";
-import TiptapEditor from "@/components/TiptapEditor";
 
 export default function LinkedInPostFormatter() {
-    const [tiptapJson, setTiptapJson] = useState(null);
-    const [inputText, setInputText] = useState(''); // Used for word/char count
-
-    const handleEditorChange = useCallback((json) => {
-        setTiptapJson(json);
-    }, []);
-
-    const handleTextChange = useCallback((text) => {
-        setInputText(text);
-    }, []);
-
+    const [inputText, setInputText] = useState('');
     const [formattedText, setFormattedText] = useState('');
     const [copied, setCopied] = useState(false);
 
@@ -31,10 +19,14 @@ What's a project you're proud of? Let me know in the comments! 👇
 `;
 
     const formatPost = () => {
-        if (!tiptapJson) return;
+        if (!inputText.trim()) return;
 
-        // Use the new conversion logic
-        const formatted = tiptapJsonToLinkedInText(tiptapJson);
+        // Split by newlines and process
+        const lines = inputText.split('\n');
+        const formatted = lines
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .join('\n\n');
 
         setFormattedText(formatted);
     };
@@ -52,17 +44,13 @@ What's a project you're proud of? Let me know in the comments! 👇
     };
 
     const handleClear = () => {
-        // Resetting tiptapJson to null will clear the editor via the useEffect in TiptapEditor
-        setTiptapJson(null);
         setInputText('');
         setFormattedText('');
         setCopied(false);
     };
 
     const loadExample = () => {
-        // The TiptapEditor component will handle setting the content
-        // We pass the example post as a string, which TiptapEditor will convert to JSON
-        setTiptapJson(examplePost);
+        setInputText(examplePost);
         setFormattedText('');
     };
 
@@ -104,10 +92,11 @@ What's a project you're proud of? Let me know in the comments! 👇
                     </button>
                 </div>
 
-                <TiptapEditor
-                    value={tiptapJson}
-                    onChange={handleEditorChange}
-                    onTextChange={handleTextChange}
+                <textarea
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    placeholder="Paste your raw text and click Generate to format it with proper spacing and structure."
+                    className="bg-white/5 w-full h-80 p-4 border-2 border-gray-300 rounded-xl resize-none focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-gray-300 transition-all text-gray-300 placeholder:text-gray-300"
                 />
 
                 <div className="flex items-center justify-between mt-4">
@@ -177,9 +166,6 @@ What's a project you're proud of? Let me know in the comments! 👇
                     <div className="mt-4 p-3 bg-white/5 border border-gray-300 rounded-lg">
                         <p className="text-sm text-gray-300">
                             ✓ Post formatted with proper spacing and line breaks
-                        </p>
-                        <p className="text-sm text-gray-300">
-                            ✓ Rich text (bold, italic, lists) converted to LinkedIn-compatible Unicode
                         </p>
                     </div>
                 )}
