@@ -1,7 +1,12 @@
 "use client"
 
 import TiptapEditor from "@/components/TiptapEditor";
-import {Check, Copy, RotateCcw, Sparkles} from "lucide-react";
+import {
+    SparklesIcon,
+    ClipboardIcon,
+    CheckIcon,
+    ArrowPathIcon
+} from '@heroicons/react/24/outline'
 import {useCallback, useState} from "react";
 import {tiptapJsonToLinkedInText} from "@/components/TiptapTextFormatter";
 import {motion} from "framer-motion";
@@ -80,7 +85,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                 <div className="text-center mb-12">
                     <div
                         className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
-                        <Sparkles className="w-8 h-8 text-white"/>
+                        <SparklesIcon aria-hidden="true" className="w-8 h-8 text-white" />
                     </div>
                     <h2 className="text-white font-semibold text-3xl mb-3">
                         LinkedIn Post Formatter
@@ -119,7 +124,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                             onClick={handleClear}
                             className="flex items-center gap-2 px-4 py-2 text-gray-300"
                         >
-                            <RotateCcw className="w-4 h-4"/>
+                            <ArrowPathIcon aria-hidden="true" className="w-4 h-4"/>
                             Clear
                         </button>
                         <button
@@ -127,7 +132,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                             disabled={!inputText.trim()}
                             className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:text-gray-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-md"
                         >
-                            <Sparkles className="w-4 h-4"/>
+                            <SparklesIcon aria-hidden="true" className="w-4 h-4" />
                             Generate
                         </button>
                     </div>
@@ -144,12 +149,12 @@ What's a project you're proud of? Let me know in the comments! 👇
                         >
                             {copied ? (
                                 <>
-                                    <Check className="w-4 h-4"/>
+                                    <CheckIcon aria-hidden="true" className="w-4 h-4"/>
                                     Copied!
                                 </>
                             ) : (
                                 <>
-                                    <Copy className="w-4 h-4"/>
+                                    <ClipboardIcon aria-hidden="true" className="w-4 h-4"/>
                                     Copy
                                 </>
                             )}

@@ -3,7 +3,7 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect } from 'react'
-import { Bold, Italic, List, ListOrdered } from 'lucide-react'
+import { BoldIcon, ItalicIcon, ListBulletIcon, NumberedListIcon } from '@heroicons/react/24/outline'
 
 const MenuBar = ({ editor }) => {
     if (!editor) {
@@ -28,7 +28,7 @@ const MenuBar = ({ editor }) => {
                 }
                 className={buttonClass(editor.isActive('bold'))}
             >
-                <Bold className="w-5 h-5" />
+                <BoldIcon arial-hidden="true" className="w-5 h-5" />
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -41,19 +41,19 @@ const MenuBar = ({ editor }) => {
                 }
                 className={buttonClass(editor.isActive('italic'))}
             >
-                <Italic className="w-5 h-5" />
+                <ItalicIcon arial-hidden="true" className="w-5 h-5" />
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={buttonClass(editor.isActive('bulletList'))}
             >
-                <List className="w-5 h-5" />
+                <ListBulletIcon arial-hidden="true" className="w-5 h-5" />
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={buttonClass(editor.isActive('orderedList'))}
             >
-                <ListOrdered className="w-5 h-5" />
+                <NumberedListIcon arial-hidden="true" className="w-5 h-5" />
             </button>
         </div>
     )
