@@ -3,18 +3,6 @@ import Heading from "@/components/partials/Heading";
 export default function Contact() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
-            {/*<motion.div*/}
-            {/*    className="mb-12"*/}
-            {/*    initial={{opacity: 0, y: -20}}*/}
-            {/*    animate={{opacity: 1, y: 0}}*/}
-            {/*    transition={{duration: 0.6}}*/}
-            {/*>*/}
-            {/*    <h2 className="text-white font-semibold text-3xl">*/}
-            {/*        Contact*/}
-            {/*    </h2>*/}
-            {/*    <p className="mt-3 text-white text-lg">Get in touch with me</p>*/}
-            {/*</motion.div>*/}
-
             <Heading title="Contact" subtitle="Get in touch with me"></Heading>
 
             <div className="flex flex-col md:flex-row justify-between">

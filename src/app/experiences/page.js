@@ -2,6 +2,7 @@
 
 import {motion} from "framer-motion"
 import Link from "next/link";
+import Heading from "@/components/partials/Heading";
 
 const experiences = [
     {
@@ -66,17 +67,8 @@ const experiences = [
 export default function Experiences() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
-            <motion.div
-                className="mb-12"
-                initial={{opacity: 0, y: -20}}
-                animate={{opacity: 1, y: 0}}
-                transition={{duration: 0.6}}
-            >
-                <h2 className="text-white font-semibold text-3xl">
-                    Experiences
-                </h2>
-                <p className="mt-3 text-white text-lg">List of my professional experiences</p>
-            </motion.div>
+
+            <Heading title="Experiences" subtitle="List of my professional experiences"></Heading>
 
             <div className="mb-16">
                 {experiences.map((experience, index) => (
