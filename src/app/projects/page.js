@@ -17,10 +17,10 @@ const projects = [
         "description" : "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
     },
     {
-        "title": "Automate Tailscale with Terraform",
+        "title": "Tailscale with Terraform",
         "url": "https://github.com/minhajul/learning-terraform/tree/main/automate-tailscale",
         "technologies": ['AWS', 'Terraform', 'Tailscale'],
-        "description" : "This Terraform project provisions an AWS EC2 instance configured as a Tailscale exit node, along with all necessary networking infrastructure."
+        "description" : "This Terraform project provisions an AWS EC2 instance configured as a Tailscale exit node, along with all necessary networking infrastructures."
     }
 ];
 
