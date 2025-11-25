@@ -28,7 +28,6 @@ const projects = [
 export default function Projects() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
-
             <Heading title="Projects" subtitle="Highlighted projects demonstrating my expertise"></Heading>
 
             <div className="mb-16 grid grid-cols-1 lg:grid-cols-3 items-stretch gap-6">
