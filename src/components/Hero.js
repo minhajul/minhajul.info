@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Typewriter from "@/components/Typewriter";
 
-export default function Hero(){
+export default function Hero() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-14">
             <div className="col-span-1 lg:col-span-2">
@@ -13,11 +13,17 @@ export default function Hero(){
 
                 <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5 leading-7">
                     I am a full-stack software engineer with advanced knowledge in DevOps.
-                    I specialize in developing scalable applications using <strong>PHP</strong>, <strong>Javascript</strong>, <strong>Golang</strong>, <strong>Laravel</strong>, <strong>Livewire</strong> and JavaScript frameworks such as <strong>Node.js</strong>, <strong>React</strong>, and <strong>Next.js</strong>.
+                    I specialize in developing scalable applications
+                    using <strong>PHP</strong>, <strong>Javascript</strong>, <strong>Golang</strong>, <strong>Laravel</strong>, <strong>Livewire</strong> and
+                    JavaScript frameworks such as <strong>Node.js</strong>, <strong>React</strong>,
+                    and <strong>Next.js</strong>.
 
-                    I have hands-on experience with DevOps tools, including <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Pulumi</strong>, <strong>Terraform</strong> to streamline development, deployment, and scaling processes on <strong>AWS</strong>.
+                    I have hands-on experience with DevOps tools,
+                    including <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Pulumi</strong>, <strong>Terraform</strong> to
+                    streamline development, deployment, and scaling processes on <strong>AWS</strong>.
 
-                    My experience also includes designing distributed systems and microservices, as well as managing databases.
+                    My experience also includes designing distributed systems and microservices, as well as managing
+                    databases.
 
                     <span className="block pt-5">
                         I strive to apply my technical expertise to deliver impactful solutions while contributing to the success of forward-thinking technology teams.
@@ -31,12 +37,14 @@ export default function Hero(){
                     alt="Md Minhajul Islam"
                     width="500"
                     height="300"
-                    style={{ objectFit: 'cover' }}
+                    style={{objectFit: 'cover'}}
                 />
 
                 <div className="border text-normal font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
                     {"Software & Application Lead at "}
-                    <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://genofax.com">Genofax</a>
+                    <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://genofax.com">
+                        Genofax
+                    </a>
                 </div>
             </div>
         </div>
