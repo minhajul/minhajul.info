@@ -7,10 +7,11 @@ export default function Contact() {
 
             <div className="flex flex-col md:flex-row justify-between">
                 <p className="text-lg text-slate-300 leading-7">
-                    I am actively seeking freelance or remote opportunities in <strong>software engineering</strong>, <strong>full-stack development</strong>, and <strong>DevOps engineering</strong>.
-                    <span className="bg-blue-400 text-white rounded-md p-0.5 mr-1">I am also open to roles offering visa sponsorship.</span>
+                    I am actively seeking freelance or remote opportunities in software engineering, full-stack
+                    development, and DevOps engineering. <span className="bg-blue-400 text-white rounded-md p-0.5 mr-1">I am also open to full-time roles that offer visa sponsorship.</span>
 
-                    If you have any questions or potential opportunities, please feel free to reach out.
+                    If you have any opportunities or would like to discuss how my experience could support your team,
+                    please feel free to reach out. I would be glad to connect.
                 </p>
             </div>
 
