@@ -46,7 +46,7 @@ export default function SkillCard({ skill }) {
                 {skill.technologies.map((tech, index) => (
                     <span
                         key={index}
-                        className={`chip flex justify-center items-center gap-2 px-3 py-1.5 rounded-full text-sm ${tech.colorCode}`}
+                        className={`${tech.colorCode} chip flex justify-center items-center gap-2 px-3 py-1.5 rounded-full text-sm`}
                     >
                         {tech.name}
                     </span>
