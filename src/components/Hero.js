@@ -42,7 +42,8 @@ export default function Hero() {
 
                 <div className="border text-normal font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
                     {"Software & Application Lead at "}
-                    <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold" href="https://genofax.com">
+                    <a target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold"
+                       href="https://genofax.com">
                         Genofax
                     </a>
                 </div>
