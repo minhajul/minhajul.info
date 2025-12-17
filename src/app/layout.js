@@ -13,6 +13,9 @@ const firaCode = Fira_Code({
 });
 
 export const metadata = {
+    metadataBase: new URL(
+        process.env.NEXT_PUBLIC_SITE_URL
+    ),
     title: "Portfolio website of Minhaj",
     description: "A full-stack software engineer with advanced knowledge in DevOps.",
     twitter: {
