@@ -12,6 +12,7 @@ import {
 } from '@heroicons/react/24/outline'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { navigation } from "@/data/navigation";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -40,45 +41,18 @@ export default function Header() {
                     </button>
                 </div>
                 <PopoverGroup className="hidden lg:flex lg:gap-x-6">
-                    <Link href="/"
-                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
-                              pathname === "/"
-                                  ? "bg-slate-600/20"
-                                  : "hover:bg-slate-600/20"
-                          }`}
-                    >
-                        Me
-                    </Link>
-
-                    <Link href="/experiences"
-                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
-                              pathname === "/experiences"
-                                  ? "bg-slate-600/20"
-                                  : "hover:bg-slate-600/20"
-                          }`}
-                    >
-                        Experiences
-                    </Link>
-
-                    <Link href="/projects"
-                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
-                              pathname === "/projects"
-                                  ? "bg-slate-600/20"
-                                  : "hover:bg-slate-600/20"
-                          }`}
-                    >
-                        Projects
-                    </Link>
-
-                    <Link href="/contact"
-                          className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${
-                              pathname === "/contact"
-                                  ? "bg-slate-600/20"
-                                  : "hover:bg-slate-600/20"
-                          }`}
-                    >
-                        Contacts
-                    </Link>
+                    {navigation.map((item) => (
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${pathname === item.href
+                                    ? "bg-slate-600/20"
+                                    : "hover:bg-slate-600/20"
+                                }`}
+                        >
+                            {item.name}
+                        </Link>
+                    ))}
                 </PopoverGroup>
             </nav>
 
@@ -105,52 +79,19 @@ export default function Header() {
                     <div className="mt-6 flow-root">
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-6">
-                                <Link
-                                    href="/"
-                                    onClick={handleMenuClick}
-                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
-                                        pathname === "/"
-                                            ? "bg-slate-600/20"
-                                            : "hover:bg-slate-600/20"
-                                    }`}
-                                >
-                                    Me
-                                </Link>
-
-                                <Link
-                                    href="/experiences"
-                                    onClick={handleMenuClick}
-                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
-                                        pathname === "/experiences"
-                                            ? "bg-slate-600/20"
-                                            : "hover:bg-slate-600/20"
-                                    }`}
-                                >
-                                    Experiences
-                                </Link>
-
-                                <Link
-                                    href="/projects"
-                                    onClick={handleMenuClick}
-                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
-                                        pathname === "/projects"
-                                            ? "bg-slate-600/20"
-                                            : "hover:bg-slate-600/20"
-                                    }`}
-                                >
-                                    Projects
-                                </Link>
-
-                                <Link href="/contact"
-                                    onClick={handleMenuClick}
-                                    className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${
-                                      pathname === "/contact"
-                                          ? "bg-slate-600/20"
-                                          : "hover:bg-slate-600/20"
-                                    }`}
-                                >
-                                    Contacts
-                                </Link>
+                                {navigation.map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        onClick={handleMenuClick}
+                                        className={`-mx-3 block rounded-lg px-3 py-2 text-lg text-slate-300 hover:text-white font-semibold transition-colors ${pathname === item.href
+                                                ? "bg-slate-600/20"
+                                                : "hover:bg-slate-600/20"
+                                            }`}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </div>

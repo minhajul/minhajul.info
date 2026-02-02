@@ -11,9 +11,8 @@ const MenuBar = ({ editor }) => {
     }
 
     const buttonClass = (isActive) =>
-        `p-2 rounded-md transition-colors ${
-            isActive ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-white/10'
-        }`
+        `p-2 rounded-md transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-white/10'
+    }`
 
     return (
         <div className="flex flex-wrap gap-2 p-2 border-b border-white/10">
@@ -28,7 +27,7 @@ const MenuBar = ({ editor }) => {
                 }
                 className={buttonClass(editor.isActive('bold'))}
             >
-                <BoldIcon arial-hidden="true" className="w-5 h-5" />
+                <BoldIcon aria-hidden="true" className="w-5 h-5" />
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -41,19 +40,19 @@ const MenuBar = ({ editor }) => {
                 }
                 className={buttonClass(editor.isActive('italic'))}
             >
-                <ItalicIcon arial-hidden="true" className="w-5 h-5" />
+                <ItalicIcon aria-hidden="true" className="w-5 h-5" />
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={buttonClass(editor.isActive('bulletList'))}
             >
-                <ListBulletIcon arial-hidden="true" className="w-5 h-5" />
+                <ListBulletIcon aria-hidden="true" className="w-5 h-5" />
             </button>
             <button
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={buttonClass(editor.isActive('orderedList'))}
             >
-                <NumberedListIcon arial-hidden="true" className="w-5 h-5" />
+                <NumberedListIcon aria-hidden="true" className="w-5 h-5" />
             </button>
         </div>
     )

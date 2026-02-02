@@ -1,10 +1,10 @@
 import "./globals.css";
 
-import {Fira_Code} from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import {Analytics} from "@vercel/analytics/next"
-import {SpeedInsights} from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const firaCode = Fira_Code({
     subsets: ["latin"],
@@ -37,19 +37,19 @@ export const metadata = {
     },
 };
 
-export default function RootLayout({children}) {
+export default function RootLayout({ children }) {
     return (
         <html lang="en">
-        <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>
-        <Header/>
+            <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>
+                <Header />
 
-        {children}
+                {children}
 
-        <Footer/>
+                <Footer />
 
-        <Analytics/>
-        <SpeedInsights/>
-        </body>
+                <Analytics />
+                <SpeedInsights />
+            </body>
         </html>
     );
 }
