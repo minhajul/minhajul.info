@@ -18,6 +18,12 @@ const projects = [
         "description" : "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
     },
     {
+        "title": "Kubernetes Microservices",
+        "url": "https://github.com/minhajul/kubernetes-microservices",
+        "technologies": ['Laravel', 'Next.js', 'Docker', 'Grafana', 'Prometheus', 'Loki', 'Promtail'],
+        "description" : "A cloud-native application stack featuring Laravel (Backend), Next.js (Frontend), and Kubernetes, complete with a full observability suite (Loki, Grafana, Fluent Bit)."
+    },
+    {
         "title": "Tailscale with Terraform",
         "url": "https://github.com/minhajul/learning-terraform/tree/main/automate-tailscale",
         "technologies": ['AWS', 'Terraform', 'Tailscale'],
