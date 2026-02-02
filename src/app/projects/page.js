@@ -18,6 +18,12 @@ const projects = [
         "description" : "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
     },
     {
+        "title": "Go - Thundering Herd",
+        "url": "https://github.com/minhajul/go-thundering-herd",
+        "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL'],
+        "description" : "A distributed system designed to send millions of emails to users across 100+ different time zones at exactly midnight their local time."
+    },
+    {
         "title": "Kubernetes Microservices",
         "url": "https://github.com/minhajul/kubernetes-microservices",
         "technologies": ['Laravel', 'Next.js', 'Docker', 'Grafana', 'Prometheus', 'Loki', 'Promtail'],
