@@ -2,7 +2,7 @@
 
 import {motion} from "framer-motion"
 import Link from "next/link";
-import Heading from "@/components/partials/Heading";
+import Heading from "@/components/ui/Heading";
 import { projects } from "@/data/projects";
 
 export default function Projects() {
