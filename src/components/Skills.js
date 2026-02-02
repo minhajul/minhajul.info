@@ -3,8 +3,6 @@
 import SkillCard from "@/components/SkillCard";
 import { skills } from "@/data/skills";
 
-
-
 export default function Skills() {
     return (
         <section className="py-10 lg:py-16 mt-10 lg:mt-24">

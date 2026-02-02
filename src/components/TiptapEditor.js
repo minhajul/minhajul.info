@@ -12,7 +12,7 @@ const MenuBar = ({ editor }) => {
 
     const buttonClass = (isActive) =>
         `p-2 rounded-md transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-white/10'
-        }`
+    }`
 
     return (
         <div className="flex flex-wrap gap-2 p-2 border-b border-white/10">
