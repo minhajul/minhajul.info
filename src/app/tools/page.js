@@ -2,14 +2,7 @@
 
 import {motion} from "framer-motion"
 import Link from "next/link";
-
-const tools = [
-    {
-        "title": "LinkedIn Post Formatter",
-        "url": "/tools/linkedin-post-formatter",
-        "description": "Transform your raw text into polished, professional LinkedIn posts."
-    }
-];
+import {tools} from "@/data/tools";
 
 export default function Tools() {
     return (
