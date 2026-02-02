@@ -15,25 +15,25 @@ const projects = [
         "title": "Docker Cleaner",
         "url": "https://github.com/minhajul/docker-cleaner",
         "technologies": ['Golang', 'Docker', 'Bubbletea', 'Lipgloss'],
-        "description" : "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
+        "description": "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
     },
     {
         "title": "Go - Thundering Herd",
         "url": "https://github.com/minhajul/go-thundering-herd",
         "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL'],
-        "description" : "A distributed system designed to send millions of emails to users across 100+ different time zones at exactly midnight their local time."
+        "description": "A distributed system designed to send millions of emails to users across 100+ different time zones at exactly midnight their local time."
     },
     {
         "title": "Kubernetes Microservices",
         "url": "https://github.com/minhajul/kubernetes-microservices",
         "technologies": ['Laravel', 'Next.js', 'Docker', 'Grafana', 'Prometheus', 'Loki', 'Promtail'],
-        "description" : "A cloud-native application stack featuring Laravel (Backend), Next.js (Frontend), and Kubernetes, complete with a full observability suite (Loki, Grafana, Fluent Bit)."
+        "description": "A cloud-native application stack featuring Laravel (Backend), Next.js (Frontend), and Kubernetes, complete with a full observability suite (Loki, Grafana, Fluent Bit)."
     },
     {
         "title": "Tailscale with Terraform",
         "url": "https://github.com/minhajul/learning-terraform/tree/main/automate-tailscale",
         "technologies": ['AWS', 'Terraform', 'Tailscale'],
-        "description" : "This Terraform project provisions an AWS EC2 instance configured as a Tailscale exit node, along with all necessary networking infrastructures."
+        "description": "This Terraform project provisions an AWS EC2 instance configured as a Tailscale exit node, along with all necessary networking infrastructures."
     }
 ];
 
@@ -50,13 +50,12 @@ export default function Projects() {
                         whileHover="hover"
                         initial="initial"
                     >
-                        <motion.div
-                            className="absolute top-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-600"
+                        <motion.div className="absolute top-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-600"
                             variants={{
-                                initial: { width: 0, x: "-50%" },
-                                hover: { width: "100%", x: "-50%" },
+                                initial: {width: 0, x: "-50%"},
+                                hover: {width: "100%", x: "-50%"},
                             }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            transition={{duration: 0.4, ease: "easeOut"}}
                         />
 
                         <div className="flex flex-col h-full">
