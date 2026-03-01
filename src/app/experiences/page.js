@@ -9,7 +9,10 @@ export default function Experiences() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
 
-            <Heading title="Experiences" subtitle="List of my professional experiences"/>
+            <Heading
+                title="Experiences"
+                subtitle="List of my professional experiences"
+            />
 
             <div className="mb-16">
                 {experiences.map((experience, index) => (

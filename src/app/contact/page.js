@@ -3,7 +3,10 @@ import Heading from "@/components/ui/Heading";
 export default function Contact() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
-            <Heading title="Contact" subtitle="Get in touch with me" />
+            <Heading
+                title="Contact"
+                subtitle="Get in touch with me"
+            />
 
             <div className="flex flex-col md:flex-row justify-between">
                 <p className="text-lg text-slate-300 leading-7">
