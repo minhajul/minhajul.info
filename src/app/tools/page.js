@@ -3,21 +3,15 @@
 import {motion} from "framer-motion"
 import Link from "next/link";
 import {tools} from "@/data/tools";
+import Heading from "@/components/ui/Heading";
 
 export default function Tools() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
-            <motion.div
-                className="mb-12"
-                initial={{opacity: 0, y: -20}}
-                animate={{opacity: 1, y: 0}}
-                transition={{duration: 0.6}}
-            >
-                <h2 className="text-white font-semibold text-3xl">
-                    Tools
-                </h2>
-                <p className="mt-3 text-white text-lg">Highlighted projects demonstrating my expertise</p>
-            </motion.div>
+            <Heading
+                title="Tools"
+                subtitle="Highlighted projects demonstrating my expertise"
+            />
 
             <div className="mb-16 grid grid-cols-1 lg:grid-cols-3 items-stretch gap-6">
                 {tools.map((tool, index) => (
