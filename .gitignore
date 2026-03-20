@@ -45,3 +45,5 @@ next-env.d.ts
 
 # OpenNext build artifacts
 .open-next/
+# next-agents-md
+.next-docs/
