@@ -88,9 +88,9 @@ export default function TiptapEditor({ value, onChange, onTextChange }) {
     if (!editor) return null
 
     return (
-        <div className="border border-gray-300 rounded-xl bg-white/5 text-gray-300 min-h-[20rem] flex flex-col">
+        <div className="border border-gray-300 rounded-xl bg-white/5 text-gray-300 min-h-80 flex flex-col">
             <MenuBar editor={editor} />
-            <div className="p-4 flex-grow overflow-y-auto">
+            <div className="p-4 grow overflow-y-auto">
                 <EditorContent editor={editor} className="prose prose-invert max-w-none outline-none h-full" />
             </div>
         </div>

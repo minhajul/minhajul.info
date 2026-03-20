@@ -162,7 +162,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                     )}
                 </div>
 
-                <div className="w-full h-80 p-4 bg-white/5 border-1 border-slate-400 rounded-xl overflow-y-auto">
+                <div className="w-full h-80 p-4 bg-white/5 border border-slate-400 rounded-xl overflow-y-auto">
                     {formattedText ? (
                         <p className="whitespace-pre-wrap text-gray-300 leading-relaxed">
                             {formattedText}

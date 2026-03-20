@@ -28,7 +28,7 @@ export default function Tools() {
                         initial="initial"
                     >
                         <motion.div
-                            className="absolute top-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-600"
+                            className="absolute top-0 left-1/2 h-0.5 bg-linear-to-r from-blue-400 via-purple-500 to-teal-600"
                             variants={{
                                 initial: {width: 0, x: "-50%"},
                                 hover: {width: "100%", x: "-50%"},

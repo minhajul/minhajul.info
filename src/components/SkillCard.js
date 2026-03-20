@@ -18,7 +18,7 @@ export default function SkillCard({ skill }) {
             initial="initial"
         >
             <motion.div
-                className="absolute top-0 left-1/2 h-0.5 bg-gradient-to-r from-blue-400 via-purple-500 to-teal-600"
+                className="absolute top-0 left-1/2 h-0.5 bg-linear-to-r from-blue-400 via-purple-500 to-teal-600"
                 variants={{
                     initial: { width: 0, x: "-50%" },
                     hover: { width: "100%", x: "-50%" },
@@ -27,7 +27,7 @@ export default function SkillCard({ skill }) {
             />
 
             <div className="flex items-center gap-3">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${skill.gradient} text-white shadow`}>
+                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${skill.gradient} text-white shadow`}>
                     <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"

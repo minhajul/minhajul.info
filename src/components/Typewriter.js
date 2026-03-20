@@ -21,7 +21,7 @@ export default function Typewriter() {
             i++
             if (i === currentSentence.length) {
                 clearInterval(interval)
-                // Wait 1.5s then show next sentence
+                // Wait 1.5s then show the next sentence
                 setTimeout(() => {
                     setIndex((prev) => (prev + 1) % sentences.length)
                     setDisplayText("")
