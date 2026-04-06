@@ -3,7 +3,7 @@
 import {motion} from "framer-motion"
 import Link from "next/link";
 import Heading from "@/components/ui/Heading";
-import { projects } from "@/data/projects";
+import {projects} from "@/data/projects";
 
 export default function Projects() {
     return (
@@ -21,7 +21,8 @@ export default function Projects() {
                         whileHover="hover"
                         initial="initial"
                     >
-                        <motion.div className="absolute top-0 left-1/2 h-0.5 bg-linear-to-r from-blue-400 via-purple-500 to-teal-600"
+                        <motion.div
+                            className="absolute top-0 left-1/2 h-0.5 bg-linear-to-r from-blue-400 via-purple-500 to-teal-600"
                             variants={{
                                 initial: {width: 0, x: "-50%"},
                                 hover: {width: "100%", x: "-50%"},

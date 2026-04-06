@@ -2,6 +2,6 @@ export const metadata = {
     title: "Portfolio website of Minhaj - Experiences",
 }
 
-export default function ExperienceLayout({children}) {
+export default function ExperiencesLayout({children}) {
     return children;
 }
