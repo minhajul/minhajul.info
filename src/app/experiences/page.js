@@ -5,10 +5,9 @@ import Link from "next/link";
 import Heading from "@/components/ui/Heading";
 import {experiences} from '@/data/experiences';
 
-export default function Experiences() {
+export default function Page() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
-
             <Heading
                 title="Experiences"
                 subtitle="List of my professional experiences"
