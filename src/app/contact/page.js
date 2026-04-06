@@ -1,5 +1,9 @@
 import Heading from "@/components/ui/Heading";
 
+export const metadata = {
+    title: "Portfolio website of Minhaj - Contact",
+}
+
 export default function Contact() {
     return (
         <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
