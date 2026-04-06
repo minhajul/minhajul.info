@@ -57,7 +57,6 @@ export const experiences = [
             "Managed project tasks and coordinated team activities using Asana to ensure smooth and timely delivery",
         ]
     },
-
     {
         "title": "Web Developer",
         "company": "Maya",
