@@ -57,6 +57,8 @@ type Cmd = {
   domain?: string;
   width?: number | null;
   height?: number | null;
+  fullPage?: boolean;
+  caption?: string;
 };
 
 async function run(cmd: Cmd) {
@@ -84,12 +86,24 @@ async function run(cmd: Cmd) {
     const data = await browser.perf(cmd.url as string | undefined);
     return { ok: true, data };
   }
+  if (cmd.action === "browser-logs") {
+    const data = await browser.browserLogs();
+    return { ok: true, data };
+  }
+  if (cmd.action === "renders-start") {
+    await browser.rendersStart();
+    return { ok: true };
+  }
+  if (cmd.action === "renders-stop") {
+    const data = await browser.rendersStop();
+    return { ok: true, data };
+  }
   if (cmd.action === "restart") {
     const data = await browser.restart();
     return { ok: true, data };
   }
   if (cmd.action === "screenshot") {
-    const data = await browser.screenshot();
+    const data = await browser.screenshot({ fullPage: cmd.fullPage, caption: cmd.caption });
     return { ok: true, data };
   }
   if (cmd.action === "links") {
@@ -104,9 +118,13 @@ async function run(cmd: Cmd) {
     const data = await browser.goto(cmd.url!);
     return { ok: true, data };
   }
-  if (cmd.action === "ssr-goto") {
-    const data = await browser.ssrGoto(cmd.url!);
-    return { ok: true, data };
+  if (cmd.action === "ssr-lock") {
+    await browser.ssrLock();
+    return { ok: true };
+  }
+  if (cmd.action === "ssr-unlock") {
+    await browser.ssrUnlock();
+    return { ok: true };
   }
   if (cmd.action === "back") {
     await browser.back();
