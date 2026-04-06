@@ -3,7 +3,7 @@
 import {motion} from "framer-motion"
 import Link from "next/link";
 import {tools} from "@/data/tools";
-import Heading from "@/components/ui/Heading";
+import Heading from "@/components/Heading";
 
 export default function Tools() {
     return (

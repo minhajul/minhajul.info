@@ -1,4 +1,4 @@
-import Heading from "@/components/ui/Heading";
+import Heading from "@/components/Heading";
 
 export const metadata = {
     title: "Portfolio website of Minhaj - Contact",
