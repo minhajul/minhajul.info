@@ -20,7 +20,7 @@ export const projects = [
     {
         "title": "Go - Sentinel",
         "url": "https://github.com/minhajul/sentinel",
-        "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL'],
+        "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL', 'Grafara', 'Prometheus', 'Loki'],
         "description": "Sentinel is a high-throughput, append-only event sourcing system designed to provide compliance, traceability, and \"time-travel\" debugging capabilities for enterprise microservices."
     },
     {
