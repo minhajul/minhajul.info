@@ -18,6 +18,12 @@ export const projects = [
         "description": "A distributed system designed to send millions of emails to users across 100+ different time zones at exactly midnight their local time."
     },
     {
+        "title": "Go - Sentinel",
+        "url": "https://github.com/minhajul/sentinel",
+        "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL'],
+        "description": "Sentinel is a high-throughput, append-only event sourcing system designed to provide compliance, traceability, and \"time-travel\" debugging capabilities for enterprise microservices."
+    },
+    {
         "title": "Kubernetes Microservices",
         "url": "https://github.com/minhajul/kubernetes-microservices",
         "technologies": ['Laravel', 'Next.js', 'Docker', 'Grafana', 'Prometheus', 'Loki', 'Promtail'],
