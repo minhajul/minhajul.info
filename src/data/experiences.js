@@ -46,10 +46,10 @@ export const experiences = [
             "Oversaw development of RESTful APIs (Laravel, Python) powering 15+ integrations",
             "Guided full-stack delivery using Laravel, React.js, Next.js, improving performance through SSR and optimisation strategies",
             "Architected caching and performance strategies (Redis, Memcached, Nginx) reducing database load and improving response times",
-            "Directed database design and optimisation (MySQL, PostgreSQL) for scalability, consistency, and highavailability",
-            "Owned AWS infrastructure architecture and operations, maintaining 99.9% SLA for enterprise-grad systems",
+            "Directed database design and optimisation (MySQL, PostgreSQL) for scalability, consistency, and high availability",
+            "Owned AWS infrastructure architecture and operations, maintaining 99.9% SLA for enterprise-grade systems",
             "Established and improved CI/CD pipelines, enabling faster release cycles and reducing deployment risks",
-            "Mentored engineers, conducted code reviews, and drove engineering excellence across the team",
+            "Mentored engineers, conducted code reviews, and drove engineering excellence across the team"
         ]
     },
     {
@@ -58,10 +58,9 @@ export const experiences = [
         "url": "https://www.linkedin.com/company/mayaiswithyou/",
         "date_of_joining": "Jun 2015 - Nov 2018",
         "description": [
-            "Designed and built a highly available, scalable backend system supporting 1M monthly active users, maintaining <200ms p95 latency under peak load",
+            "Designed and built a highly available, scalable backend system supporting 1M monthly active users, maintaining low latency under peak load",
             "Developed server-side applications using Python, PHP (Laravel), Node.js, Vue.js, and MySQL",
-            "Provisioned and managed AWS infrastructure (RDS, API Gateway, Lambda, SQS) using",
-            "CloudFormation, reducing setup time and eliminating manual errors",
+            "Provisioned and managed AWS infrastructure (RDS, API Gateway, Lambda, SQS) using CloudFormation, reducing setup and eliminating manual errors",
             "Integrated third-party APIs including Facebook, Google Graph, and Account Kit, increasing social login adoption to 65% of new users",
             "Built real-time systems using Socket.io, reducing response time and improving user retention",
             "Implemented caching strategies using Nginx, Redis, and Memcached to improve system performance and reduce server load",
