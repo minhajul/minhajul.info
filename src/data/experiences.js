@@ -7,8 +7,7 @@ export const experiences = [
         "description": [
             "Architect and develop scalable distributed systems and SaaS products for global markets, operating with complete technical autonomy.",
             "Engineered Sentinel, a secure, high-throughput system audit log utilizing Go and Kafka, successfully designing robust consumer strategies and dead-letter queues to mitigate thundering herd problems.",
-            "Designed and launched the Refund & Return Risk Analyzer Shopify application, utilizing a modern",
-            "PHP/Laravel, MySQL, and Redis stack to deliver a margin-protection product for e-commerce merchants.",
+            "Designed and launched the Refund & Return Risk Analyzer Shopify application, utilizing a modern PHP/Laravel, MySQL, and Redis stack to deliver a margin-protection product for e-commerce merchants.",
             "Consult on cloud infrastructure modernization, including migrating monolithic applications to scalable, containerized microservices ecosystems using Docker and Kubernetes on AWS."
         ]
     },
