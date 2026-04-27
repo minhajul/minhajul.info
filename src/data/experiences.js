@@ -31,7 +31,7 @@ export const experiences = [
             "Introduced better tools and processes to improve team efficiency and product quality",
             "Monitored system performance and fixed bottlenecks to keep applications fast and reliable",
             "Clearly communicated technical decisions and progress to both technical and non-technical audiences",
-            "Helped resolve complex technical problems by guiding the team toward effective solutions"
+            "Helped resolve complex technical problems by guiding the team toward effective solutions",
         ]
     },
     {
