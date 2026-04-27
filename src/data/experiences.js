@@ -1,9 +1,22 @@
 export const experiences = [
     {
+        "title": "Independent Software Consultant",
+        "company": "Remote",
+        "url": "",
+        "date_of_joining": "Jan 2026 - Running",
+        "description": [
+            "Architect and develop scalable distributed systems and SaaS products for global markets, operating with complete technical autonomy.",
+            "Engineered Sentinel, a secure, high-throughput system audit log utilizing Go and Kafka, successfully designing robust consumer strategies and dead-letter queues to mitigate thundering herd problems.",
+            "Designed and launched the Refund & Return Risk Analyzer Shopify application, utilizing a modern",
+            "PHP/Laravel, MySQL, and Redis stack to deliver a margin-protection product for e-commerce merchants.",
+            "Consult on cloud infrastructure modernization, including migrating monolithic applications to scalable, containerized microservices ecosystems using Docker and Kubernetes on AWS."
+        ]
+    },
+    {
         "title": "Software & Application Lead",
         "company": "Genofax",
         "url": "https://www.genofax.com",
-        "date_of_joining": "Jul 2023 - Running",
+        "date_of_joining": "Jul 2023 - Dec 2025",
         "description": [
             "Led the transition of a core product from prototype to a production-ready platform, defining the technical roadmap and reducing time-to-market",
             "Made key architectural decisions and designed scalable, maintainable systems aligned with business needs",
