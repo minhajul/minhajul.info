@@ -70,7 +70,7 @@ export const experiences = [
     },
     {
         "title": "Web Developer",
-        "company": "Maya",
+        "company": "Melbweb",
         "url": "https://www.linkedin.com/company/melbweb/",
         "date_of_joining": "Nov 2014 – May 2015",
         "description": [
