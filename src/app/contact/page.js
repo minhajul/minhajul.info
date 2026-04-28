@@ -1,8 +1,5 @@
 import Heading from "@/components/Heading";
 
-export const dynamic = 'force-static';
-export const revalidate = 86400;
-
 export const metadata = {
     title: "Portfolio website of Minhaj - Contact",
 }
