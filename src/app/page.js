@@ -1,3 +1,7 @@
+export const dynamic = 'force-static';
+export const revalidate = 86400;
+export const runtime = 'nodejs';
+
 import Typewriter from "@/components/Typewriter";
 import Image from "next/image";
 import {skills} from "@/data/skills";

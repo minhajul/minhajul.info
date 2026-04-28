@@ -1,4 +1,4 @@
-const CACHE_NAME = 'minhaj-portfolio-v1';
+const CACHE_NAME = 'minhaj-v1';
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
@@ -29,7 +29,10 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+
   if (event.request.method !== 'GET') return;
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
