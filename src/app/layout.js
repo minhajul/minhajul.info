@@ -3,8 +3,7 @@ import "./globals.css";
 import {Fira_Code} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import {Analytics} from "@vercel/analytics/next"
-import {SpeedInsights} from "@vercel/speed-insights/next"
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 
 const firaCode = Fira_Code({
     subsets: ["latin"],
@@ -16,24 +15,30 @@ export const metadata = {
     metadataBase: new URL(
         process.env.NEXT_PUBLIC_SITE_URL
     ),
-    title: "Portfolio website of Minhaj",
-    description: "A full-stack software engineer with advanced knowledge in DevOps.",
+    title: {
+        default: "Md Minhajul Islam - Portfolio",
+        template: "%s | Md Minhajul Islam",
+    },
+    description: "Full-stack software engineer with advanced knowledge in DevOps. Building scalable applications with PHP, Python, Go, React, Next.js.",
     twitter: {
         card: "summary",
-        title: "Portfolio website of Minhaj",
-        description: "A full-stack software engineer with advanced knowledge in DevOps.",
+        title: "Md Minhajul Islam - Portfolio",
+        description: "Full-stack software engineer with advanced knowledge in DevOps.",
         site: "@minhaj_cse",
         images: ["/profile-pic.png"],
     },
     openGraph: {
-        title: "Portfolio website of Minhaj",
-        siteName: "A full-stack software engineer with advanced knowledge in DevOps.",
+        title: "Md Minhajul Islam - Portfolio",
+        siteName: "Md Minhajul Islam",
+        description: "Full-stack software engineer with advanced knowledge in DevOps.",
         images: ["/profile-pic.png"],
         type: "website",
         locale: "en_US",
     },
+    manifest: "/manifest.json",
     icons: {
-        shortcut: "/favicon.ico",
+        icon: "/favicon.ico",
+        apple: "/apple-touch-icon.png",
     },
 };
 
@@ -47,8 +52,7 @@ export default function RootLayout({children}) {
 
         <Footer/>
 
-        <Analytics/>
-        <SpeedInsights/>
+        <ServiceWorkerRegistration/>
         </body>
         </html>
     );
