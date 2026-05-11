@@ -47,3 +47,6 @@ next-env.d.ts
 .open-next/
 # next-agents-md
 .next-docs/
+
+
+/.puku
