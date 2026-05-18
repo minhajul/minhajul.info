@@ -11,10 +11,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.10",
     "@heroicons/react": "^2.2.0",
-    "@tiptap/react": "^3.23.1",
-    "@tiptap/starter-kit": "^3.23.1",
-    "framer-motion": "^12.38.0",
-    "next": "^9.3.3",
+    "@tiptap/react": "^3.23.4",
+    "@tiptap/starter-kit": "^3.23.4",
+    "framer-motion": "^12.39.0",
+    "next": "^16.2.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
@@ -22,7 +22,7 @@
     "@eslint/eslintrc": "^3.3.5",
     "@next/eslint-plugin-next": "^16.2.6",
     "@tailwindcss/postcss": "^4.3.0",
-    "eslint": "^9.39.4",
+    "eslint": "^10.4.0",
     "eslint-config-next": "^16.2.6",
     "tailwindcss": "^4.3.0"
   }
