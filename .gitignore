@@ -42,14 +42,12 @@ next-env.d.ts
 
 .idea
 
-
 # OpenNext build artifacts
 .open-next/
 # next-agents-md
 .next-docs/
 
-
 /.puku
 
-# antigravity
+# Antigravity
 .antigravitycli/
