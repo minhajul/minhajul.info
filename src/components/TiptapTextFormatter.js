@@ -87,7 +87,7 @@ function processNode(node) {
 }
 
 /**
- * Converts Tiptap JSON document to a LinkedIn-compatible plain text string.
+ * Converts a Tiptap JSON document to a LinkedIn-compatible plain text string.
  * @param {object} tiptapJson The Tiptap JSON document object.
  * @returns {string} The formatted LinkedIn post text.
  */
