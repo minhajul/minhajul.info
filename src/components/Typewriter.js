@@ -37,10 +37,10 @@ export default function Typewriter() {
             <AnimatePresence mode="wait">
                 <motion.span
                     key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
+                    transition={{duration: 0.3}}
                 >
                     {displayText}
                     <span className="inline-block w-1 bg-white ml-1 animate-blink"></span>
