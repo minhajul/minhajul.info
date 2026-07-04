@@ -46,12 +46,8 @@ export default function RootLayout({children}) {
         <html lang="en">
         <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>
         <Header/>
-
         {children}
-
         <Footer/>
-
-
         </body>
         </html>
     );
