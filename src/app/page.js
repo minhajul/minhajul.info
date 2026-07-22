@@ -15,11 +15,11 @@ export default function Home() {
                     <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5 leading-7">
                         I am a full-stack software engineer with advanced knowledge in DevOps.
                         I am skilled in developing scalable applications
-                        using <strong>PHP</strong>/<strong>Laravel</strong>, <strong>Python</strong>/<strong>Django</strong>, <strong>Golang</strong>, <strong>Javascript</strong>,
-                        <strong>Node.js</strong>, <strong>Nest.js</strong>, <strong>React</strong>, <strong>Next.js</strong> and <strong>Tailwind CSS</strong>.
+                        using <strong>PHP</strong>/<strong>Laravel</strong>, <strong>Python</strong>/<strong>Django</strong>, <strong>Golang</strong>, <strong>Javascript</strong>, <strong>Node.js</strong>, <strong>Nest.js</strong>, <strong>Next.js</strong> and <strong>Tailwind
+                        CSS</strong>.
 
                         I have hands-on experience with DevOps tools,
-                        including <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Grafana</strong>, <strong>Prometheus</strong>, <strong>Pulumi</strong>, <strong>Terraform</strong>, <strong>Nginx</strong> to
+                        including <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>ArgoCD</strong>, <strong>Jenkins</strong>, <strong>Grafana</strong>, <strong>Prometheus</strong>, <strong>Loki</strong>, <strong>Pulumi</strong>, <strong>Terraform</strong>, <strong>Nginx</strong> to
                         streamline development, deployment, and scaling processes on <strong>AWS</strong>.
 
                         My experience also includes designing distributed systems and microservices, as well as managing
@@ -42,7 +42,8 @@ export default function Home() {
 
                     <div className="border text-normal font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
                         {"Software & Application Lead at "}
-                        <a href="https://genofax.com" target="_blank" rel="noreferrer" className="text-blue-400 font-extrabold">
+                        <a href="https://genofax.com" target="_blank" rel="noreferrer"
+                           className="text-blue-400 font-extrabold">
                             Genofax
                         </a>
                     </div>
@@ -56,7 +57,8 @@ export default function Home() {
                             <h2 className="font-semibold text-slate-300 hover:text-white text-2xl lg:text-4xl mb-6">
                                 Skills & Expertise
                             </h2>
-                            <div className="h-1 w-32 bg-linear-to-r from-blue-400 to-teal-600 mx-auto rounded-full"></div>
+                            <div
+                                className="h-1 w-32 bg-linear-to-r from-blue-400 to-teal-600 mx-auto rounded-full"></div>
                         </div>
                         <p className="text-xl text-slate-300 hover:text-white max-w-3xl mx-auto mt-5">
                             Technologies and tools I use to bring ideas to life
