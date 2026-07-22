@@ -12,6 +12,12 @@ export const projects = [
         "description": "This is a terminal user interface (TUI) application built with Go and BubbleTea for cleaning up Docker images and containers."
     },
     {
+        "title": "Kube Sandbox",
+        "url": "https://github.com/minhajul/kube-sandbox",
+        "technologies": ['Docker', 'Kubernetes', 'ArgoCD', 'Grafana', 'Prometheus', 'Loki', 'CI/CD', 'Nest.js', 'Nest.js'],
+        "description": "A GitOps-driven microservices sandbox built for practicing Kubernetes, CI/CD, and GitOps locally. It contains two NestJS backend services and a Next.js frontend, deployed to Kubernetes."
+    },
+    {
         "title": "Go - Thundering Herd",
         "url": "https://github.com/minhajul/go-thundering-herd",
         "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL'],
@@ -28,11 +34,5 @@ export const projects = [
         "url": "https://github.com/minhajul/kubernetes-microservices",
         "technologies": ['Laravel', 'Next.js', 'Docker', 'Grafana', 'Prometheus', 'Loki', 'Promtail'],
         "description": "A cloud-native application stack featuring Laravel (Backend), Next.js (Frontend), and Kubernetes, complete with a full observability suite (Loki, Grafana, Fluent Bit)."
-    },
-    {
-        "title": "Tailscale with Terraform",
-        "url": "https://github.com/minhajul/learning-terraform/tree/main/automate-tailscale",
-        "technologies": ['AWS', 'Terraform', 'Tailscale'],
-        "description": "This Terraform project provisions an AWS EC2 instance configured as a Tailscale exit node, along with all necessary networking infrastructures."
     }
 ];
