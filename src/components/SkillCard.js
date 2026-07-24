@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import Card from "@/components/Card";
 
 const ICONS = {
     frontend: "M3 4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4H3V4Zm0 6h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10Zm4 3v2h10v-2H7Z",
@@ -10,24 +10,9 @@ const ICONS = {
     cloud: "M19 18H6a4 4 0 1 1 1.48-7.73A6 6 0 0 1 22 12a4 4 0 0 1-3 6Z"
 };
 
-const BAR_VARIANTS = {
-    initial: { width: 0, x: "-50%" },
-    hover: { width: "100%", x: "-50%" },
-};
-
 export default function SkillCard({ skill }) {
     return (
-        <motion.article
-            className="group rounded-2xl p-5 sm:p-6 bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden"
-            whileHover="hover"
-            initial="initial"
-        >
-            <motion.div
-                className="absolute top-0 left-1/2 h-0.5 bg-linear-to-r from-blue-400 via-purple-500 to-teal-600"
-                variants={BAR_VARIANTS}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-            />
-
+        <Card>
             <div className="flex items-center gap-3">
                 <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${skill.gradient} text-white shadow`}>
                     <svg
@@ -54,6 +39,6 @@ export default function SkillCard({ skill }) {
                     </span>
                 ))}
             </div>
-        </motion.article>
+        </Card>
     );
 }
