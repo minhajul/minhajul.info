@@ -12,7 +12,7 @@ const firaCode = Fira_Code({
 
 export const metadata = {
     metadataBase: new URL(
-        process.env.NEXT_PUBLIC_SITE_URL
+        process.env.NEXT_PUBLIC_SITE_URL || "https://minhajul.info"
     ),
     title: {
         default: "Md Minhajul Islam - Portfolio",

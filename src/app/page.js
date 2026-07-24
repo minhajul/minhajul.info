@@ -33,9 +33,10 @@ export default function Home() {
                     <Image
                         src="/profile-pic.png"
                         alt="Md Minhajul Islam"
-                        width="500"
-                        height="300"
-                        style={{objectFit: 'cover'}}
+                        width={500}
+                        height={300}
+                        className="object-cover"
+                        priority
                     />
 
                     <div className="border text-normal font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">

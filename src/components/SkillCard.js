@@ -10,19 +10,21 @@ const ICONS = {
     cloud: "M19 18H6a4 4 0 1 1 1.48-7.73A6 6 0 0 1 22 12a4 4 0 0 1-3 6Z"
 };
 
+const BAR_VARIANTS = {
+    initial: { width: 0, x: "-50%" },
+    hover: { width: "100%", x: "-50%" },
+};
+
 export default function SkillCard({ skill }) {
     return (
         <motion.article
-            className="group will-reveal rounded-2xl p-5 sm:p-6 bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden"
+            className="group rounded-2xl p-5 sm:p-6 bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden"
             whileHover="hover"
             initial="initial"
         >
             <motion.div
                 className="absolute top-0 left-1/2 h-0.5 bg-linear-to-r from-blue-400 via-purple-500 to-teal-600"
-                variants={{
-                    initial: { width: 0, x: "-50%" },
-                    hover: { width: "100%", x: "-50%" },
-                }}
+                variants={BAR_VARIANTS}
                 transition={{ duration: 0.4, ease: "easeOut" }}
             />
 
@@ -46,7 +48,7 @@ export default function SkillCard({ skill }) {
                 {skill.technologies.map((tech, index) => (
                     <span
                         key={index}
-                        className={`${tech.colorCode} chip flex justify-center items-center gap-2 px-3 py-1.5 rounded-full text-sm`}
+                        className={`${tech.colorCode} flex justify-center items-center gap-2 px-3 py-1.5 rounded-full text-sm`}
                     >
                         {tech.name}
                     </span>

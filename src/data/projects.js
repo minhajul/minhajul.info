@@ -14,7 +14,7 @@ export const projects = [
     {
         "title": "Kube Sandbox",
         "url": "https://github.com/minhajul/kube-sandbox",
-        "technologies": ['Docker', 'Kubernetes', 'ArgoCD', 'Grafana', 'Prometheus', 'Loki', 'CI/CD', 'Nest.js', 'Nest.js'],
+        "technologies": ['Docker', 'Kubernetes', 'ArgoCD', 'Grafana', 'Prometheus', 'Loki', 'CI/CD', 'Nest.js'],
         "description": "A GitOps-driven microservices sandbox built for practicing Kubernetes, CI/CD, and GitOps locally. It contains two NestJS backend services and a Next.js frontend, deployed to Kubernetes."
     },
     {
@@ -26,7 +26,7 @@ export const projects = [
     {
         "title": "Go - Sentinel",
         "url": "https://github.com/minhajul/sentinel",
-        "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL', 'Grafara', 'Prometheus', 'Loki'],
+        "technologies": ['Golang', 'Docker', 'Kafka', 'System Design', 'PostgreSQL', 'Grafana', 'Prometheus', 'Loki'],
         "description": "Sentinel is a high-throughput, append-only event sourcing system designed to provide compliance, traceability, and \"time-travel\" debugging capabilities for enterprise microservices."
     },
     {

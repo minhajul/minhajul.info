@@ -16,20 +16,25 @@ export default function Typewriter() {
     useEffect(() => {
         const currentSentence = sentences[index]
         let i = 0
+        let pauseTimeout
+
         const interval = setInterval(() => {
             setDisplayText(currentSentence.slice(0, i + 1))
             i++
+
             if (i === currentSentence.length) {
                 clearInterval(interval)
-                // Wait 1.5s then show the next sentence
-                setTimeout(() => {
+                pauseTimeout = setTimeout(() => {
                     setIndex((prev) => (prev + 1) % sentences.length)
                     setDisplayText("")
                 }, 1500)
             }
-        }, 100) // typing speed per character
+        }, 100)
 
-        return () => clearInterval(interval)
+        return () => {
+            clearInterval(interval)
+            clearTimeout(pauseTimeout)
+        }
     }, [index])
 
     return (
