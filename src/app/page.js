@@ -39,12 +39,8 @@ export default function Home() {
                         priority
                     />
 
-                    <div className="border text-normal font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
-                        {"Software & Application Lead at "}
-                        <a href="https://genofax.com" target="_blank" rel="noreferrer"
-                           className="text-blue-400 font-extrabold">
-                            Genofax
-                        </a>
+                    <div className="border text-normal text-center font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
+                        Fullstack Software Engineer
                     </div>
                 </div>
             </div>
