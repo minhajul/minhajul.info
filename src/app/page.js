@@ -15,15 +15,13 @@ export default function Home() {
                     <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5 leading-7">
                         I am a full-stack software engineer with advanced knowledge in DevOps.
                         I am skilled in developing scalable applications
-                        using <strong>PHP/Laravel</strong>, <strong>Python</strong>/<strong>Django</strong>, <strong>Golang</strong>, <strong>Javascript</strong>, <strong>Node.js</strong>, <strong>Nest.js</strong>, <strong>Next.js</strong> and <strong>Tailwind
-                        CSS</strong>.
+                        using <strong>PHP/Laravel</strong>, <strong>Python/Django</strong>, <strong>Golang</strong>, <strong>JavaScript</strong>, <strong>Nest.js</strong>, <strong>Next.js</strong> and <strong>Tailwind CSS</strong>.
 
                         I have hands-on experience with DevOps tools,
-                        including <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>ArgoCD</strong>, <strong>Jenkins</strong>, <strong>Grafana</strong>, <strong>Prometheus</strong>, <strong>Loki</strong>, <strong>Pulumi</strong>, <strong>Terraform</strong>, <strong>Nginx</strong> to
+                        including <strong>Docker, Kubernetes, ArgoCD, Jenkins, Grafana, Prometheus, Loki, Pulumi, Terraform, Nginx</strong> to
                         streamline development, deployment, and scaling processes on <strong>AWS</strong>.
 
-                        My experience also includes designing distributed systems and microservices, as well as managing
-                        databases.
+                        My experience also includes designing distributed systems and microservices, as well as managing databases.
 
                         <span className="block pt-5">
                         I strive to apply my technical expertise to deliver impactful solutions while contributing to the success of forward-thinking technology teams.
