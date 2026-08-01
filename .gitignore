@@ -47,7 +47,7 @@ next-env.d.ts
 # next-agents-md
 .next-docs/
 
-/.puku
+/.puku-cli
 
 # Antigravity
 .antigravitycli/
