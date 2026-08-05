@@ -5,14 +5,14 @@ import SkillCard from "@/components/SkillCard";
 
 export default function Home() {
     return (
-        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="">
             <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-14">
                 <div className="col-span-1 lg:col-span-2">
                     <div className="text-center">
-                        <Typewriter></Typewriter>
+                        <Typewriter />
                     </div>
 
-                    <p className="mt-3 text-base lg:text-lg font-normal text-slate-300 sm:mt-5 leading-7">
+                    <p className="mt-3 font-normal text-slate-300 sm:mt-5 leading-7">
                         I am a full-stack software engineer with advanced knowledge in DevOps.
                         I am skilled in developing scalable applications
                         using <strong>PHP/Laravel</strong>, <strong>Python/Django</strong>, <strong>Golang</strong>, <strong>JavaScript</strong>, <strong>Nest.js</strong>, <strong>Next.js</strong> and <strong>Tailwind CSS</strong>.
@@ -24,8 +24,8 @@ export default function Home() {
                         My experience also includes designing distributed systems and microservices, as well as managing databases.
 
                         <span className="block pt-5">
-                        I strive to apply my technical expertise to deliver impactful solutions while contributing to the success of forward-thinking technology teams.
-                    </span>
+                            I enjoy solving complex technical challenges and building scalable software that delivers real value for users and businesses.
+                        </span>
                     </p>
                 </div>
 
@@ -45,16 +45,16 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="py-10 lg:py-16 mt-10 lg:mt-24">
+            <div className="pt-10 lg:pt-14">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-20">
+                    <div className="text-center mb-10">
                         <div className="inline-block">
-                            <h2 className="font-semibold text-slate-300 hover:text-white text-2xl lg:text-4xl mb-6">
+                            <h2 className="font-semibold text-slate-300 hover:text-white text-2xl mb-4">
                                 Skills & Expertise
                             </h2>
                             <div className="h-1 w-32 bg-linear-to-r from-blue-400 to-teal-600 mx-auto rounded-full"></div>
                         </div>
-                        <p className="text-xl text-slate-300 hover:text-white max-w-3xl mx-auto mt-5">
+                        <p className="text-slate-300 hover:text-white max-w-3xl mx-auto mt-3">
                             Technologies and tools I use to bring ideas to life
                         </p>
                     </div>
@@ -67,7 +67,7 @@ export default function Home() {
                         </div>
                     </section>
 
-                    <div className="max-w-full lg:max-w-2xl mx-auto text-center mt-16">
+                    <div className="max-w-full lg:max-w-2xl mx-auto text-center mt-12">
                         <p className="border border-blue-400 p-1 rounded-md text-slate-300 hover:text-white">
                             Always learning and exploring new technologies
                         </p>

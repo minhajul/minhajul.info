@@ -38,7 +38,7 @@ export default function Typewriter() {
     }, [index])
 
     return (
-        <div className="font-semibold text-slate-300 hover:text-white text-2xl lg:text-4xl mt-3">
+        <div className="font-semibold text-slate-300 hover:text-white text-2xl lg:text-3xl">
             <AnimatePresence mode="wait">
                 <motion.span
                     key={index}
