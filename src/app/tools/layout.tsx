@@ -2,6 +2,6 @@ export const metadata = {
     title: "Portfolio website of Minhaj - Tools",
 }
 
-export default function ToolsLayout({children}) {
+export default function ToolsLayout({children}: {children: React.ReactNode}) {
     return children;
 }

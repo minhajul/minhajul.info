@@ -3,14 +3,9 @@ const nextConfig = {
     logging: {
         browserToTerminal: true
     },
+    reactCompiler: true,
     images: {
         minimumCacheTTL: 86400,
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: '**',
-            },
-        ],
     },
     headers: async () => {
         return [

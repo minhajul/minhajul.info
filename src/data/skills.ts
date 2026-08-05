@@ -1,4 +1,19 @@
-export const skills = [
+export type SkillIcon = 'frontend' | 'backend' | 'devops' | 'database' | 'cloud';
+
+export type SkillTechnology = {
+    name: string;
+    colorCode: string;
+};
+
+export type Skill = {
+    title: string;
+    description: string;
+    icon: SkillIcon;
+    gradient: string;
+    technologies: SkillTechnology[];
+};
+
+export const skills: Skill[] = [
     {
         title: "Frontend",
         description: "Interfaces that feel fast, fluid, and accessible",

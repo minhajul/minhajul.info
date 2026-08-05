@@ -8,18 +8,21 @@ import {
     ArrowPathIcon
 } from '@heroicons/react/24/outline'
 import {useCallback, useState} from "react";
-import {tiptapJsonToLinkedInText} from "@/components/TiptapTextFormatter";
+import {tiptapJsonToLinkedInText} from "@/lib/TiptapTextFormatter";
+import {generateJSON} from '@tiptap/core'
+import {tiptapExtensions} from "@/lib/tiptapConfig";
 import {motion} from "framer-motion";
+import type {JSONContent} from '@tiptap/core'
 
 export default function LinkedInPostFormatter() {
-    const [tiptapJson, setTiptapJson] = useState(null);
+    const [tiptapJson, setTiptapJson] = useState<JSONContent | null>(null);
     const [inputText, setInputText] = useState(''); // Used for word/char count
 
-    const handleEditorChange = useCallback((json) => {
+    const handleEditorChange = useCallback((json: JSONContent) => {
         setTiptapJson(json);
     }, []);
 
-    const handleTextChange = useCallback((text) => {
+    const handleTextChange = useCallback((text: string) => {
         setInputText(text);
     }, []);
 
@@ -65,9 +68,8 @@ What's a project you're proud of? Let me know in the comments! 👇
     };
 
     const loadExample = () => {
-        // The TiptapEditor component will handle setting the content
-        // We pass the example post as a string, which TiptapEditor will convert to JSON
-        setTiptapJson(examplePost);
+        // Convert the plain-text example into Tiptap JSON so the editor can render it
+        setTiptapJson(generateJSON(examplePost, tiptapExtensions));
         setFormattedText('');
     };
 
@@ -85,7 +87,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                 <div className="text-center mb-12">
                     <div
                         className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
-                        <SparklesIcon aria-hidden="true" className="w-8 h-8 text-white" />
+                        <SparklesIcon aria-hidden="true" className="w-8 h-8 text-white"/>
                     </div>
                     <h2 className="text-white font-semibold text-3xl mb-3">
                         LinkedIn Post Formatter
@@ -132,7 +134,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                             disabled={!inputText.trim()}
                             className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:text-gray-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-md"
                         >
-                            <SparklesIcon aria-hidden="true" className="w-4 h-4" />
+                            <SparklesIcon aria-hidden="true" className="w-4 h-4"/>
                             Generate
                         </button>
                     </div>

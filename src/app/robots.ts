@@ -1,7 +1,8 @@
-/** @type {import('next').MetadataRoute.Robots} */
+import type {MetadataRoute} from 'next';
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://minhajul.info';
 
-export default function robots() {
+export default function robots(): MetadataRoute.Robots {
     return {
         rules: [
             {

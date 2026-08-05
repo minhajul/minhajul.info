@@ -1,22 +1,29 @@
 'use client'
 
 import {useEditor, EditorContent} from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
 import {useEffect} from 'react'
 import {BoldIcon, ItalicIcon, ListBulletIcon, NumberedListIcon} from '@heroicons/react/24/outline'
+import {tiptapExtensions} from '@/lib/tiptapConfig'
+import type {Editor, JSONContent} from '@tiptap/core'
 
-const MenuBar = ({editor}) => {
+type MenuBarProps = {
+    editor: Editor | null
+}
+
+const MenuBar = ({editor}: MenuBarProps) => {
     if (!editor) {
         return null
     }
 
-    const buttonClass = (isActive) =>
+    const buttonClass = (isActive: boolean) =>
         `p-2 rounded-md transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-white/10'
         }`
 
     return (
         <div className="flex flex-wrap gap-2 p-2 border-b border-white/10">
             <button
+                type="button"
+                aria-label="Bold"
                 onClick={() => editor.chain().focus().toggleBold().run()}
                 disabled={
                     !editor.can()
@@ -30,6 +37,8 @@ const MenuBar = ({editor}) => {
                 <BoldIcon aria-hidden="true" className="w-5 h-5"/>
             </button>
             <button
+                type="button"
+                aria-label="Italic"
                 onClick={() => editor.chain().focus().toggleItalic().run()}
                 disabled={
                     !editor.can()
@@ -43,12 +52,16 @@ const MenuBar = ({editor}) => {
                 <ItalicIcon aria-hidden="true" className="w-5 h-5"/>
             </button>
             <button
+                type="button"
+                aria-label="Bullet list"
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={buttonClass(editor.isActive('bulletList'))}
             >
                 <ListBulletIcon aria-hidden="true" className="w-5 h-5"/>
             </button>
             <button
+                type="button"
+                aria-label="Numbered list"
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={buttonClass(editor.isActive('orderedList'))}
             >
@@ -58,15 +71,15 @@ const MenuBar = ({editor}) => {
     )
 }
 
-export default function TiptapEditor({value, onChange, onTextChange}) {
+type TiptapEditorProps = {
+    value?: string | JSONContent | null
+    onChange: (json: JSONContent) => void
+    onTextChange: (text: string) => void
+}
+
+export default function TiptapEditor({value, onChange, onTextChange}: TiptapEditorProps) {
     const editor = useEditor({
-        extensions: [
-            StarterKit.configure({
-                // Disable code blocks and horizontal rule for a cleaner LinkedIn post
-                codeBlock: false,
-                horizontalRule: false,
-            }),
-        ],
+        extensions: tiptapExtensions,
         content: value || '',
         immediatelyRender: false,
         onUpdate: ({editor}) => {

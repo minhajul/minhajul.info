@@ -1,5 +1,7 @@
+import type {JSONContent} from '@tiptap/core';
+
 // Unicode characters for LinkedIn-compatible rich text
-const unicodeMap = {
+const unicodeMap: Record<'bold' | 'italic', Record<string, string>> = {
     bold: {
         'A': '𝗔',
         'B': '𝗕',
@@ -127,7 +129,7 @@ const unicodeMap = {
  * @param {'bold' | 'italic'} style The style to apply.
  * @returns {string} The Unicode-formatted string.
  */
-function applyUnicodeStyle(text, style) {
+function applyUnicodeStyle(text: string, style: 'bold' | 'italic'): string {
     const map = unicodeMap[style];
     if (!map) return text;
 
@@ -139,11 +141,11 @@ function applyUnicodeStyle(text, style) {
  * @param {object} node The Tiptap JSON node.
  * @returns {string} The converted text.
  */
-function processNode(node) {
+function processNode(node: JSONContent): string {
     let text = '';
 
     if (node.type === 'text') {
-        text = node.text;
+        text = node.text || '';
         if (node.marks) {
             node.marks.forEach(mark => {
                 if (mark.type === 'bold') {
@@ -173,7 +175,7 @@ function processNode(node) {
         // We'll rely on the paragraph handling for the line break after the content.
     } else if (node.type === 'bulletList') {
         // Process children (listItems) and prepend a bullet point to each.
-        text = node.content.map(listItem => {
+        text = (node.content || []).map(listItem => {
             // Tiptap listItem usually contains a paragraph
             const itemContent = processNode(listItem).trim();
             return '• ' + itemContent;
@@ -181,7 +183,7 @@ function processNode(node) {
         text = text + '\n\n'; // Double line break after the whole list
     } else if (node.type === 'orderedList') {
         // Process children (listItems) and prepend a number to each.
-        text = node.content.map((listItem, index) => {
+        text = (node.content || []).map((listItem, index) => {
             const itemContent = processNode(listItem).trim();
             return `${index + 1}. ${itemContent}`;
         }).join('\n'); // Single line break between list items
@@ -196,7 +198,7 @@ function processNode(node) {
  * @param {object} tiptapJson The Tiptap JSON document object.
  * @returns {string} The formatted LinkedIn post text.
  */
-export function tiptapJsonToLinkedInText(tiptapJson) {
+export function tiptapJsonToLinkedInText(tiptapJson: JSONContent | null): string {
     if (!tiptapJson || !tiptapJson.content) {
         return '';
     }

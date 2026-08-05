@@ -1,6 +1,7 @@
 import Heading from "@/components/Heading";
+import type {Metadata} from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Portfolio website of Minhaj - Contact",
 }
 
