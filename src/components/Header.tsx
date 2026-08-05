@@ -46,7 +46,7 @@ export default function Header() {
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={`flex items-center p-2 text-lg text-slate-300 hover:text-white font-semibold rounded-md transition ${pathname === item.href
+                            className={`flex items-center p-2 text-slate-300 hover:text-white font-semibold rounded-md transition ${pathname === item.href
                                     ? "bg-slate-600/20"
                                     : "hover:bg-slate-600/20"
                                 }`}
