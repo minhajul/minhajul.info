@@ -2,8 +2,8 @@ export default function Footer() {
     return (
         <footer>
             <div className="mx-auto max-w-7xl p-6 lg:px-8">
-                <div className="flex flex-col md:flex-row justify-between items-center h-20 pt-5 border-t border-gray-200">
-                    <div className="text-slate-300">
+                <div className="flex flex-col md:flex-row justify-between items-center h-20 border-t border-gray-200">
+                    <div className="text-slate-300 text-sm">
                         © {new Date().getFullYear()} Minhajul. All rights reserved.
                     </div>
 

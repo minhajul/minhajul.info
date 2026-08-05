@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ToolForLinkedIn() {
     return (
-        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl relative">
+        <div>
             <LinkedInPostFormatter />
         </div>
     );

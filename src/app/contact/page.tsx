@@ -7,14 +7,14 @@ export const metadata: Metadata = {
 
 export default function Contact() {
     return (
-        <div className="mt-10 lg:mt-16 p-6 lg:px-8 mx-auto max-w-7xl">
+        <div>
             <Heading
                 title="Contact"
                 subtitle="Get in touch with me"
             />
 
             <div className="flex flex-col md:flex-row justify-between">
-                <p className="text-lg text-slate-300 leading-7">
+                <p className="text-slate-300 leading-7">
                     I am actively seeking freelance or remote opportunities in software engineering, full-stack
                     development, and DevOps engineering. <span className="bg-blue-400 text-white rounded-md p-0.5 mr-1">I am also open to full-time roles that offer visa sponsorship.</span>
 

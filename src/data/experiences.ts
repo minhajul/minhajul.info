@@ -13,10 +13,11 @@ export const experiences: Experience[] = [
         "url": "",
         "date_of_joining": "Jan 2026 - Running",
         "description": [
-            "Architect and develop scalable distributed systems and SaaS products for global markets, operating with complete technical autonomy.",
-            "Engineered Sentinel, a secure, high-throughput system audit log utilizing Go and Kafka, successfully designing robust consumer strategies and dead-letter queues to mitigate thundering herd problems.",
-            "Designed and launched the Refund & Return Risk Analyzer Shopify application, utilizing a modern PHP/Laravel, MySQL, and Redis stack to deliver a margin-protection product for e-commerce merchants.",
-            "Consult on cloud infrastructure modernization, including migrating monolithic applications to scalable, containerized microservices ecosystems using Docker and Kubernetes on AWS."
+            "Design and build scalable backend systems and SaaS products, leading projects from architecture and planning through deployment and launch",
+            "Modernize legacy applications by breaking monolithic systems into Kubernetes-based microservices running on AWS",
+            "Streamline software delivery by implementing CI/CD pipelines with GitHub Actions, Jenkins, and ArgoCD, enabling faster releases with minimal downtime",
+            "Improve system reliability by setting up monitoring, logging, and alerting with Prometheus, Grafana, and Loki to quickly detect and resolve production issues",
+            "Developed a high-performance event processing platform using Go and Kafka, improving reliability during traffic spikes with message queues and dead-letter queues"
         ]
     },
     {

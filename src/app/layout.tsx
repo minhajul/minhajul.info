@@ -52,7 +52,9 @@ export default function RootLayout({children}: RootLayoutProps) {
         <html lang="en">
         <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>
         <Header/>
-        {children}
+        <div className="mt-6 lg:mt-10 p-6 lg:px-8 mx-auto max-w-7xl">
+            {children}
+        </div>
         <Footer/>
         </body>
         </html>
