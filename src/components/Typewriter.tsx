@@ -16,7 +16,7 @@ export default function Typewriter() {
     useEffect(() => {
         const currentSentence = sentences[index]
         let i = 0
-        let pauseTimeout
+        let pauseTimeout: ReturnType<typeof setTimeout> | undefined
 
         const interval = setInterval(() => {
             setDisplayText(currentSentence.slice(0, i + 1))
@@ -33,7 +33,7 @@ export default function Typewriter() {
 
         return () => {
             clearInterval(interval)
-            clearTimeout(pauseTimeout)
+            if (pauseTimeout) clearTimeout(pauseTimeout)
         }
     }, [index])
 

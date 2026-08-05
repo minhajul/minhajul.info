@@ -1,7 +1,8 @@
-/** @type {import('next').MetadataRoute.Sitemap} */
+import type {MetadataRoute} from 'next';
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://minhajul.info';
 
-export default function sitemap() {
+export default function sitemap(): MetadataRoute.Sitemap {
     return ['', 'contact', 'projects', 'experiences', 'tools'].map((route) => ({
         url: `${BASE_URL}/${route}`.replace(/\/$/, ''),
         lastModified: new Date(),

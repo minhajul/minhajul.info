@@ -1,4 +1,11 @@
-export const projects = [
+export type Project = {
+    title: string;
+    url: string;
+    technologies: string[];
+    description: string;
+};
+
+export const projects: Project[] = [
     {
         "title": "Laravel Grafana",
         "url": "https://github.com/minhajul/laravel-grafana",

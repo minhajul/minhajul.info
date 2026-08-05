@@ -3,6 +3,8 @@ import "./globals.css";
 import {Fira_Code} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import type {Metadata} from "next";
+import type {ReactNode} from "react";
 
 const firaCode = Fira_Code({
     subsets: ["latin"],
@@ -10,7 +12,7 @@ const firaCode = Fira_Code({
     display: "swap",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
     metadataBase: new URL(
         process.env.NEXT_PUBLIC_SITE_URL || "https://minhajul.info"
     ),
@@ -41,7 +43,11 @@ export const metadata = {
     },
 };
 
-export default function RootLayout({children}) {
+type RootLayoutProps = {
+    children: ReactNode;
+};
+
+export default function RootLayout({children}: RootLayoutProps) {
     return (
         <html lang="en">
         <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>

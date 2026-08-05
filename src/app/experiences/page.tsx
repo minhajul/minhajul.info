@@ -16,7 +16,7 @@ export default function Page() {
             <div className="mb-16">
                 {experiences.map((experience, index) => (
                     <motion.div
-                        key={index}
+                        key={`${experience.title}-${index}`}
                         className="mb-6 border-l-2 border-blue-400 pl-6 relative"
                         initial={{opacity: 0, x: -30}}
                         whileInView={{opacity: 1, x: 0}}
@@ -43,8 +43,8 @@ export default function Page() {
                             transition={{duration: 0.5, delay: 0.3}}
                             viewport={{once: true}}
                         >
-                            {experience.description.map((responsibility, indexValue) => (
-                                <li key={indexValue} className="flex items-start">
+                            {experience.description.map((responsibility) => (
+                                <li key={responsibility} className="flex items-start">
                                     <span className="text-blue-400 mr-2 mt-1">•</span>
                                     <span>{responsibility}</span>
                                 </li>

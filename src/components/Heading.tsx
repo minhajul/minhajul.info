@@ -2,7 +2,12 @@
 
 import {motion} from "framer-motion";
 
-export default function Heading({title, subtitle}) {
+type HeadingProps = {
+    title: string;
+    subtitle: string;
+};
+
+export default function Heading({title, subtitle}: HeadingProps) {
     return (
         <motion.div
             className="mb-12"

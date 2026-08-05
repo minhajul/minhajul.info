@@ -1,15 +1,21 @@
 "use client"
 
 import { motion } from "framer-motion"
+import type { ReactNode } from "react"
 
 const BAR_VARIANTS = {
     initial: { width: 0, x: "-50%" },
     hover: { width: "100%", x: "-50%" },
 };
 
-const BAR_TRANSITION = { duration: 0.4, ease: "easeOut" };
+const BAR_TRANSITION = { duration: 0.4, ease: "easeOut" as const };
 
-export default function Card({ children, className = "" }) {
+type CardProps = {
+    children: ReactNode;
+    className?: string;
+};
+
+export default function Card({ children, className = "" }: CardProps) {
     return (
         <motion.article
             className={`group rounded-2xl p-5 sm:p-6 bg-white/5 ring-1 ring-white/10 backdrop-blur overflow-hidden ${className}`}
