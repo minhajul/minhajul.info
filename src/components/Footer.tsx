@@ -3,7 +3,7 @@ export default function Footer() {
         <footer>
             <div className="mx-auto max-w-7xl p-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-center h-20 border-t border-gray-200">
-                    <div className="text-slate-300 text-sm">
+                    <div className="text-slate-300 text-sm pt-4 lg:pt-0">
                         © {new Date().getFullYear()} Minhajul. All rights reserved.
                     </div>
 

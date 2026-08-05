@@ -16,7 +16,7 @@ export default function Page() {
             {experiences.map((experience, index) => (
                 <motion.div
                     key={`${experience.title}-${index}`}
-                    className=""
+                    className="mb-5"
                     initial={{opacity: 0, x: -30}}
                     whileInView={{opacity: 1, x: 0}}
                     transition={{duration: 0.6, delay: 0.1}}
