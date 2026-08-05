@@ -89,10 +89,10 @@ What's a project you're proud of? Let me know in the comments! 👇
                         className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
                         <SparklesIcon aria-hidden="true" className="w-8 h-8 text-white"/>
                     </div>
-                    <h2 className="text-white font-semibold text-3xl mb-3">
+                    <h2 className="text-white font-semibold text-2xl mb-3">
                         LinkedIn Post Formatter
                     </h2>
-                    <p className="mt-3 text-white text-lg">
+                    <p className="mt-3 text-white">
                         Transform your raw text into polished, professional LinkedIn posts
                     </p>
                 </div>
@@ -100,7 +100,7 @@ What's a project you're proud of? Let me know in the comments! 👇
 
             <div className="bg-white/5 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-blue-400">
+                    <h2 className="font-semibold text-blue-400">
                         Write Your Post
                     </h2>
                     <button
@@ -132,7 +132,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                         <button
                             onClick={formatPost}
                             disabled={!inputText.trim()}
-                            className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:text-gray-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-md"
+                            className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-md"
                         >
                             <SparklesIcon aria-hidden="true" className="w-4 h-4"/>
                             Generate
@@ -143,7 +143,7 @@ What's a project you're proud of? Let me know in the comments! 👇
 
             <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-blue-400">Formatted Post</h2>
+                    <h2 className="font-semibold text-blue-400">Formatted Post</h2>
                     {formattedText && (
                         <button
                             onClick={copyToClipboard}
@@ -193,8 +193,8 @@ What's a project you're proud of? Let me know in the comments! 👇
             </div>
 
             <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-400 mb-3">
-                    💡 Formatting Tips
+                <h3 className="font-semibold text-blue-400 mb-3">
+                    Formatting Tips
                 </h3>
                 <ul className="grid sm:grid-cols-2 gap-3 text-sm text-slate-300">
                     <li className="flex items-start gap-2">
