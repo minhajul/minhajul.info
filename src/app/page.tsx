@@ -15,7 +15,7 @@ export default function Home() {
                     <p className="mt-3 font-normal text-slate-300 sm:mt-5 leading-7">
                         I am a full-stack software engineer with advanced knowledge in DevOps.
                         I am skilled in developing scalable applications
-                        using <strong>PHP/Laravel</strong>, <strong>Python/Django</strong>, <strong>Golang</strong>, <strong>JavaScript</strong>, <strong>Nest.js</strong>, <strong>Next.js</strong> and <strong>Tailwind CSS</strong>.
+                        using <strong>PHP/Laravel, Python/Django, Golang, Nest.js, Next.js</strong> and <strong>Tailwind CSS</strong>.
 
                         I have hands-on experience with DevOps tools,
                         including <strong>Docker, Kubernetes, ArgoCD, Jenkins, Grafana, Prometheus, Loki, Pulumi, Terraform, Nginx</strong> to
