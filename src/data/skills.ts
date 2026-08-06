@@ -37,7 +37,7 @@ export const skills: Skill[] = [
             {name: "Golang", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
             {name: "Python", colorCode: "text-rose-300 bg-rose-500/10 ring-rose-500/20"},
             {name: "Django", colorCode: "text-slate-300 bg-slate-500/10 ring-slate-500/20"},
-            {name: "JavaScript/TypeScript", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
+            {name: "TypeScript", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
             {name: "Nest.js", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
         ]
     },
