@@ -68,7 +68,7 @@ export const experiences: Experience[] = [
             "Provisioned and managed AWS infrastructure (RDS, API Gateway, Lambda, SQS) using CloudFormation, reducing setup and eliminating manual errors",
             "Integrated third-party APIs including Facebook, Google Graph, and Account Kit, increasing social login adoption to 65% of new users",
             "Built real-time systems using Socket.io, reducing response time and improving user retention",
-            "Implemented caching strategies using Nginx, Redis, and Memcached to improve system performance and reduce server load",
+            "Implemented caching strategies using Nginx, Redis to improve system performance and reduce server load",
             "Monitored application and server performance, identifying bottlenecks and applying optimisations",
             "Developed automated browser testing workflows using Selenium, reducing regression testing time",
             "Managed project tasks and coordinated team activities using Asana to ensure smooth and timely delivery",
