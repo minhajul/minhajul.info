@@ -36,7 +36,6 @@ export const experiences: Experience[] = [
             "Worked closely with product managers, designers, and stakeholders to ensure clear communication and smooth delivery",
             "Planned, tracked, and delivered projects on time while maintaining high quality",
             "Built and improved CI/CD pipelines, reducing release time",
-            "Introduced better tools and processes to improve team efficiency and product quality",
             "Monitored system performance and fixed bottlenecks to keep applications fast and reliable",
             "Helped resolve complex technical problems by guiding the team toward effective solutions",
         ]
@@ -55,7 +54,6 @@ export const experiences: Experience[] = [
             "Architected caching and performance strategies (Redis, Memcached, Nginx) reducing database load and improving response times",
             "Directed database design and optimisation (MySQL, PostgreSQL) for scalability, consistency, and high availability",
             "Owned AWS infrastructure architecture and operations, maintaining 99.9% SLA for enterprise-grade systems",
-            "Established and improved CI/CD pipelines, enabling faster release cycles and reducing deployment risks",
             "Mentored engineers, conducted code reviews, and drove engineering excellence across the team"
         ]
     },
