@@ -60,7 +60,7 @@ export default function Home() {
                     </div>
 
                     <section className="mt-10">
-                        <div className="grid gap-6 sm:gap-7 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                             {skills.map((skill) => (
                                 <SkillCard key={skill.title} skill={skill}/>
                             ))}

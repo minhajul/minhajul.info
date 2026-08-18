@@ -1,4 +1,4 @@
-export type SkillIcon = 'frontend' | 'backend' | 'devops' | 'database' | 'cloud';
+export type SkillIcon = 'frontend' | 'backend' | 'devops' | 'observability' | 'database' | 'cloud';
 
 export type SkillTechnology = {
     name: string;
@@ -31,15 +31,17 @@ export const skills: Skill[] = [
         icon: "backend",
         gradient: "from-blue-500/90 to-violet-500/90",
         technologies: [
-            {name: "PHP/Laravel", colorCode: "text-amber-300 bg-amber-500/10 ring-amber-500/20"},
-            {name: "Golang", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
+            {name: "PHP", colorCode: "text-amber-300 bg-amber-500/10 ring-amber-500/20"},
+            {name: "Laravel", colorCode: "text-violet-300 bg-violet-500/10 ring-violet-500/20"},
+            {name: "Python", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
+            {name: "Golang", colorCode: "text-slate-300 bg-slate-500/10 ring-slate-500/20"},
             {name: "TypeScript", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
             {name: "Nest.js", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
         ]
     },
     {
         title: "DevOps",
-        description: "Automation, CI/CD, and reliability",
+        description: "Containers, CI/CD, and infrastructure automation",
         icon: "devops",
         gradient: "from-cyan-500/90 to-blue-600/90",
         technologies: [
@@ -48,10 +50,20 @@ export const skills: Skill[] = [
             {name: "ArgoCD", colorCode: "text-purple-300 bg-purple-500/10 ring-purple-500/20"},
             {name: "Jenkins", colorCode: "text-violet-300 bg-violet-500/10 ring-violet-500/20"},
             {name: "Terraform", colorCode: "text-slate-300 bg-slate-500/10 ring-slate-500/20"},
-            {name: "Grafana", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
-            {name: "Prometheus", colorCode: "text-rose-300 bg-rose-500/10 ring-rose-500/20"},
-            {name: "Loki", colorCode: "text-purple-300 bg-purple-500/10 ring-purple-500/20"},
             {name: "GitHub Actions", colorCode: "text-violet-300 bg-violet-500/10 ring-violet-500/20"},
+        ]
+    },
+    {
+        title: "Observability",
+        description: "Metrics, logs, and dashboards for system health",
+        icon: "observability",
+        gradient: "from-rose-500/90 to-orange-500/90",
+        technologies: [
+            {name: "Grafana", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
+            {name: "Prometheus", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
+            {name: "Loki", colorCode: "text-purple-300 bg-purple-500/10 ring-purple-500/20"},
+            {name: "Tempo", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
+            // {name: "OpenTelemetry", colorCode: "text-rose-300 bg-rose-500/10 ring-rose-500/20"},
         ]
     },
     {
