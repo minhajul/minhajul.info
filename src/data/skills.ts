@@ -22,8 +22,7 @@ export const skills: Skill[] = [
         technologies: [
             {name: "React", colorCode: "text-indigo-300 bg-indigo-500/10 ring-indigo-500/20"},
             {name: "Next.js", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
-            {name: "Tailwind CSS", colorCode: "text-cyan-300 bg-cyan-500/10 ring-cyan-500/20"},
-            {name: "Accessibility", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
+            {name: "Tailwind CSS", colorCode: "text-cyan-300 bg-cyan-500/10 ring-cyan-500/20"}
         ]
     },
     {
@@ -32,11 +31,8 @@ export const skills: Skill[] = [
         icon: "backend",
         gradient: "from-blue-500/90 to-violet-500/90",
         technologies: [
-            {name: "PHP", colorCode: "text-amber-300 bg-amber-500/10 ring-amber-500/20"},
-            {name: "Laravel", colorCode: "text-violet-300 bg-violet-500/10 ring-violet-500/20"},
+            {name: "PHP/Laravel", colorCode: "text-amber-300 bg-amber-500/10 ring-amber-500/20"},
             {name: "Golang", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
-            {name: "Python", colorCode: "text-rose-300 bg-rose-500/10 ring-rose-500/20"},
-            {name: "Django", colorCode: "text-slate-300 bg-slate-500/10 ring-slate-500/20"},
             {name: "TypeScript", colorCode: "text-emerald-300 bg-emerald-500/10 ring-emerald-500/20"},
             {name: "Nest.js", colorCode: "text-blue-300 bg-blue-500/10 ring-blue-500/20"},
         ]
