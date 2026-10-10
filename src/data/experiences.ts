@@ -18,7 +18,7 @@ export const experiences: Experience[] = [
             "Streamline software delivery by implementing CI/CD pipelines with GitHub Actions, Jenkins, and ArgoCD, enabling faster releases with minimal downtime",
             "Improve system reliability by setting up monitoring, logging, and alerting with Prometheus, Grafana, and Loki to quickly detect and resolve production issues",
             "Developed a high-performance event processing platform using Go and Kafka, improving reliability during traffic spikes with message queues and dead-letter queues",
-            "Built automated root cause analysis tooling for health and wellness diagnostic platforms, cutting post-incident triage time",
+            "Built AI powered root cause analysis tooling for health and wellness diagnostic platforms, cutting post-incident triage time",
             "Secured CI/CD workflows in GitHub Actions using AWS OIDC for keyless authentication and Tailscale for private network deployments"
         ]
     },
