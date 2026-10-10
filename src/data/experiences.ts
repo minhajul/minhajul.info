@@ -9,7 +9,7 @@ export type Experience = {
 export const experiences: Experience[] = [
     {
         "title": "Software Consultant",
-        "company": "Genofax Life Sciences",
+        "company": "Genofax® Life Sciences",
         "url": "https://www.genofax.com",
         "date_of_joining": "Jan 2026 - Running",
         "description": [
@@ -24,7 +24,7 @@ export const experiences: Experience[] = [
     },
     {
         "title": "Software & Application Lead",
-        "company": "Genofax Life Sciences",
+        "company": "Genofax® Life Sciences",
         "url": "https://www.genofax.com",
         "date_of_joining": "Jul 2023 - Dec 2025",
         "description": [
@@ -44,7 +44,7 @@ export const experiences: Experience[] = [
     },
     {
         "title": "Software & Application Engineer",
-        "company": "Tenssor Bangladesh Ltd",
+        "company": "Tenssor Pty Ltd",
         "url": "https://www.tenssor.com",
         "date_of_joining": "Dec 2018 - Jun 2023",
         "description": [
