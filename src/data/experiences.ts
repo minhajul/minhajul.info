@@ -8,21 +8,23 @@ export type Experience = {
 
 export const experiences: Experience[] = [
     {
-        "title": "Independent Software Consultant",
-        "company": "Remote",
-        "url": "",
+        "title": "Software Consultant",
+        "company": "Genofax Life Sciences",
+        "url": "https://www.genofax.com",
         "date_of_joining": "Jan 2026 - Running",
         "description": [
             "Design and build scalable backend systems and SaaS products, leading projects from architecture and planning through deployment and launch",
             "Modernize legacy applications by breaking monolithic systems into Kubernetes-based microservices running on AWS",
             "Streamline software delivery by implementing CI/CD pipelines with GitHub Actions, Jenkins, and ArgoCD, enabling faster releases with minimal downtime",
             "Improve system reliability by setting up monitoring, logging, and alerting with Prometheus, Grafana, and Loki to quickly detect and resolve production issues",
-            "Developed a high-performance event processing platform using Go and Kafka, improving reliability during traffic spikes with message queues and dead-letter queues"
+            "Developed a high-performance event processing platform using Go and Kafka, improving reliability during traffic spikes with message queues and dead-letter queues",
+            "Built automated root cause analysis tooling for health and wellness diagnostic platforms, cutting post-incident triage time",
+            "Secured CI/CD workflows in GitHub Actions using AWS OIDC for keyless authentication and Tailscale for private network deployments"
         ]
     },
     {
         "title": "Software & Application Lead",
-        "company": "Genofax",
+        "company": "Genofax Life Sciences",
         "url": "https://www.genofax.com",
         "date_of_joining": "Jul 2023 - Dec 2025",
         "description": [
