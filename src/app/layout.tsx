@@ -1,14 +1,21 @@
 import "./globals.css";
 
-import {Fira_Code} from "next/font/google";
+import {Geist, Geist_Mono} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import type {Metadata} from "next";
 import type {ReactNode} from "react";
+import {profile} from "@/data/profile";
 
-const firaCode = Fira_Code({
+const geistSans = Geist({
     subsets: ["latin"],
-    weight: ["300", "400", "500", "600", "700"],
+    variable: "--font-geist-sans",
+    display: "swap",
+});
+
+const geistMono = Geist_Mono({
+    subsets: ["latin"],
+    variable: "--font-geist-mono",
     display: "swap",
 });
 
@@ -17,29 +24,22 @@ export const metadata: Metadata = {
         process.env.NEXT_PUBLIC_SITE_URL || "https://minhajul.info"
     ),
     title: {
-        default: "Md Minhajul Islam - Portfolio",
-        template: "%s | Md Minhajul Islam",
+        default: `${profile.name} — ${profile.role}`,
+        template: `%s | ${profile.name}`,
     },
     description: "Full-stack software engineer with advanced knowledge in DevOps. Building scalable applications with PHP, Python, Go, React, Next.js.",
     twitter: {
-        card: "summary",
-        title: "Md Minhajul Islam - Portfolio",
+        card: "summary_large_image",
+        title: `${profile.name} — ${profile.role}`,
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
         site: "@minhaj_cse",
-        images: ["/profile-pic.png"],
     },
     openGraph: {
-        title: "Md Minhajul Islam - Portfolio",
-        siteName: "Md Minhajul Islam",
+        title: `${profile.name} — ${profile.role}`,
+        siteName: profile.name,
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
-        images: ["/profile-pic.png"],
         type: "website",
         locale: "en_US",
-    },
-    manifest: "/manifest.json",
-    icons: {
-        icon: "/favicon.ico",
-        apple: "/apple-touch-icon.png",
     },
 };
 
@@ -49,12 +49,12 @@ type RootLayoutProps = {
 
 export default function RootLayout({children}: RootLayoutProps) {
     return (
-        <html lang="en">
-        <body className={`${firaCode.className} antialiased flex flex-col bg-gray-800`}>
+        <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body className="flex min-h-dvh flex-col font-sans antialiased">
         <Header/>
-        <div className="mt-6 lg:mt-10 p-6 lg:px-8 mx-auto max-w-7xl">
+        <main className="mx-auto w-full max-w-6xl px-6 py-12 lg:px-8 lg:py-16">
             {children}
-        </div>
+        </main>
         <Footer/>
         </body>
         </html>

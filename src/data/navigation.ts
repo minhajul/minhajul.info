@@ -4,8 +4,8 @@ export type NavItem = {
 };
 
 export const navigation: NavItem[] = [
-    {name: 'Me', href: '/'},
-    {name: 'Experiences', href: '/experiences'},
+    {name: 'Home', href: '/'},
+    {name: 'Experience', href: '/experiences'},
     {name: 'Projects', href: '/projects'},
-    {name: 'Contacts', href: '/contact'},
+    {name: 'Contact', href: '/contact'},
 ];

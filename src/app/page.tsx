@@ -1,79 +1,67 @@
-import Typewriter from "@/components/Typewriter";
-import Image from "next/image";
+import Hero from "@/components/Hero";
+import SectionHeading from "@/components/SectionHeading";
 import {skills} from "@/data/skills";
 import SkillCard from "@/components/SkillCard";
+import ProjectCard from "@/components/ProjectCard";
+import {projects} from "@/data/projects";
+import ExperienceSnapshot from "@/components/ExperienceSnapshot";
+import {experiences} from "@/data/experiences";
+import Link from "next/link";
+import CopyEmailButton from "@/components/CopyEmailButton";
+import {profile} from "@/data/profile";
+import {buttonPrimary} from "@/lib/styles";
+
+const featuredProjects = projects.filter((project) => project.featured);
 
 export default function Home() {
     return (
-        <div className="">
-            <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-14">
-                <div className="col-span-1 lg:col-span-2">
-                    <div className="text-center">
-                        <Typewriter />
-                    </div>
+        <div className="space-y-24">
+            <Hero/>
 
-                    <p className="mt-3 font-normal text-slate-300 sm:mt-5 leading-7">
-                        I am a full-stack software engineer with advanced knowledge in DevOps.
-                        I am skilled in developing scalable applications
-                        using <strong>PHP/Laravel, TypeScript, Golang, Nest.js, Next.js</strong> and <strong>Tailwind CSS</strong>.
+            <section>
+                <SectionHeading eyebrow="Selected work" title="Featured projects" href="/projects" linkLabel="All projects"/>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {featuredProjects.map((project) => (
+                        <ProjectCard key={project.url} project={project}/>
+                    ))}
+                </div>
+            </section>
 
-                        I have hands-on experience with DevOps tools,
-                        including <strong>Docker, Kubernetes, ArgoCD, Jenkins, Grafana, Prometheus, Loki, Pulumi, Terraform, Nginx</strong> to
-                        streamline development, deployment, and scaling processes on <strong>AWS</strong>.
+            <section>
+                <SectionHeading eyebrow="Career" title="Where I've worked" href="/experiences" linkLabel="Full experience"/>
+                <ExperienceSnapshot experiences={experiences}/>
+            </section>
 
-                        My experience also includes designing distributed systems and microservices, as well as managing databases.
+            <section>
+                <SectionHeading eyebrow="Toolbox" title="Skills & expertise"/>
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                    {skills.map((skill) => (
+                        <SkillCard key={skill.title} skill={skill}/>
+                    ))}
+                </div>
+            </section>
 
-                        <span className="block pt-5">
-                            I enjoy solving complex technical challenges and building scalable software that delivers real value for users and businesses.
-                        </span>
+            <section className="relative overflow-hidden rounded-3xl border border-line bg-surface px-6 py-14 text-center sm:px-12">
+                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(59_130_246/0.15),transparent_70%)]"/>
+                <div className="relative">
+                    <p className="font-mono text-xs uppercase tracking-widest text-accent">{profile.availability}</p>
+                    <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                        Have a project or role in mind?
+                    </h2>
+                    <p className="mx-auto mt-3 max-w-xl text-muted text-pretty">
+                        I&apos;m happy to talk about backend systems, platform engineering, or how I could help your team ship.
                     </p>
-                </div>
-
-                <div className="col-span-1 lg:col-span-1">
-                    <Image
-                        src="/profile-pic.png"
-                        alt="Md Minhajul Islam"
-                        width={500}
-                        height={300}
-                        className="object-cover"
-                        priority
-                    />
-
-                    <div className="border text-normal text-center font-bold text-slate-300 hover:text-white text-sm p-2 mt-5">
-                        Fullstack Software Engineer
+                    <div className="mt-8 flex flex-wrap justify-center gap-3">
+                        <Link
+                            href="/contact"
+                            className={buttonPrimary}
+                        >
+                            Get in touch
+                        </Link>
+                        <CopyEmailButton/>
                     </div>
                 </div>
-            </div>
-
-            <div className="pt-10 lg:pt-14">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-10">
-                        <div className="inline-block">
-                            <h2 className="font-semibold text-slate-300 hover:text-white text-2xl mb-4">
-                                Skills & Expertise
-                            </h2>
-                            <div className="h-1 w-32 bg-linear-to-r from-blue-400 to-teal-600 mx-auto rounded-full"></div>
-                        </div>
-                        <p className="text-slate-300 hover:text-white max-w-3xl mx-auto mt-3">
-                            Technologies and tools I use to bring ideas to life
-                        </p>
-                    </div>
-
-                    <section className="mt-10">
-                        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                            {skills.map((skill) => (
-                                <SkillCard key={skill.title} skill={skill}/>
-                            ))}
-                        </div>
-                    </section>
-
-                    <div className="max-w-full lg:max-w-2xl mx-auto text-center mt-12">
-                        <p className="border border-blue-400 p-1 rounded-md text-slate-300 hover:text-white">
-                            Always learning and exploring new technologies
-                        </p>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
     );
 }

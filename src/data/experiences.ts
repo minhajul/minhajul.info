@@ -2,7 +2,10 @@ export type Experience = {
     title: string;
     company: string;
     url: string;
-    date_of_joining: string;
+    /** "YYYY-MM" */
+    start: string;
+    /** "YYYY-MM"; omit for a current role */
+    end?: string;
     description: string[];
 };
 
@@ -11,7 +14,7 @@ export const experiences: Experience[] = [
         "title": "Software Consultant",
         "company": "Genofax® Life Sciences",
         "url": "https://www.genofax.com",
-        "date_of_joining": "Jan 2026 - Running",
+        "start": "2026-01",
         "description": [
             "Design and build scalable backend systems and SaaS products, leading projects from architecture and planning through deployment and launch",
             "Modernize legacy applications by breaking monolithic systems into Kubernetes-based microservices running on AWS",
@@ -26,7 +29,8 @@ export const experiences: Experience[] = [
         "title": "Software & Application Lead",
         "company": "Genofax® Life Sciences",
         "url": "https://www.genofax.com",
-        "date_of_joining": "Jul 2023 - Dec 2025",
+        "start": "2023-07",
+        "end": "2025-12",
         "description": [
             "Led the transition of a core product from prototype to a production-ready platform, defining the technical roadmap and reducing time-to-market",
             "Made key architectural decisions and designed scalable, maintainable systems aligned with business needs",
@@ -46,7 +50,8 @@ export const experiences: Experience[] = [
         "title": "Software & Application Engineer",
         "company": "Tenssor Pty Ltd",
         "url": "https://www.tenssor.com",
-        "date_of_joining": "Dec 2018 - Jun 2023",
+        "start": "2018-12",
+        "end": "2023-06",
         "description": [
             "Led the design and architecture of scalable, high-availability systems handling 500K+ daily requests with 99.95% uptime",
             "Partnered with product and business stakeholders to translate requirements into scalable technical solutions and system designs",
@@ -63,7 +68,8 @@ export const experiences: Experience[] = [
         "title": "Sr Software Engineer",
         "company": "Mayalogy Private Ltd",
         "url": "https://www.linkedin.com/company/mayaiswithyou/",
-        "date_of_joining": "Jun 2015 - Nov 2018",
+        "start": "2015-06",
+        "end": "2018-11",
         "description": [
             "Designed and built a highly available, scalable backend system supporting 1M monthly active users, maintaining low latency under peak load",
             "Developed server-side applications using Python, PHP (Laravel), Node.js, Vue.js, and MySQL",
@@ -80,7 +86,8 @@ export const experiences: Experience[] = [
         "title": "Web Developer",
         "company": "Melbweb",
         "url": "https://www.linkedin.com/company/melbweb/",
-        "date_of_joining": "Nov 2014 – May 2015",
+        "start": "2014-11",
+        "end": "2015-05",
         "description": [
             "Developed and customised WordPress themes and plugins for multiple marketplace platforms based on business requirements",
             "Extended and optimised third-party plugins to enhance website functionality, performance, and user experience",

@@ -16,11 +16,11 @@ const MenuBar = ({editor}: MenuBarProps) => {
     }
 
     const buttonClass = (isActive: boolean) =>
-        `p-2 rounded-md transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-white/10'
+        `p-2 rounded-md transition-colors ${isActive ? 'bg-accent/15 text-accent' : 'text-muted hover:bg-white/10 hover:text-foreground'
         }`
 
     return (
-        <div className="flex flex-wrap gap-2 p-2 border-b border-white/10">
+        <div className="flex flex-wrap gap-1 border-b border-line p-2">
             <button
                 type="button"
                 aria-label="Bold"
@@ -34,7 +34,7 @@ const MenuBar = ({editor}: MenuBarProps) => {
                 }
                 className={buttonClass(editor.isActive('bold'))}
             >
-                <BoldIcon aria-hidden="true" className="w-5 h-5"/>
+                <BoldIcon aria-hidden="true" className="size-5"/>
             </button>
             <button
                 type="button"
@@ -49,7 +49,7 @@ const MenuBar = ({editor}: MenuBarProps) => {
                 }
                 className={buttonClass(editor.isActive('italic'))}
             >
-                <ItalicIcon aria-hidden="true" className="w-5 h-5"/>
+                <ItalicIcon aria-hidden="true" className="size-5"/>
             </button>
             <button
                 type="button"
@@ -57,7 +57,7 @@ const MenuBar = ({editor}: MenuBarProps) => {
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={buttonClass(editor.isActive('bulletList'))}
             >
-                <ListBulletIcon aria-hidden="true" className="w-5 h-5"/>
+                <ListBulletIcon aria-hidden="true" className="size-5"/>
             </button>
             <button
                 type="button"
@@ -65,7 +65,7 @@ const MenuBar = ({editor}: MenuBarProps) => {
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={buttonClass(editor.isActive('orderedList'))}
             >
-                <NumberedListIcon aria-hidden="true" className="w-5 h-5"/>
+                <NumberedListIcon aria-hidden="true" className="size-5"/>
             </button>
         </div>
     )
@@ -101,10 +101,10 @@ export default function TiptapEditor({value, onChange, onTextChange}: TiptapEdit
     if (!editor) return null
 
     return (
-        <div className="border border-gray-300 rounded-xl bg-white/5 text-gray-300 min-h-80 flex flex-col">
+        <div className="flex min-h-80 flex-col rounded-xl border border-line bg-background text-foreground/90 focus-within:border-line-strong">
             <MenuBar editor={editor}/>
             <div className="p-4 grow overflow-y-auto">
-                <EditorContent editor={editor} className="prose prose-invert max-w-none outline-none h-full"/>
+                <EditorContent editor={editor} className="tiptap-content h-full"/>
             </div>
         </div>
     )
