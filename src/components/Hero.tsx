@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {ArrowRightIcon} from "@heroicons/react/20/solid";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
 import SocialLinks from "@/components/SocialLinks";
 import {buttonPrimary, buttonSecondary} from "@/lib/styles";
 import {profile} from "@/data/profile";
@@ -10,13 +11,7 @@ export default function Hero() {
         <section>
             <div className="flex flex-col-reverse gap-10 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-2xl">
-                    <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs font-medium text-muted">
-                        <span className="relative flex size-2">
-                            <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60 motion-reduce:hidden"/>
-                            <span className="relative inline-flex size-2 rounded-full bg-success"/>
-                        </span>
-                        {profile.availability}
-                    </p>
+                    <AvailabilityBadge href="/contact"/>
 
                     <h1 className="mt-6 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                         {profile.name}

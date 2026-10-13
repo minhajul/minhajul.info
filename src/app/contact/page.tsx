@@ -1,10 +1,10 @@
 import Heading from "@/components/Heading";
+import AvailabilityBadge from "@/components/AvailabilityBadge";
 import CopyEmailButton from "@/components/CopyEmailButton";
 import {SocialIcon} from "@/components/SocialLinks";
 import {EMAIL, socialLinks} from "@/data/social";
 import {externalLinkProps} from "@/lib/links";
 import {buttonPrimary} from "@/lib/styles";
-import {profile} from "@/data/profile";
 import {ArrowUpRightIcon, EnvelopeIcon} from "@heroicons/react/20/solid";
 import type {Metadata} from "next";
 
@@ -22,10 +22,7 @@ export default function Contact() {
             />
 
             <section className="rounded-2xl border border-line bg-surface p-6 sm:p-10">
-                <p className="inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-xs font-medium text-success">
-                    <span className="size-1.5 rounded-full bg-success"/>
-                    {profile.availability}
-                </p>
+                <AvailabilityBadge/>
 
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-foreground/90 text-pretty">
                     I&apos;m looking for freelance or remote opportunities in software engineering, full-stack
