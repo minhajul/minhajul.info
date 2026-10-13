@@ -63,8 +63,8 @@ export default function ExperienceTimeline({experiences}: ExperienceTimelineProp
     return (
         <ol className="space-y-6">
             {groups.map((group) => (
-                <li key={`${group.company}-${group.roles[0].date_of_joining}`} className="rounded-2xl border border-line bg-surface p-5 sm:p-8">
-                    <div className="flex items-center gap-4">
+                <li key={`${group.company}-${group.roles[0].date_of_joining}`} className="rounded-2xl border border-line bg-surface p-5 sm:p-8 lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
+                    <div className="flex items-center gap-4 lg:sticky lg:top-24 lg:self-start">
                         <span
                             aria-hidden="true"
                             className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-background font-mono text-lg font-semibold text-accent"
@@ -86,7 +86,7 @@ export default function ExperienceTimeline({experiences}: ExperienceTimelineProp
                         </div>
                     </div>
 
-                    <ol className="relative mt-6 space-y-8 before:absolute before:left-[5px] before:top-2 before:bottom-2 before:w-px before:bg-line-strong">
+                    <ol className="relative mt-6 space-y-8 lg:mt-0 before:absolute before:left-[5px] before:top-2 before:bottom-2 before:w-px before:bg-line-strong">
                         {group.roles.map((role) => (
                             <Role key={role.title} role={role} showDate={group.roles.length > 1}/>
                         ))}

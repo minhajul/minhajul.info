@@ -2,7 +2,7 @@ import Heading from "@/components/Heading";
 import CopyEmailButton from "@/components/CopyEmailButton";
 import {EMAIL, socialLinks} from "@/components/SocialLinks";
 import {profile} from "@/data/profile";
-import {ArrowUpRightIcon} from "@heroicons/react/20/solid";
+import {ArrowUpRightIcon, EnvelopeIcon} from "@heroicons/react/20/solid";
 import type {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -13,12 +13,12 @@ export const metadata: Metadata = {
 const handles: Record<string, string> = {
     GitHub: "github.com/minhajul",
     LinkedIn: "linkedin.com/in/minhajul52",
-    Email: EMAIL,
+    Email: "Send me a message",
 };
 
 export default function Contact() {
     return (
-        <div className="mx-auto max-w-4xl">
+        <div>
             <Heading
                 title="Contact"
                 subtitle="Let's build something reliable together"
@@ -42,9 +42,10 @@ export default function Contact() {
                 <div className="mt-8 flex flex-wrap items-center gap-3">
                     <a
                         href={`mailto:${EMAIL}`}
-                        className="inline-flex items-center rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
+                        className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
                     >
-                        {EMAIL}
+                        <EnvelopeIcon aria-hidden="true" className="size-4"/>
+                        Email me
                     </a>
                     <CopyEmailButton/>
                 </div>

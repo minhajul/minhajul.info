@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="mx-auto max-w-4xl">
+        <div>
             <Heading
                 title="Experience"
                 subtitle="Over a decade of building and running production software"
