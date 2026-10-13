@@ -6,6 +6,9 @@ import ProjectCard from "@/components/ProjectCard";
 import {projects} from "@/data/projects";
 import ExperienceSnapshot from "@/components/ExperienceSnapshot";
 import {experiences} from "@/data/experiences";
+import Link from "next/link";
+import CopyEmailButton from "@/components/CopyEmailButton";
+import {profile} from "@/data/profile";
 
 const featuredProjects = projects.filter((project) => project.featured);
 
@@ -34,6 +37,28 @@ export default function Home() {
                     {skills.map((skill) => (
                         <SkillCard key={skill.title} skill={skill}/>
                     ))}
+                </div>
+            </section>
+
+            <section className="relative overflow-hidden rounded-3xl border border-line bg-surface px-6 py-14 text-center sm:px-12">
+                <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgb(59_130_246/0.15),transparent_70%)]"/>
+                <div className="relative">
+                    <p className="font-mono text-xs uppercase tracking-widest text-accent">{profile.availability}</p>
+                    <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                        Have a project or role in mind?
+                    </h2>
+                    <p className="mx-auto mt-3 max-w-xl text-muted text-pretty">
+                        I&apos;m happy to talk about backend systems, platform engineering, or how I could help your team ship.
+                    </p>
+                    <div className="mt-8 flex flex-wrap justify-center gap-3">
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
+                        >
+                            Get in touch
+                        </Link>
+                        <CopyEmailButton/>
+                    </div>
                 </div>
             </section>
         </div>
