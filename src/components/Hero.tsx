@@ -3,7 +3,7 @@ import Link from "next/link";
 import {ArrowRightIcon} from "@heroicons/react/20/solid";
 import SocialLinks from "@/components/SocialLinks";
 import {buttonPrimary, buttonSecondary} from "@/lib/styles";
-import {highlights, profile} from "@/data/profile";
+import {profile} from "@/data/profile";
 
 export default function Hero() {
     return (
@@ -62,17 +62,6 @@ export default function Hero() {
                     />
                 </div>
             </div>
-
-            <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line lg:grid-cols-4">
-                {highlights.map((item) => (
-                    <div key={item.label} className="flex flex-col-reverse bg-background p-6">
-                        <dt className="text-sm text-muted">{item.label}</dt>
-                        <dd className="mb-1 text-3xl font-semibold tracking-tight text-foreground">
-                            {item.value}
-                        </dd>
-                    </div>
-                ))}
-            </dl>
         </section>
     );
 }

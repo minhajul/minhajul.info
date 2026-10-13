@@ -1,7 +1,7 @@
 import {ImageResponse} from "next/og";
 import {readFile} from "node:fs/promises";
 import {join} from "node:path";
-import {highlights, profile} from "@/data/profile";
+import {profile} from "@/data/profile";
 import {colors} from "@/lib/theme";
 
 export const alt = `${profile.name} — ${profile.role}`;
@@ -20,13 +20,13 @@ export default async function Image() {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
                     padding: 72,
                     background: `radial-gradient(ellipse 80% 60% at 50% -10%, ${colors.glow}, ${colors.background})`,
                     color: colors.foreground,
                 }}
             >
-                <div style={{display: "flex", fontSize: 28, color: colors.muted}}>
+                <div style={{position: "absolute", top: 72, left: 72, display: "flex", fontSize: 28, color: colors.muted}}>
                     <span style={{color: colors.accent}}>~/</span>minhajul.info
                 </div>
 
@@ -45,15 +45,6 @@ export default async function Image() {
                         height={240}
                         style={{borderRadius: 32, border: `2px solid ${colors.lineStrong}`}}
                     />
-                </div>
-
-                <div style={{display: "flex", gap: 20, fontSize: 20, color: colors.muted}}>
-                    {highlights.map((item) => (
-                        <div key={item.label} style={{display: "flex", gap: 8}}>
-                            <span style={{color: colors.foreground, fontWeight: 700}}>{item.value}</span>
-                            <span>{item.label}</span>
-                        </div>
-                    ))}
                 </div>
             </div>
         ),
