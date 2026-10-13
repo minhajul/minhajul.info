@@ -3,11 +3,12 @@ import {ArrowRightIcon} from "@heroicons/react/20/solid";
 import Heading from "@/components/Heading";
 import Card from "@/components/Card";
 import {tools} from "@/data/tools";
+import {profile} from "@/data/profile";
 import type {Metadata} from "next";
 
 export const metadata: Metadata = {
     title: "Tools",
-    description: "Small, free utilities built by Md Minhajul Islam.",
+    description: `Small, free utilities built by ${profile.name}.`,
 }
 
 export default function Tools() {
@@ -20,9 +21,9 @@ export default function Tools() {
 
             <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {tools.map((tool) => (
-                    <Card key={tool.url} className="flex h-full flex-col has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent">
+                    <Card key={tool.url} className="flex h-full flex-col">
                         <h2 className="font-semibold text-foreground">
-                            <Link href={tool.url} className="after:absolute after:inset-0 focus-visible:outline-none">
+                            <Link href={tool.url} className="stretched-link">
                                 {tool.title}
                             </Link>
                         </h2>

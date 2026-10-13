@@ -13,10 +13,10 @@
   --color-muted: #a1a1aa;
   --color-subtle: #71717a;
   --color-accent: #60a5fa;
-  --color-accent-strong: #3b82f6;
   --color-success: #4ade80;
 }
 
+/* Keep color values in sync with src/lib/theme.ts (used by generated images and the manifest). */
 @layer base {
   html {
     color-scheme: dark;
@@ -25,12 +25,20 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+
+  /* Fixed layer instead of background-attachment: fixed, so scrolling doesn't repaint it. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -20%, rgb(59 130 246 / 0.12), transparent),
       linear-gradient(to right, rgb(255 255 255 / 0.025) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(255 255 255 / 0.025) 1px, transparent 1px);
     background-size: 100% 100%, 48px 48px, 48px 48px;
-    background-attachment: fixed;
   }
 
   ::selection {
@@ -41,10 +49,7 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
-}
 
-
-@layer base {
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -52,6 +57,19 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+/* Make a link cover its nearest positioned ancestor, e.g. a whole card. */
+@utility stretched-link {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  &:focus-visible {
+    outline: none;
   }
 }
 

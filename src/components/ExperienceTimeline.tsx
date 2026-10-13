@@ -1,6 +1,8 @@
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import type {Experience} from "@/data/experiences";
-import {companySpan, groupByCompany, splitMetrics} from "@/lib/experience";
+import CompanyMonogram from "@/components/CompanyMonogram";
+import {companyPeriod, formatPeriod, groupByCompany, splitMetrics} from "@/lib/experience";
+import {externalLinkProps} from "@/lib/links";
 
 const VISIBLE_BULLETS = 3;
 
@@ -30,7 +32,7 @@ function Role({role, showDate}: { role: Experience; showDate: boolean }) {
             />
             <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <h3 className="font-semibold text-foreground">{role.title}</h3>
-                {showDate && <p className="shrink-0 font-mono text-xs text-subtle">{role.date_of_joining}</p>}
+                {showDate && <p className="shrink-0 font-mono text-xs text-subtle">{formatPeriod(role.start, role.end)}</p>}
             </div>
 
             <ul className="mt-3 space-y-2 text-sm leading-6 text-muted">
@@ -63,26 +65,20 @@ export default function ExperienceTimeline({experiences}: ExperienceTimelineProp
     return (
         <ol className="space-y-6">
             {groups.map((group) => (
-                <li key={`${group.company}-${group.roles[0].date_of_joining}`} className="rounded-2xl border border-line bg-surface p-5 sm:p-8 lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
+                <li key={`${group.company}-${group.roles[0].start}`} className="rounded-2xl border border-line bg-surface p-5 sm:p-8 lg:grid lg:grid-cols-[260px_1fr] lg:gap-10">
                     <div className="flex items-center gap-4 lg:sticky lg:top-24 lg:self-start">
-                        <span
-                            aria-hidden="true"
-                            className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-line bg-background font-mono text-lg font-semibold text-accent"
-                        >
-                            {group.company.charAt(0)}
-                        </span>
+                        <CompanyMonogram company={group.company} className="flex size-11 rounded-xl text-lg"/>
                         <div>
                             <h2 className="text-lg font-semibold text-foreground">
                                 <a
-                                    href={group.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href={group.roles[0].url}
+                                    {...externalLinkProps(group.roles[0].url)}
                                     className="hover:text-accent transition-colors"
                                 >
                                     {group.company}
                                 </a>
                             </h2>
-                            <p className="font-mono text-xs text-subtle">{companySpan(group)}</p>
+                            <p className="font-mono text-xs text-subtle">{companyPeriod(group)}</p>
                         </div>
                     </div>
 

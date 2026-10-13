@@ -9,6 +9,7 @@ import {experiences} from "@/data/experiences";
 import Link from "next/link";
 import CopyEmailButton from "@/components/CopyEmailButton";
 import {profile} from "@/data/profile";
+import {buttonPrimary} from "@/lib/styles";
 
 const featuredProjects = projects.filter((project) => project.featured);
 
@@ -53,7 +54,7 @@ export default function Home() {
                     <div className="mt-8 flex flex-wrap justify-center gap-3">
                         <Link
                             href="/contact"
-                            className="inline-flex items-center rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
+                            className={buttonPrimary}
                         >
                             Get in touch
                         </Link>

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import {ArrowUpRightIcon} from "@heroicons/react/20/solid";
+import Card from "@/components/Card";
 import Tag from "@/components/Tag";
+import {externalLinkProps} from "@/lib/links";
 import type {Project} from "@/data/projects";
 
 function repoSlug(url: string) {
@@ -45,7 +47,7 @@ type ProjectCardProps = {
 
 export default function ProjectCard({project}: ProjectCardProps) {
     return (
-        <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors duration-300 hover:border-line-strong has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent">
+        <Card padded={false} className="flex h-full flex-col">
             <div className="relative aspect-[16/9] overflow-hidden border-b border-line bg-background">
                 <Preview project={project}/>
             </div>
@@ -55,9 +57,8 @@ export default function ProjectCard({project}: ProjectCardProps) {
                     <h3 className="font-semibold text-foreground">
                         <a
                             href={project.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="after:absolute after:inset-0 focus-visible:outline-none"
+                            {...externalLinkProps(project.url)}
+                            className="stretched-link"
                         >
                             {project.title}
                         </a>
@@ -75,6 +76,6 @@ export default function ProjectCard({project}: ProjectCardProps) {
                     ))}
                 </div>
             </div>
-        </article>
+        </Card>
     );
 }

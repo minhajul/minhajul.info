@@ -12,7 +12,21 @@ import {tiptapJsonToLinkedInText} from "@/lib/TiptapTextFormatter";
 import {generateJSON} from '@tiptap/core'
 import {tiptapExtensions} from "@/lib/tiptapConfig";
 import Heading from "@/components/Heading";
+import {buttonPrimary, buttonSecondary} from "@/lib/styles";
+import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
 import type {JSONContent} from '@tiptap/core'
+
+const EXAMPLE_POST_HTML = `
+<p>I just launched my new project and I'm excited to share it with you all</p>
+<p>It took 6 months of hard work but we finally made it happen</p>
+<p>Here are 3 key lessons I learned along the way:</p>
+<ol>
+<li><p>Consistency beats perfection every time</p></li>
+<li><p>Community support is everything</p></li>
+<li><p>Small wins lead to big victories</p></li>
+</ol>
+<p>What's a project you're proud of? Let me know in the comments! 👇</p>
+`;
 
 export default function LinkedInPostFormatter() {
     const [tiptapJson, setTiptapJson] = useState<JSONContent | null>(null);
@@ -27,16 +41,7 @@ export default function LinkedInPostFormatter() {
     }, []);
 
     const [formattedText, setFormattedText] = useState('');
-    const [copied, setCopied] = useState(false);
-
-    const examplePost = `I just launched my new project and I'm excited to share it with you all
-It took 6 months of hard work but we finally made it happen
-Here are 3 key lessons I learned along the way:
-1. Consistency beats perfection every time
-2. Community support is everything
-3. Small wins lead to big victories
-What's a project you're proud of? Let me know in the comments! 👇
-`;
+    const {copied, copy} = useCopyToClipboard();
 
     const formatPost = () => {
         if (!tiptapJson) return;
@@ -51,9 +56,7 @@ What's a project you're proud of? Let me know in the comments! 👇
         if (!formattedText) return;
 
         try {
-            await navigator.clipboard.writeText(formattedText);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
+            await copy(formattedText);
         } catch (err) {
             console.error('Failed to copy:', err);
         }
@@ -64,14 +67,10 @@ What's a project you're proud of? Let me know in the comments! 👇
         setTiptapJson(null);
         setInputText('');
         setFormattedText('');
-        setCopied(false);
     };
 
     const loadExample = () => {
-        // Convert the plain-text example into Tiptap JSON so the editor can render it
-        // generateJSON parses HTML, so wrap each line in <p> to keep the line breaks
-        const html = examplePost.trim().split('\n').map((line) => `<p>${line}</p>`).join('');
-        setTiptapJson(generateJSON(html, tiptapExtensions));
+        setTiptapJson(generateJSON(EXAMPLE_POST_HTML, tiptapExtensions));
         setFormattedText('');
     };
 
@@ -122,7 +121,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                             onClick={formatPost}
                             disabled={!inputText.trim()}
                             type="button"
-                            className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
+                            className={`${buttonPrimary} disabled:cursor-not-allowed disabled:opacity-40`}
                         >
                             <SparklesIcon aria-hidden="true" className="size-4"/>
                             Generate
@@ -138,7 +137,7 @@ What's a project you're proud of? Let me know in the comments! 👇
                         <button
                             onClick={copyToClipboard}
                             type="button"
-                            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-4 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-surface-hover"
+                            className={buttonSecondary}
                         >
                             {copied ? (
                                 <>

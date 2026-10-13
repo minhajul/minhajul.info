@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {ArrowRightIcon} from "@heroicons/react/20/solid";
 import SocialLinks from "@/components/SocialLinks";
+import {buttonPrimary, buttonSecondary} from "@/lib/styles";
 import {highlights, profile} from "@/data/profile";
 
 export default function Hero() {
@@ -34,14 +35,14 @@ export default function Hero() {
                     <div className="mt-8 flex flex-wrap items-center gap-3">
                         <Link
                             href="/contact"
-                            className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
+                            className={`group ${buttonPrimary}`}
                         >
                             Get in touch
                             <ArrowRightIcon aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5"/>
                         </Link>
                         <Link
                             href="/projects"
-                            className="inline-flex items-center rounded-full border border-line-strong px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-surface-hover"
+                            className={buttonSecondary}
                         >
                             View projects
                         </Link>

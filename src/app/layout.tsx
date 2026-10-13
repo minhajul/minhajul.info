@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import type {Metadata} from "next";
 import type {ReactNode} from "react";
+import {profile} from "@/data/profile";
 
 const geistSans = Geist({
     subsets: ["latin"],
@@ -23,24 +24,23 @@ export const metadata: Metadata = {
         process.env.NEXT_PUBLIC_SITE_URL || "https://minhajul.info"
     ),
     title: {
-        default: "Md Minhajul Islam — Full-stack & DevOps Engineer",
-        template: "%s | Md Minhajul Islam",
+        default: `${profile.name} — ${profile.role}`,
+        template: `%s | ${profile.name}`,
     },
     description: "Full-stack software engineer with advanced knowledge in DevOps. Building scalable applications with PHP, Python, Go, React, Next.js.",
     twitter: {
         card: "summary_large_image",
-        title: "Md Minhajul Islam — Full-stack & DevOps Engineer",
+        title: `${profile.name} — ${profile.role}`,
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
         site: "@minhaj_cse",
     },
     openGraph: {
-        title: "Md Minhajul Islam — Full-stack & DevOps Engineer",
-        siteName: "Md Minhajul Islam",
+        title: `${profile.name} — ${profile.role}`,
+        siteName: profile.name,
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
         type: "website",
         locale: "en_US",
     },
-    manifest: "/manifest.json",
 };
 
 type RootLayoutProps = {

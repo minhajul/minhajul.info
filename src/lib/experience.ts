@@ -2,7 +2,6 @@ import type {Experience} from "@/data/experiences";
 
 export type CompanyGroup = {
     company: string;
-    url: string;
     roles: Experience[];
 };
 
@@ -14,17 +13,30 @@ export function groupByCompany(experiences: Experience[]): CompanyGroup[] {
         if (last && last.company === experience.company) {
             last.roles.push(experience);
         } else {
-            groups.push({company: experience.company, url: experience.url, roles: [experience]});
+            groups.push({company: experience.company, roles: [experience]});
         }
     }
     return groups;
 }
 
-/** "Jul 2023 - Dec 2025" for the earliest and latest roles in a group. */
-export function companySpan(group: CompanyGroup): string {
-    const end = group.roles[0].date_of_joining.split(" - ")[1];
-    const start = group.roles.at(-1)!.date_of_joining.split(" - ")[0];
-    return `${start} - ${end}`;
+const MONTH = new Intl.DateTimeFormat("en-US", {month: "short", year: "numeric", timeZone: "UTC"});
+
+/** "2014-11" → "Nov 2014" */
+function formatMonth(yearMonth: string) {
+    return MONTH.format(new Date(`${yearMonth}-01T00:00:00Z`));
+}
+
+/** "Nov 2014 - May 2015", or "Jan 2026 - Present" when there is no end. */
+export function formatPeriod(start: string, end?: string) {
+    return `${formatMonth(start)} - ${end ? formatMonth(end) : "Present"}`;
+}
+
+/** Earliest start to latest end across a company's roles ("YYYY-MM" strings sort chronologically). */
+export function companyPeriod(group: CompanyGroup) {
+    const start = group.roles.map((role) => role.start).sort()[0];
+    const current = group.roles.some((role) => !role.end);
+    const end = current ? undefined : group.roles.map((role) => role.end!).sort().at(-1);
+    return formatPeriod(start, end);
 }
 
 const METRIC = /(~?\d+(?:\.\d+)?(?:%|K\+?|M\b|\+))/g;

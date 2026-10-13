@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {buttonPrimary} from "@/lib/styles";
 
 export default function NotFound() {
     return (
@@ -12,7 +13,7 @@ export default function NotFound() {
             </p>
             <Link
                 href="/"
-                className="mt-8 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
+                className={`mt-8 ${buttonPrimary}`}
             >
                 Back to home
             </Link>

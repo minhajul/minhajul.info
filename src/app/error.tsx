@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect} from 'react';
+import {buttonPrimary} from '@/lib/styles';
 
 type ErrorProps = {
     error: Error & {digest?: string};
@@ -24,7 +25,7 @@ export default function Error({error, reset}: ErrorProps) {
             <button
                 type="button"
                 onClick={() => reset()}
-                className="mt-8 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white"
+                className={`mt-8 ${buttonPrimary}`}
             >
                 Try again
             </button>

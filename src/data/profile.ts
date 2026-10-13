@@ -1,11 +1,13 @@
+import {experiences} from "@/data/experiences";
+
 export type Highlight = {
     value: string;
     label: string;
 };
 
-const CAREER_START = new Date(2014, 10); // Nov 2014
+const careerStart = new Date(`${experiences.map((experience) => experience.start).sort()[0]}-01`);
 const yearsOfExperience = Math.floor(
-    (Date.now() - CAREER_START.getTime()) / (365.25 * 24 * 60 * 60 * 1000)
+    (Date.now() - careerStart.getTime()) / (365.25 * 24 * 60 * 60 * 1000)
 );
 
 export const profile = {

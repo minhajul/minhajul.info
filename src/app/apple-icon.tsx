@@ -1,4 +1,5 @@
 import {ImageResponse} from "next/og";
+import {colors} from "@/lib/theme";
 
 export const size = {width: 180, height: 180};
 export const contentType = "image/png";
@@ -13,13 +14,13 @@ export default function AppleIcon() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "#09090b",
-                    color: "#f4f4f5",
+                    background: colors.background,
+                    color: colors.foreground,
                     fontSize: 84,
                     fontWeight: 700,
                 }}
             >
-                <span style={{color: "#60a5fa"}}>~/</span>m
+                <span style={{color: colors.accent}}>~/</span>m
             </div>
         ),
         size
