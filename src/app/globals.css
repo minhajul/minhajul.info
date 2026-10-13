@@ -1,18 +1,45 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
-:root {
-  --background: #1f2937;
-  --foreground: #ededed;
+  --color-background: #09090b;
+  --color-surface: #131316;
+  --color-surface-hover: #1a1a1f;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-foreground: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-subtle: #71717a;
+  --color-accent: #60a5fa;
+  --color-accent-strong: #3b82f6;
+  --color-success: #4ade80;
 }
 
 @layer base {
+  html {
+    color-scheme: dark;
+  }
+
   body {
-    background-color: var(--color-gray-800, #1f2937);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgb(59 130 246 / 0.12), transparent),
+      linear-gradient(to right, rgb(255 255 255 / 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 48px 48px, 48px 48px;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: rgb(96 165 250 / 0.3);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 }
 
