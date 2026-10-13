@@ -4,6 +4,8 @@ import {skills} from "@/data/skills";
 import SkillCard from "@/components/SkillCard";
 import ProjectCard from "@/components/ProjectCard";
 import {projects} from "@/data/projects";
+import ExperienceSnapshot from "@/components/ExperienceSnapshot";
+import {experiences} from "@/data/experiences";
 
 const featuredProjects = projects.filter((project) => project.featured);
 
@@ -19,6 +21,11 @@ export default function Home() {
                         <ProjectCard key={project.url} project={project}/>
                     ))}
                 </div>
+            </section>
+
+            <section>
+                <SectionHeading eyebrow="Career" title="Where I've worked" href="/experiences" linkLabel="Full experience"/>
+                <ExperienceSnapshot experiences={experiences}/>
             </section>
 
             <section>

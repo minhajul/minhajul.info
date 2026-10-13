@@ -11,7 +11,7 @@ export const experiences: Experience[] = [
         "title": "Software Consultant",
         "company": "Genofax® Life Sciences",
         "url": "https://www.genofax.com",
-        "date_of_joining": "Jan 2026 - Running",
+        "date_of_joining": "Jan 2026 - Present",
         "description": [
             "Design and build scalable backend systems and SaaS products, leading projects from architecture and planning through deployment and launch",
             "Modernize legacy applications by breaking monolithic systems into Kubernetes-based microservices running on AWS",
@@ -80,7 +80,7 @@ export const experiences: Experience[] = [
         "title": "Web Developer",
         "company": "Melbweb",
         "url": "https://www.linkedin.com/company/melbweb/",
-        "date_of_joining": "Nov 2014 – May 2015",
+        "date_of_joining": "Nov 2014 - May 2015",
         "description": [
             "Developed and customised WordPress themes and plugins for multiple marketplace platforms based on business requirements",
             "Extended and optimised third-party plugins to enhance website functionality, performance, and user experience",
