@@ -1,6 +1,5 @@
-"use client"
-
 import Card from "@/components/Card";
+import Tag from "@/components/Tag";
 import type {Skill, SkillIcon} from "@/data/skills";
 
 const ICONS: Record<SkillIcon, string> = {
@@ -19,30 +18,21 @@ type SkillCardProps = {
 export default function SkillCard({skill}: SkillCardProps) {
     return (
         <Card>
-            <div className="flex items-center gap-3">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${skill.gradient} text-white shadow`}>
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="h-5 w-5"
-                    >
-                        <path d={ICONS[skill.icon]} />
+            <div className="flex items-start gap-3">
+                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-line bg-accent/10 text-accent">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="size-5" aria-hidden="true">
+                        <path d={ICONS[skill.icon]}/>
                     </svg>
                 </span>
                 <div>
-                    <h3 className="text-lg font-semibold text-white">{skill.title}</h3>
-                    <p className="text-xs text-slate-300">{skill.description}</p>
+                    <h3 className="font-semibold text-foreground">{skill.title}</h3>
+                    <p className="mt-0.5 text-sm text-muted">{skill.description}</p>
                 </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-1.5">
                 {skill.technologies.map((tech) => (
-                    <span
-                        key={tech.name}
-                        className={`${tech.colorCode} flex justify-center items-center gap-2 px-3 py-1.5 rounded-full text-sm`}
-                    >
-                        {tech.name}
-                    </span>
+                    <Tag key={tech}>{tech}</Tag>
                 ))}
             </div>
         </Card>
