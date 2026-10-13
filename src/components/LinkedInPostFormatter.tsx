@@ -6,12 +6,12 @@ import {
     ClipboardIcon,
     CheckIcon,
     ArrowPathIcon
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/20/solid'
 import {useCallback, useState} from "react";
 import {tiptapJsonToLinkedInText} from "@/lib/TiptapTextFormatter";
 import {generateJSON} from '@tiptap/core'
 import {tiptapExtensions} from "@/lib/tiptapConfig";
-import {motion} from "framer-motion";
+import Heading from "@/components/Heading";
 import type {JSONContent} from '@tiptap/core'
 
 export default function LinkedInPostFormatter() {
@@ -78,34 +78,20 @@ What's a project you're proud of? Let me know in the comments! 👇
 
     return (
         <div>
-            <motion.div
-                className="mb-12"
-                initial={{opacity: 0, y: -20}}
-                animate={{opacity: 1, y: 0}}
-                transition={{duration: 0.6}}
-            >
-                <div className="text-center mb-12">
-                    <div
-                        className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4 shadow-lg">
-                        <SparklesIcon aria-hidden="true" className="w-8 h-8 text-white"/>
-                    </div>
-                    <h2 className="text-white font-semibold text-2xl mb-3">
-                        LinkedIn Post Formatter
-                    </h2>
-                    <p className="mt-3 text-white">
-                        Transform your raw text into polished, professional LinkedIn posts
-                    </p>
-                </div>
-            </motion.div>
+            <Heading
+                title="LinkedIn Post Formatter"
+                subtitle="Transform your raw text into polished, professional LinkedIn posts"
+            />
 
-            <div className="bg-white/5 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
+            <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="font-semibold text-blue-400">
+                    <h2 className="font-semibold text-foreground">
                         Write Your Post
                     </h2>
                     <button
                         onClick={loadExample}
-                        className="text-sm text-blue-400 font-medium transition-colors"
+                        type="button"
+                        className="text-sm font-medium text-accent transition-colors hover:text-foreground"
                     >
                         Load Example
                     </button>
@@ -117,46 +103,49 @@ What's a project you're proud of? Let me know in the comments! 👇
                     onTextChange={handleTextChange}
                 />
 
-                <div className="flex items-center justify-between mt-4">
-                    <div className="text-base text-gray-300">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <div className="font-mono text-xs text-subtle">
                         {wordCount} words · {charCount} characters
                     </div>
                     <div className="flex gap-2">
                         <button
                             onClick={handleClear}
-                            className="flex items-center gap-2 px-4 py-2 text-gray-300"
+                            type="button"
+                            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
                         >
-                            <ArrowPathIcon aria-hidden="true" className="w-4 h-4"/>
+                            <ArrowPathIcon aria-hidden="true" className="size-4"/>
                             Clear
                         </button>
                         <button
                             onClick={formatPost}
                             disabled={!inputText.trim()}
-                            className="flex items-center gap-2 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:cursor-not-allowed transition-all font-medium shadow-md hover:shadow-md"
+                            type="button"
+                            className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
                         >
-                            <SparklesIcon aria-hidden="true" className="w-4 h-4"/>
+                            <SparklesIcon aria-hidden="true" className="size-4"/>
                             Generate
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6 transition-all hover:shadow-xl">
+            <div className="mt-6 rounded-2xl border border-line bg-surface p-5 sm:p-6">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="font-semibold text-blue-400">Formatted Post</h2>
+                    <h2 className="font-semibold text-foreground">Formatted Post</h2>
                     {formattedText && (
                         <button
                             onClick={copyToClipboard}
-                            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg transition-all font-medium shadow-md hover:shadow-lg"
+                            type="button"
+                            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-4 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-surface-hover"
                         >
                             {copied ? (
                                 <>
-                                    <CheckIcon aria-hidden="true" className="w-4 h-4"/>
+                                    <CheckIcon aria-hidden="true" className="size-4 text-success"/>
                                     Copied!
                                 </>
                             ) : (
                                 <>
-                                    <ClipboardIcon aria-hidden="true" className="w-4 h-4"/>
+                                    <ClipboardIcon aria-hidden="true" className="size-4"/>
                                     Copy
                                 </>
                             )}
@@ -164,14 +153,14 @@ What's a project you're proud of? Let me know in the comments! 👇
                     )}
                 </div>
 
-                <div className="w-full h-80 p-4 bg-white/5 border border-slate-400 rounded-xl overflow-y-auto">
+                <div className="h-80 w-full overflow-y-auto rounded-xl border border-line bg-background p-4">
                     {formattedText ? (
-                        <p className="whitespace-pre-wrap text-gray-300 leading-relaxed">
+                        <p className="whitespace-pre-wrap leading-relaxed text-foreground/90">
                             {formattedText}
                         </p>
                     ) : (
                         <div className="flex items-center justify-center h-full">
-                            <p className="text-slate-300 text-center">
+                            <p className="text-center text-subtle">
                                 Your formatted post will appear here...
                                 <br/>
                                 <span className="text-sm">Click Generate to see the magic ✨</span>
@@ -181,36 +170,36 @@ What's a project you're proud of? Let me know in the comments! 👇
                 </div>
 
                 {formattedText && (
-                    <div className="mt-4 p-3 bg-white/5 border border-gray-300 rounded-lg">
-                        <p className="text-sm text-gray-300">
+                    <div className="mt-4 space-y-1 rounded-lg border border-success/20 bg-success/5 p-3">
+                        <p className="text-sm text-muted">
                             ✓ Post formatted with proper spacing and line breaks
                         </p>
-                        <p className="text-sm text-gray-300">
+                        <p className="text-sm text-muted">
                             ✓ Rich text (bold, italic, lists) converted to LinkedIn-compatible Unicode
                         </p>
                     </div>
                 )}
             </div>
 
-            <div className="bg-white/5 mt-8 rounded-2xl shadow-lg p-6">
-                <h3 className="font-semibold text-blue-400 mb-3">
+            <div className="mt-6 rounded-2xl border border-line bg-surface p-5 sm:p-6">
+                <h2 className="mb-3 font-semibold text-foreground">
                     Formatting Tips
-                </h3>
-                <ul className="grid sm:grid-cols-2 gap-3 text-sm text-slate-300">
+                </h2>
+                <ul className="grid gap-3 text-sm text-muted sm:grid-cols-2">
                     <li className="flex items-start gap-2">
-                        <span className="text-slate-300 font-bold">•</span>
+                        <span aria-hidden="true" className="text-accent">•</span>
                         <span>Each line break in your input becomes a paragraph</span>
                     </li>
                     <li className="flex items-start gap-2">
-                        <span className="text-slate-300 font-bold">•</span>
+                        <span aria-hidden="true" className="text-accent">•</span>
                         <span>Extra spaces are automatically cleaned up</span>
                     </li>
                     <li className="flex items-start gap-2">
-                        <span className="text-slate-300 font-bold">•</span>
+                        <span aria-hidden="true" className="text-accent">•</span>
                         <span>Emojis and special characters are preserved</span>
                     </li>
                     <li className="flex items-start gap-2">
-                        <span className="text-slate-300 font-bold">•</span>
+                        <span aria-hidden="true" className="text-accent">•</span>
                         <span>Use numbered lists or bullet points for better structure</span>
                     </li>
                 </ul>
