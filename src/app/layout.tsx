@@ -23,30 +23,24 @@ export const metadata: Metadata = {
         process.env.NEXT_PUBLIC_SITE_URL || "https://minhajul.info"
     ),
     title: {
-        default: "Md Minhajul Islam - Portfolio",
+        default: "Md Minhajul Islam — Full-stack & DevOps Engineer",
         template: "%s | Md Minhajul Islam",
     },
     description: "Full-stack software engineer with advanced knowledge in DevOps. Building scalable applications with PHP, Python, Go, React, Next.js.",
     twitter: {
-        card: "summary",
-        title: "Md Minhajul Islam - Portfolio",
+        card: "summary_large_image",
+        title: "Md Minhajul Islam — Full-stack & DevOps Engineer",
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
         site: "@minhaj_cse",
-        images: ["/profile-pic.png"],
     },
     openGraph: {
-        title: "Md Minhajul Islam - Portfolio",
+        title: "Md Minhajul Islam — Full-stack & DevOps Engineer",
         siteName: "Md Minhajul Islam",
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
-        images: ["/profile-pic.png"],
         type: "website",
         locale: "en_US",
     },
     manifest: "/manifest.json",
-    icons: {
-        icon: "/favicon.ico",
-        apple: "/apple-touch-icon.png",
-    },
 };
 
 type RootLayoutProps = {

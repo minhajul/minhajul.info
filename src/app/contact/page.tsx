@@ -6,7 +6,8 @@ import {ArrowUpRightIcon} from "@heroicons/react/20/solid";
 import type {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Portfolio website of Minhaj - Contact",
+    title: "Contact",
+    description: "Get in touch about freelance, remote, or visa-sponsored software engineering and DevOps roles.",
 }
 
 const handles: Record<string, string> = {

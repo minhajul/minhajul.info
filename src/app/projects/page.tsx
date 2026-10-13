@@ -1,6 +1,12 @@
 import Heading from "@/components/Heading";
 import ProjectCard from "@/components/ProjectCard";
 import {projects} from "@/data/projects";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Projects",
+    description: "Open-source work exploring distributed systems, observability, and platform engineering.",
+}
 
 const sortedProjects = [...projects].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
 

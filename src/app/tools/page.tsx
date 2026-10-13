@@ -7,6 +7,7 @@ import type {Metadata} from "next";
 
 export const metadata: Metadata = {
     title: "Tools",
+    description: "Small, free utilities built by Md Minhajul Islam.",
 }
 
 export default function Tools() {
