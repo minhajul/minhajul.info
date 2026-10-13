@@ -69,7 +69,9 @@ What's a project you're proud of? Let me know in the comments! 👇
 
     const loadExample = () => {
         // Convert the plain-text example into Tiptap JSON so the editor can render it
-        setTiptapJson(generateJSON(examplePost, tiptapExtensions));
+        // generateJSON parses HTML, so wrap each line in <p> to keep the line breaks
+        const html = examplePost.trim().split('\n').map((line) => `<p>${line}</p>`).join('');
+        setTiptapJson(generateJSON(html, tiptapExtensions));
         setFormattedText('');
     };
 
