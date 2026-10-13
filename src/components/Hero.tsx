@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import {ArrowRightIcon} from "@heroicons/react/20/solid";
 import AvailabilityBadge from "@/components/AvailabilityBadge";
+import ProfilePortrait from "@/components/ProfilePortrait";
 import SocialLinks from "@/components/SocialLinks";
 import {buttonPrimary, buttonSecondary} from "@/lib/styles";
 import {profile} from "@/data/profile";
@@ -46,15 +46,7 @@ export default function Hero() {
                 </div>
 
                 <div className="shrink-0">
-                    <Image
-                        src="/profile-pic.png"
-                        alt={profile.name}
-                        width={500}
-                        height={500}
-                        sizes="(min-width: 768px) 288px, 160px"
-                        className="size-40 rounded-3xl object-cover ring-1 ring-line-strong shadow-2xl shadow-accent/10 md:size-72"
-                        priority
-                    />
+                    <ProfilePortrait/>
                 </div>
             </div>
         </section>
