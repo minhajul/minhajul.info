@@ -18,7 +18,7 @@ export default function SectionHeading({eyebrow, title, href, linkLabel}: Sectio
             {href && (
                 <Link
                     href={href}
-                    className="group hidden shrink-0 items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-foreground sm:inline-flex"
+                    className="group inline-flex shrink-0 items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-foreground"
                 >
                     {linkLabel}
                     <ArrowRightIcon aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5"/>
