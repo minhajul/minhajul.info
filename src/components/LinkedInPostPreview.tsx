@@ -92,7 +92,7 @@ export default function LinkedInPostPreview({text}: LinkedInPostPreviewProps) {
                 </div>
             </div>
 
-            <div className={`mx-auto w-full ${cardWidth} rounded-xl border border-line bg-background transition-[max-width] duration-300`}>
+            <div className={`@container mx-auto w-full ${cardWidth} rounded-xl border border-line bg-background transition-[max-width] duration-300`}>
                 <div className="flex items-start gap-2 px-4 pt-3">
                     <Image
                         src="/profile-pic.png"
@@ -135,10 +135,11 @@ export default function LinkedInPostPreview({text}: LinkedInPostPreviewProps) {
                     <span>24 comments · 6 reposts</span>
                 </div>
                 <div aria-hidden="true" className="flex justify-around px-2 py-1">
+                    {/* Stack icon and label when the card is too narrow to fit all four side by side */}
                     {ACTIONS.map(({label, icon: Icon}) => (
                         <span
                             key={label}
-                            className={`flex items-center rounded-md px-2 py-2 text-xs font-semibold text-subtle ${device === "mobile" ? "flex-col gap-0.5" : "gap-1.5"}`}
+                            className={`flex items-center rounded-md px-2 py-2 text-xs font-semibold text-subtle ${device === "mobile" ? "flex-col gap-0.5" : "flex-col gap-0.5 @sm:flex-row @sm:gap-1.5"}`}
                         >
                             <Icon className="size-5"/>
                             {label}
