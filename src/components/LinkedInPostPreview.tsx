@@ -62,14 +62,15 @@ export default function LinkedInPostPreview({text}: LinkedInPostPreviewProps) {
         const element = bodyRef.current;
         if (!element || expanded) return;
 
-        // ResizeObserver reports once on observe, so this also measures on every text change
+        // ResizeObserver reports once on observe, so this measures on every text change,
+        // and again whenever the card width changes, e.g. switching device
         const observer = new ResizeObserver(() => {
             setIsTruncated(element.scrollHeight > element.clientHeight + 1);
         });
         observer.observe(element);
 
         return () => observer.disconnect();
-    }, [body, device, expanded]);
+    }, [body, expanded]);
 
     return (
         <div>
@@ -95,7 +96,7 @@ export default function LinkedInPostPreview({text}: LinkedInPostPreviewProps) {
             <div className={`@container mx-auto w-full ${cardWidth} rounded-xl border border-line bg-background transition-[max-width] duration-300`}>
                 <div className="flex items-start gap-2 px-4 pt-3">
                     <Image
-                        src="/profile-pic.png"
+                        src={profile.photo}
                         alt=""
                         width={48}
                         height={48}
@@ -114,8 +115,8 @@ export default function LinkedInPostPreview({text}: LinkedInPostPreviewProps) {
                 <div className="relative px-4 pt-3 pb-2 text-sm leading-normal text-foreground/90">
                     <p
                         ref={bodyRef}
-                        // Three lines at leading-normal; a height cap rather than line-clamp, which would add its own ellipsis
-                        className={`whitespace-pre-wrap break-words ${expanded ? "" : "max-h-[4.5em] overflow-hidden"}`}
+                        // Three lines; a height cap rather than line-clamp, which would add its own ellipsis
+                        className={`whitespace-pre-wrap break-words ${expanded ? "" : "max-h-[3lh] overflow-hidden"}`}
                     >
                         {renderBody(body)}
                     </p>
@@ -139,7 +140,7 @@ export default function LinkedInPostPreview({text}: LinkedInPostPreviewProps) {
                     {ACTIONS.map(({label, icon: Icon}) => (
                         <span
                             key={label}
-                            className={`flex items-center rounded-md px-2 py-2 text-xs font-semibold text-subtle ${device === "mobile" ? "flex-col gap-0.5" : "flex-col gap-0.5 @sm:flex-row @sm:gap-1.5"}`}
+                            className={`flex flex-col items-center gap-0.5 rounded-md px-2 py-2 text-xs font-semibold text-subtle ${device === "mobile" ? "" : "@sm:flex-row @sm:gap-1.5"}`}
                         >
                             <Icon className="size-5"/>
                             {label}

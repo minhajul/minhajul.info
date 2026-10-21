@@ -5,13 +5,10 @@ import LinkedInPostPreview from "@/components/LinkedInPostPreview";
 import {ClipboardIcon, CheckIcon} from '@heroicons/react/20/solid'
 import {useState} from "react";
 import {useEditor} from "@tiptap/react";
-import {tiptapJsonToLinkedInText} from "@/lib/TiptapTextFormatter";
+import {LINKEDIN_CHARACTER_LIMIT, tiptapJsonToLinkedInText} from "@/lib/TiptapTextFormatter";
 import {tiptapExtensions} from "@/lib/tiptapConfig";
-import {buttonPrimary} from "@/lib/styles";
+import {buttonPrimary, panel} from "@/lib/styles";
 import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
-
-// LinkedIn rejects posts longer than this
-const CHARACTER_LIMIT = 3000;
 
 const EXAMPLE_POST_HTML = `
 <p>I just launched my new project and I'm excited to share it with you all</p>
@@ -37,8 +34,6 @@ export default function LinkedInPostFormatter() {
     });
 
     const copyToClipboard = async () => {
-        if (!formattedText) return;
-
         try {
             await copy(formattedText);
         } catch (err) {
@@ -52,11 +47,11 @@ export default function LinkedInPostFormatter() {
 
     const charCount = formattedText.length;
     const wordCount = formattedText.trim() ? formattedText.trim().split(/\s+/).length : 0;
-    const isOverLimit = charCount > CHARACTER_LIMIT;
+    const isOverLimit = charCount > LINKEDIN_CHARACTER_LIMIT;
 
     return (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <div className={`${panel} p-5 sm:p-6`}>
                 <div className="flex items-center justify-between mb-4">
                     <h2 className="font-semibold text-foreground">
                         Write Your Post
@@ -78,13 +73,13 @@ export default function LinkedInPostFormatter() {
                         <div aria-hidden="true" className="h-1.5 w-16 overflow-hidden rounded-full bg-white/10">
                             <div
                                 className={`h-full rounded-full transition-[width] ${isOverLimit ? 'bg-red-400' : 'bg-accent'}`}
-                                style={{width: `${Math.min(charCount / CHARACTER_LIMIT, 1) * 100}%`}}
+                                style={{width: `${Math.min(charCount / LINKEDIN_CHARACTER_LIMIT, 1) * 100}%`}}
                             />
                         </div>
                         <span>
                             {wordCount} {wordCount === 1 ? 'word' : 'words'} ·{' '}
                             <span className={isOverLimit ? 'text-red-400' : undefined}>
-                                {charCount.toLocaleString()} / {CHARACTER_LIMIT.toLocaleString()} characters
+                                {charCount.toLocaleString()} / {LINKEDIN_CHARACTER_LIMIT.toLocaleString()} characters
                             </span>
                         </span>
                     </div>
@@ -109,12 +104,12 @@ export default function LinkedInPostFormatter() {
                 </div>
                 {isOverLimit && (
                     <p className="mt-2 text-sm text-red-400">
-                        LinkedIn posts can be at most {CHARACTER_LIMIT.toLocaleString()} characters.
+                        LinkedIn posts can be at most {LINKEDIN_CHARACTER_LIMIT.toLocaleString()} characters.
                     </p>
                 )}
             </div>
 
-            <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <div className={`${panel} p-5 sm:p-6`}>
                 <LinkedInPostPreview text={formattedText}/>
             </div>
         </div>

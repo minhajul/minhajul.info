@@ -1,5 +1,7 @@
 import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import SectionHeading from "@/components/SectionHeading";
+import {panel} from "@/lib/styles";
+import {LINKEDIN_CHARACTER_LIMIT} from "@/lib/TiptapTextFormatter";
 
 const STEPS = [
     {
@@ -27,7 +29,7 @@ const FAQS = [
     },
     {
         question: "Why does formatted text use up more characters?",
-        answer: "Each bold or italic letter takes two characters, and underline and strikethrough add a mark to every character. The counter includes all of that, so you won't go over LinkedIn's 3,000-character limit by surprise.",
+        answer: `Each bold or italic letter takes two characters, and underline and strikethrough add a mark to every character. The counter includes all of that, so you won't go over LinkedIn's ${LINKEDIN_CHARACTER_LIMIT.toLocaleString("en-US")}-character limit by surprise.`,
     },
     {
         question: "Is my post saved or sent anywhere?",
@@ -42,7 +44,7 @@ export default function LinkedInFormatterGuide() {
                 <SectionHeading eyebrow="How it works" title="Format, preview, post"/>
                 <ol className="grid gap-6 md:grid-cols-3">
                     {STEPS.map((step, index) => (
-                        <li key={step.title} className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+                        <li key={step.title} className={`${panel} p-5 sm:p-6`}>
                             <span className="font-mono text-xs text-accent">
                                 {String(index + 1).padStart(2, "0")}
                             </span>
@@ -55,7 +57,7 @@ export default function LinkedInFormatterGuide() {
 
             <section>
                 <SectionHeading eyebrow="FAQ" title="Good to know"/>
-                <div className="divide-y divide-line rounded-2xl border border-line bg-surface">
+                <div className={`${panel} divide-y divide-line`}>
                     {FAQS.map((faq) => (
                         <details key={faq.question} className="group px-5 py-4 sm:px-6">
                             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-foreground [&::-webkit-details-marker]:hidden">

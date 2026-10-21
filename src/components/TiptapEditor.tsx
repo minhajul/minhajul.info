@@ -16,13 +16,40 @@ import {
     TrashIcon,
     UnderlineIcon,
 } from '@heroicons/react/24/outline'
-import type {Editor} from '@tiptap/core'
+import {findParentNode} from '@tiptap/core'
+import type {ChainedCommands, Editor} from '@tiptap/core'
 
 type Icon = typeof BoldIcon
 
+type ToggleButton = {
+    /** The mark or node the button toggles, as passed to editor.isActive() */
+    name: string
+    label: string
+    icon: Icon
+    shortcut: string[]
+    toggle: (chain: ChainedCommands) => ChainedCommands
+}
+
+const MARK_BUTTONS: ToggleButton[] = [
+    {name: 'bold', label: 'Bold', icon: BoldIcon, shortcut: ['Mod', 'B'], toggle: chain => chain.toggleBold()},
+    {name: 'italic', label: 'Italic', icon: ItalicIcon, shortcut: ['Mod', 'I'], toggle: chain => chain.toggleItalic()},
+    {name: 'underline', label: 'Underline', icon: UnderlineIcon, shortcut: ['Mod', 'U'], toggle: chain => chain.toggleUnderline()},
+    {name: 'strike', label: 'Strikethrough', icon: StrikethroughIcon, shortcut: ['Mod', 'Shift', 'S'], toggle: chain => chain.toggleStrike()},
+]
+
+const LIST_BUTTONS: ToggleButton[] = [
+    {name: 'bulletList', label: 'Bullet list', icon: ListBulletIcon, shortcut: ['Mod', 'Shift', '8'], toggle: chain => chain.toggleBulletList()},
+    {name: 'orderedList', label: 'Numbered list', icon: NumberedListIcon, shortcut: ['Mod', 'Shift', '7'], toggle: chain => chain.toggleOrderedList()},
+]
+
+const LIST_TYPES = LIST_BUTTONS.map(button => button.name)
+
 type SortDirection = 'ascending' | 'descending'
 
-const LIST_TYPES = ['bulletList', 'orderedList']
+const SORT_OPTIONS: { direction: SortDirection, label: string, icon: Icon }[] = [
+    {direction: 'ascending', label: 'Ascending (shortest to longest)', icon: BarsArrowUpIcon},
+    {direction: 'descending', label: 'Descending (longest to shortest)', icon: BarsArrowDownIcon},
+]
 
 // Emojis that show up most in LinkedIn posts
 const EMOJIS = [
@@ -32,7 +59,7 @@ const EMOJIS = [
     '⚡', '⭐', '💬', '👀', '➡️', '❌', '⚠️', '📣',
 ]
 
-const buttonClass = (isActive: boolean) =>
+const buttonClass = (isActive = false) =>
     `p-1.5 rounded-md transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${isActive ? 'bg-accent/15 text-accent' : 'text-muted enabled:hover:bg-white/10 enabled:hover:text-foreground'
     }`
 
@@ -47,32 +74,25 @@ function sortListByLength(editor: Editor, direction: SortDirection) {
     }
 
     chain.command(({tr, commands}) => {
+        const list = findParentNode(node => LIST_TYPES.includes(node.type.name))(tr.selection)
+        if (!list) return false
+
         const {$from} = tr.selection
+        const cursorItem = $from.node(list.depth + 1)
+        const cursorOffset = $from.pos - $from.before(list.depth + 1)
 
-        for (let depth = $from.depth; depth > 0; depth--) {
-            const list = $from.node(depth)
-            if (!LIST_TYPES.includes(list.type.name)) continue
+        const items = [...list.node.children].sort((a, b) => direction === 'ascending'
+            ? a.textContent.length - b.textContent.length
+            : b.textContent.length - a.textContent.length)
 
-            const cursorItem = $from.node(depth + 1)
-            const cursorOffset = $from.pos - $from.before(depth + 1)
+        tr.replaceWith(list.start, list.start + list.node.content.size, items)
 
-            const items = Array.from({length: list.childCount}, (_, index) => list.child(index))
-            items.sort((a, b) => direction === 'ascending'
-                ? a.textContent.length - b.textContent.length
-                : b.textContent.length - a.textContent.length)
-
-            const start = $from.start(depth)
-            tr.replaceWith(start, start + list.content.size, items)
-
-            // Follow the item the cursor was in, otherwise it lands after the list
-            const itemStart = items
-                .slice(0, items.indexOf(cursorItem))
-                .reduce((position, item) => position + item.nodeSize, start)
-            commands.setTextSelection(itemStart + cursorOffset)
-            return true
-        }
-
-        return false
+        // Follow the item the cursor was in, otherwise it lands after the list
+        const itemStart = items
+            .slice(0, items.indexOf(cursorItem))
+            .reduce((position, item) => position + item.nodeSize, list.start)
+        commands.setTextSelection(itemStart + cursorOffset)
+        return true
     }).run()
 }
 
@@ -115,7 +135,7 @@ const ToolbarButton = ({label, icon: Icon, onClick, shortcut, isActive, disabled
             onMouseDown={event => event.preventDefault()}
             onClick={onClick}
             disabled={disabled}
-            className={buttonClass(isActive ?? false)}
+            className={buttonClass(isActive)}
         >
             <Icon aria-hidden="true" className="size-5"/>
         </button>
@@ -126,7 +146,7 @@ const Divider = () => <div aria-hidden="true" className="mx-1 my-1.5 w-px bg-lin
 
 const EmojiPicker = ({editor}: { editor: Editor }) => (
     <Popover>
-        <PopoverButton aria-label="Add emoji" title="Add emoji" className={buttonClass(false)}>
+        <PopoverButton aria-label="Add emoji" title="Add emoji" className={buttonClass()}>
             <FaceSmileIcon aria-hidden="true" className="size-5"/>
         </PopoverButton>
         <PopoverPanel anchor="bottom start" className={`${menuPanelClass} grid grid-cols-8 gap-0.5`}>
@@ -152,88 +172,62 @@ const EmojiPicker = ({editor}: { editor: Editor }) => (
     </Popover>
 )
 
-const SortMenu = ({editor}: { editor: Editor }) => {
-    const options: { direction: SortDirection, label: string, icon: Icon }[] = [
-        {direction: 'ascending', label: 'Ascending (shortest to longest)', icon: BarsArrowUpIcon},
-        {direction: 'descending', label: 'Descending (longest to shortest)', icon: BarsArrowDownIcon},
-    ]
-
-    return (
-        <Popover>
-            <PopoverButton aria-label="Sort list" title="Sort list" className={buttonClass(false)}>
-                <BarsArrowDownIcon aria-hidden="true" className="size-5"/>
-            </PopoverButton>
-            <PopoverPanel anchor="bottom end" className={`${menuPanelClass} min-w-64`}>
-                {({close}) => (
-                    <>
-                        {options.map(({direction, label, icon: Icon}) => (
-                            <button
-                                key={direction}
-                                type="button"
-                                onClick={() => {
-                                    close(editor.view.dom)
-                                    sortListByLength(editor, direction)
-                                }}
-                                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-muted transition-colors hover:bg-white/10 hover:text-foreground"
-                            >
-                                <Icon aria-hidden="true" className="size-4"/>
-                                {label}
-                            </button>
-                        ))}
-                    </>
-                )}
-            </PopoverPanel>
-        </Popover>
-    )
-}
+const SortMenu = ({editor}: { editor: Editor }) => (
+    <Popover>
+        <PopoverButton aria-label="Sort list" title="Sort list" className={buttonClass()}>
+            <BarsArrowDownIcon aria-hidden="true" className="size-5"/>
+        </PopoverButton>
+        <PopoverPanel anchor="bottom end" className={`${menuPanelClass} min-w-64`}>
+            {({close}) => (
+                <>
+                    {SORT_OPTIONS.map(({direction, label, icon: Icon}) => (
+                        <button
+                            key={direction}
+                            type="button"
+                            onClick={() => {
+                                close(editor.view.dom)
+                                sortListByLength(editor, direction)
+                            }}
+                            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-muted transition-colors hover:bg-white/10 hover:text-foreground"
+                        >
+                            <Icon aria-hidden="true" className="size-4"/>
+                            {label}
+                        </button>
+                    ))}
+                </>
+            )}
+        </PopoverPanel>
+    </Popover>
+)
 
 const MenuBar = ({editor}: { editor: Editor }) => {
     // Tiptap doesn't re-render on every transaction, so subscribe to the bits the toolbar shows
     const state = useEditorState({
         editor,
-        selector: ({editor}) => ({
-            isBold: editor.isActive('bold'),
-            isItalic: editor.isActive('italic'),
-            isUnderline: editor.isActive('underline'),
-            isStrike: editor.isActive('strike'),
-            isBulletList: editor.isActive('bulletList'),
-            isOrderedList: editor.isActive('orderedList'),
-            canUndo: editor.can().undo(),
-            canRedo: editor.can().redo(),
-            isEmpty: editor.isEmpty,
-        }),
+        selector: ({editor}) => {
+            const can = editor.can()
+
+            return {
+                active: Object.fromEntries([...MARK_BUTTONS, ...LIST_BUTTONS].map(({name}) => [name, editor.isActive(name)])),
+                canUndo: can.undo(),
+                canRedo: can.redo(),
+                isEmpty: editor.isEmpty,
+            }
+        },
     })
+
+    const renderToggle = ({name, toggle, ...button}: ToggleButton) => (
+        <ToolbarButton
+            key={name}
+            {...button}
+            isActive={state.active[name]}
+            onClick={() => toggle(editor.chain().focus()).run()}
+        />
+    )
 
     return (
         <div className="flex flex-wrap gap-0.5 border-b border-line p-2">
-            <ToolbarButton
-                label="Bold"
-                icon={BoldIcon}
-                shortcut={['Mod', 'B']}
-                isActive={state.isBold}
-                onClick={() => editor.chain().focus().toggleBold().run()}
-            />
-            <ToolbarButton
-                label="Italic"
-                icon={ItalicIcon}
-                shortcut={['Mod', 'I']}
-                isActive={state.isItalic}
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-            />
-            <ToolbarButton
-                label="Underline"
-                icon={UnderlineIcon}
-                shortcut={['Mod', 'U']}
-                isActive={state.isUnderline}
-                onClick={() => editor.chain().focus().toggleUnderline().run()}
-            />
-            <ToolbarButton
-                label="Strikethrough"
-                icon={StrikethroughIcon}
-                shortcut={['Mod', 'Shift', 'S']}
-                isActive={state.isStrike}
-                onClick={() => editor.chain().focus().toggleStrike().run()}
-            />
+            {MARK_BUTTONS.map(renderToggle)}
 
             <Divider/>
             <EmojiPicker editor={editor}/>
@@ -262,20 +256,7 @@ const MenuBar = ({editor}: { editor: Editor }) => {
             />
 
             <Divider/>
-            <ToolbarButton
-                label="Bullet list"
-                icon={ListBulletIcon}
-                shortcut={['Mod', 'Shift', '8']}
-                isActive={state.isBulletList}
-                onClick={() => editor.chain().focus().toggleBulletList().run()}
-            />
-            <ToolbarButton
-                label="Numbered list"
-                icon={NumberedListIcon}
-                shortcut={['Mod', 'Shift', '7']}
-                isActive={state.isOrderedList}
-                onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            />
+            {LIST_BUTTONS.map(renderToggle)}
             <SortMenu editor={editor}/>
         </div>
     )
@@ -289,12 +270,8 @@ const frameClass = 'flex min-h-80 flex-col rounded-xl border border-line bg-back
 
 export default function TiptapEditor({editor}: TiptapEditorProps) {
     if (!editor) {
-        // Same frame and toolbar height as the editor, so the page doesn't shift once it mounts
-        return (
-            <div aria-hidden="true" className={frameClass}>
-                <div className="h-12 border-b border-line"/>
-            </div>
-        )
+        // Hold the editor's space so the page doesn't shift once it mounts
+        return <div aria-hidden="true" className={frameClass}/>
     }
 
     return (

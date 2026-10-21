@@ -1,5 +1,8 @@
 import type {JSONContent} from '@tiptap/core';
 
+// LinkedIn rejects posts longer than this
+export const LINKEDIN_CHARACTER_LIMIT = 3000;
+
 type UnicodeStyle = 'bold' | 'italic' | 'boldItalic';
 
 // Code points of 'A', 'a' and '0' in the Mathematical Sans-Serif blocks, which LinkedIn renders like real formatting
@@ -10,8 +13,8 @@ const unicodeOffsets: Record<UnicodeStyle, {upper: number; lower: number; digit?
     boldItalic: {upper: 0x1D63C, lower: 0x1D656, digit: 0x1D7EC},
 };
 
-const COMBINING_UNDERLINE = '̲';
-const COMBINING_STRIKETHROUGH = '̶';
+const COMBINING_UNDERLINE = '\u0332';
+const COMBINING_STRIKETHROUGH = '\u0336';
 
 const graphemes = new Intl.Segmenter();
 
@@ -70,6 +73,18 @@ function formatTextNode(node: JSONContent): string {
  * @returns {string} The converted text.
  */
 function processNode(node: JSONContent): string {
+    if (node.type === 'bulletList' || node.type === 'orderedList') {
+        // Tiptap's list structure is nested: bulletList/orderedList -> listItem -> paragraph,
+        // so prepend the marker to each item's content here.
+        const start = node.attrs?.start ?? 1;
+        const items = (node.content || []).map((listItem, index) => {
+            const marker = node.type === 'bulletList' ? '•' : `${start + index}.`;
+            return `${marker} ${processNode(listItem).trim()}`;
+        });
+        // Single line break between list items, double after the whole list
+        return items.join('\n') + '\n\n';
+    }
+
     let text = '';
 
     if (node.type === 'text') {
@@ -88,21 +103,6 @@ function processNode(node: JSONContent): string {
     if (node.type === 'paragraph') {
         // LinkedIn posts use double line breaks for paragraphs
         text = text + '\n\n';
-    } else if (node.type === 'bulletList') {
-        // Tiptap's list structure is nested: bulletList/orderedList -> listItem -> paragraph,
-        // so prepend the marker to each item's content here.
-        text = (node.content || []).map(listItem => {
-            const itemContent = processNode(listItem).trim();
-            return '• ' + itemContent;
-        }).join('\n'); // Single line break between list items
-        text = text + '\n\n'; // Double line break after the whole list
-    } else if (node.type === 'orderedList') {
-        const start = node.attrs?.start ?? 1;
-        text = (node.content || []).map((listItem, index) => {
-            const itemContent = processNode(listItem).trim();
-            return `${start + index}. ${itemContent}`;
-        }).join('\n'); // Single line break between list items
-        text = text + '\n\n'; // Double line break after the whole list
     }
 
     return text;
