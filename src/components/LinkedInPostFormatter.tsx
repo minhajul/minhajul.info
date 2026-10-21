@@ -7,7 +7,6 @@ import {useState} from "react";
 import {useEditor} from "@tiptap/react";
 import {tiptapJsonToLinkedInText} from "@/lib/TiptapTextFormatter";
 import {tiptapExtensions} from "@/lib/tiptapConfig";
-import Heading from "@/components/Heading";
 import {buttonPrimary} from "@/lib/styles";
 import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
 
@@ -57,11 +56,6 @@ export default function LinkedInPostFormatter() {
 
     return (
         <div>
-            <Heading
-                title="LinkedIn Post Formatter"
-                subtitle="Transform your raw text into polished, professional LinkedIn posts"
-            />
-
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
                     <div className="flex items-center justify-between mb-4">
