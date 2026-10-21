@@ -55,93 +55,67 @@ export default function LinkedInPostFormatter() {
     const isOverLimit = charCount > CHARACTER_LIMIT;
 
     return (
-        <div>
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="font-semibold text-foreground">
-                            Write Your Post
-                        </h2>
-                        <button
-                            onClick={loadExample}
-                            type="button"
-                            className="text-sm font-medium text-accent transition-colors hover:text-foreground"
-                        >
-                            Load Example
-                        </button>
-                    </div>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="font-semibold text-foreground">
+                        Write Your Post
+                    </h2>
+                    <button
+                        onClick={loadExample}
+                        type="button"
+                        className="text-sm font-medium text-accent transition-colors hover:text-foreground"
+                    >
+                        Load Example
+                    </button>
+                </div>
 
-                    <TiptapEditor editor={editor}/>
+                <TiptapEditor editor={editor}/>
 
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 font-mono text-xs text-subtle">
-                            {/* The counter text says the same thing for screen readers */}
-                            <div aria-hidden="true" className="h-1.5 w-16 overflow-hidden rounded-full bg-white/10">
-                                <div
-                                    className={`h-full rounded-full transition-[width] ${isOverLimit ? 'bg-red-400' : 'bg-accent'}`}
-                                    style={{width: `${Math.min(charCount / CHARACTER_LIMIT, 1) * 100}%`}}
-                                />
-                            </div>
-                            <span>
-                                {wordCount} {wordCount === 1 ? 'word' : 'words'} ·{' '}
-                                <span className={isOverLimit ? 'text-red-400' : undefined}>
-                                    {charCount.toLocaleString()} / {CHARACTER_LIMIT.toLocaleString()} characters
-                                </span>
-                            </span>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 font-mono text-xs text-subtle">
+                        {/* The counter text says the same thing for screen readers */}
+                        <div aria-hidden="true" className="h-1.5 w-16 overflow-hidden rounded-full bg-white/10">
+                            <div
+                                className={`h-full rounded-full transition-[width] ${isOverLimit ? 'bg-red-400' : 'bg-accent'}`}
+                                style={{width: `${Math.min(charCount / CHARACTER_LIMIT, 1) * 100}%`}}
+                            />
                         </div>
-                        <button
-                            onClick={copyToClipboard}
-                            disabled={!formattedText}
-                            type="button"
-                            className={`${buttonPrimary} disabled:cursor-not-allowed disabled:opacity-40`}
-                        >
-                            {copied ? (
-                                <>
-                                    <CheckIcon aria-hidden="true" className="size-4 text-success"/>
-                                    Copied!
-                                </>
-                            ) : (
-                                <>
-                                    <ClipboardIcon aria-hidden="true" className="size-4"/>
-                                    Copy text
-                                </>
-                            )}
-                        </button>
+                        <span>
+                            {wordCount} {wordCount === 1 ? 'word' : 'words'} ·{' '}
+                            <span className={isOverLimit ? 'text-red-400' : undefined}>
+                                {charCount.toLocaleString()} / {CHARACTER_LIMIT.toLocaleString()} characters
+                            </span>
+                        </span>
                     </div>
-                    {isOverLimit && (
-                        <p className="mt-2 text-sm text-red-400">
-                            LinkedIn posts can be at most {CHARACTER_LIMIT.toLocaleString()} characters.
-                        </p>
-                    )}
+                    <button
+                        onClick={copyToClipboard}
+                        disabled={!formattedText}
+                        type="button"
+                        className={`${buttonPrimary} disabled:cursor-not-allowed disabled:opacity-40`}
+                    >
+                        {copied ? (
+                            <>
+                                <CheckIcon aria-hidden="true" className="size-4 text-success"/>
+                                Copied!
+                            </>
+                        ) : (
+                            <>
+                                <ClipboardIcon aria-hidden="true" className="size-4"/>
+                                Copy text
+                            </>
+                        )}
+                    </button>
                 </div>
-
-                <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
-                    <LinkedInPostPreview text={formattedText}/>
-                </div>
+                {isOverLimit && (
+                    <p className="mt-2 text-sm text-red-400">
+                        LinkedIn posts can be at most {CHARACTER_LIMIT.toLocaleString()} characters.
+                    </p>
+                )}
             </div>
 
-            <div className="mt-6 rounded-2xl border border-line bg-surface p-5 sm:p-6">
-                <h2 className="mb-3 font-semibold text-foreground">
-                    Formatting Tips
-                </h2>
-                <ul className="grid gap-3 text-sm text-muted sm:grid-cols-2">
-                    <li className="flex items-start gap-2">
-                        <span aria-hidden="true" className="text-accent">•</span>
-                        <span>Each line break in your input becomes a paragraph</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                        <span aria-hidden="true" className="text-accent">•</span>
-                        <span>Only the first three lines show before &quot;...more&quot;, so open with a hook</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                        <span aria-hidden="true" className="text-accent">•</span>
-                        <span>Emojis and special characters are preserved</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                        <span aria-hidden="true" className="text-accent">•</span>
-                        <span>Use numbered lists or bullet points for better structure</span>
-                    </li>
-                </ul>
+            <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
+                <LinkedInPostPreview text={formattedText}/>
             </div>
         </div>
     )

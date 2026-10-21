@@ -2,6 +2,7 @@ import Link from "next/link";
 import {CheckIcon, ChevronRightIcon} from "@heroicons/react/20/solid";
 import Heading from "@/components/Heading";
 import LinkedInPostFormatter from "@/components/LinkedInPostFormatter";
+import LinkedInFormatterGuide from "@/components/LinkedInFormatterGuide";
 import {linkedInPostFormatter} from "@/data/tools";
 import {profile} from "@/data/profile";
 import type {Metadata} from "next";
@@ -61,7 +62,10 @@ export default function ToolForLinkedIn() {
                 </ul>
             </Heading>
 
-            <LinkedInPostFormatter/>
+            <div className="space-y-24">
+                <LinkedInPostFormatter/>
+                <LinkedInFormatterGuide/>
+            </div>
         </div>
     );
 }
