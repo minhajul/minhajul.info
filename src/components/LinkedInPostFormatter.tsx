@@ -62,7 +62,7 @@ export default function LinkedInPostFormatter() {
                 subtitle="Transform your raw text into polished, professional LinkedIn posts"
             />
 
-            <div className="grid items-start gap-6 lg:grid-cols-2">
+            <div className="grid gap-6 lg:grid-cols-2">
                 <div className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="font-semibold text-foreground">
