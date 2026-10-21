@@ -1,4 +1,5 @@
 import StarterKit from '@tiptap/starter-kit';
+import {Placeholder} from '@tiptap/extensions';
 import type {Extensions} from '@tiptap/core';
 
 export const tiptapExtensions: Extensions = [
@@ -9,5 +10,8 @@ export const tiptapExtensions: Extensions = [
         codeBlock: false,
         heading: false,
         horizontalRule: false,
+    }),
+    Placeholder.configure({
+        placeholder: 'Write your post here, or load the example to see how it works…',
     }),
 ];

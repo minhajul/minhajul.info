@@ -74,10 +74,19 @@ export default function LinkedInPostFormatter() {
                     <TiptapEditor editor={editor}/>
 
                     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                        <div className="font-mono text-xs text-subtle">
-                            {wordCount} words ·{' '}
-                            <span className={isOverLimit ? 'text-red-400' : undefined}>
-                                {charCount.toLocaleString()} / {CHARACTER_LIMIT.toLocaleString()} characters
+                        <div className="flex items-center gap-3 font-mono text-xs text-subtle">
+                            {/* The counter text says the same thing for screen readers */}
+                            <div aria-hidden="true" className="h-1.5 w-16 overflow-hidden rounded-full bg-white/10">
+                                <div
+                                    className={`h-full rounded-full transition-[width] ${isOverLimit ? 'bg-red-400' : 'bg-accent'}`}
+                                    style={{width: `${Math.min(charCount / CHARACTER_LIMIT, 1) * 100}%`}}
+                                />
+                            </div>
+                            <span>
+                                {wordCount} {wordCount === 1 ? 'word' : 'words'} ·{' '}
+                                <span className={isOverLimit ? 'text-red-400' : undefined}>
+                                    {charCount.toLocaleString()} / {CHARACTER_LIMIT.toLocaleString()} characters
+                                </span>
                             </span>
                         </div>
                         <button

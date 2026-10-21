@@ -98,4 +98,13 @@
     color: var(--color-foreground);
     font-weight: 600;
   }
+
+  /* Placeholder extension marks the empty first paragraph */
+  .tiptap-content .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    color: var(--color-subtle);
+  }
 }

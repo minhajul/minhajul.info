@@ -33,7 +33,7 @@ const EMOJIS = [
 ]
 
 const buttonClass = (isActive: boolean) =>
-    `p-2 rounded-md transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${isActive ? 'bg-accent/15 text-accent' : 'text-muted enabled:hover:bg-white/10 enabled:hover:text-foreground'
+    `p-1.5 rounded-md transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${isActive ? 'bg-accent/15 text-accent' : 'text-muted enabled:hover:bg-white/10 enabled:hover:text-foreground'
     }`
 
 const menuPanelClass = 'z-20 rounded-xl border border-line-strong bg-surface p-1.5 shadow-2xl shadow-black/50 [--anchor-gap:0.5rem]'
@@ -76,29 +76,51 @@ function sortListByLength(editor: Editor, direction: SortDirection) {
     }).run()
 }
 
+const APPLE_KEYS: Record<string, string> = {Mod: '⌘', Shift: '⇧'}
+
+/** Formats one of Tiptap's default shortcuts for the tooltip (⌘⇧S or Ctrl+Shift+S) and for aria-keyshortcuts. */
+function describeShortcut(keys: string[]) {
+    // Same check ProseMirror uses to bind Mod to ⌘, so the tooltip matches what actually works.
+    // The toolbar only renders in the browser, so navigator is always the visitor's.
+    const isApple = /Mac|iP(hone|[oa]d)/.test(navigator.platform)
+
+    return {
+        label: isApple
+            ? keys.map(key => APPLE_KEYS[key] ?? key).join('')
+            : keys.map(key => key === 'Mod' ? 'Ctrl' : key).join('+'),
+        aria: keys.map(key => key === 'Mod' ? (isApple ? 'Meta' : 'Control') : key).join('+'),
+    }
+}
+
 type ToolbarButtonProps = {
     label: string
     icon: Icon
     onClick: () => void
+    shortcut?: string[]
     isActive?: boolean
     disabled?: boolean
 }
 
-const ToolbarButton = ({label, icon: Icon, onClick, isActive, disabled}: ToolbarButtonProps) => (
-    <button
-        type="button"
-        aria-label={label}
-        title={label}
-        aria-pressed={isActive}
-        // Keep focus and the selection in the editor so typing carries on after a click
-        onMouseDown={event => event.preventDefault()}
-        onClick={onClick}
-        disabled={disabled}
-        className={buttonClass(isActive ?? false)}
-    >
-        <Icon aria-hidden="true" className="size-5"/>
-    </button>
-)
+const ToolbarButton = ({label, icon: Icon, onClick, shortcut, isActive, disabled}: ToolbarButtonProps) => {
+    const keys = shortcut && describeShortcut(shortcut)
+
+    return (
+        <button
+            type="button"
+            aria-label={label}
+            title={keys ? `${label} (${keys.label})` : label}
+            aria-keyshortcuts={keys?.aria}
+            aria-pressed={isActive}
+            // Keep focus and the selection in the editor so typing carries on after a click
+            onMouseDown={event => event.preventDefault()}
+            onClick={onClick}
+            disabled={disabled}
+            className={buttonClass(isActive ?? false)}
+        >
+            <Icon aria-hidden="true" className="size-5"/>
+        </button>
+    )
+}
 
 const Divider = () => <div aria-hidden="true" className="mx-1 my-1.5 w-px bg-line"/>
 
@@ -183,28 +205,32 @@ const MenuBar = ({editor}: { editor: Editor }) => {
     })
 
     return (
-        <div className="flex flex-wrap gap-1 border-b border-line p-2">
+        <div className="flex flex-wrap gap-0.5 border-b border-line p-2">
             <ToolbarButton
                 label="Bold"
                 icon={BoldIcon}
+                shortcut={['Mod', 'B']}
                 isActive={state.isBold}
                 onClick={() => editor.chain().focus().toggleBold().run()}
             />
             <ToolbarButton
                 label="Italic"
                 icon={ItalicIcon}
+                shortcut={['Mod', 'I']}
                 isActive={state.isItalic}
                 onClick={() => editor.chain().focus().toggleItalic().run()}
             />
             <ToolbarButton
                 label="Underline"
                 icon={UnderlineIcon}
+                shortcut={['Mod', 'U']}
                 isActive={state.isUnderline}
                 onClick={() => editor.chain().focus().toggleUnderline().run()}
             />
             <ToolbarButton
                 label="Strikethrough"
                 icon={StrikethroughIcon}
+                shortcut={['Mod', 'Shift', 'S']}
                 isActive={state.isStrike}
                 onClick={() => editor.chain().focus().toggleStrike().run()}
             />
@@ -216,12 +242,14 @@ const MenuBar = ({editor}: { editor: Editor }) => {
             <ToolbarButton
                 label="Undo"
                 icon={ArrowUturnLeftIcon}
+                shortcut={['Mod', 'Z']}
                 disabled={!state.canUndo}
                 onClick={() => editor.chain().focus().undo().run()}
             />
             <ToolbarButton
                 label="Redo"
                 icon={ArrowUturnRightIcon}
+                shortcut={['Mod', 'Shift', 'Z']}
                 disabled={!state.canRedo}
                 onClick={() => editor.chain().focus().redo().run()}
             />
@@ -237,12 +265,14 @@ const MenuBar = ({editor}: { editor: Editor }) => {
             <ToolbarButton
                 label="Bullet list"
                 icon={ListBulletIcon}
+                shortcut={['Mod', 'Shift', '8']}
                 isActive={state.isBulletList}
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
             />
             <ToolbarButton
                 label="Numbered list"
                 icon={NumberedListIcon}
+                shortcut={['Mod', 'Shift', '7']}
                 isActive={state.isOrderedList}
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
             />
@@ -255,11 +285,20 @@ type TiptapEditorProps = {
     editor: Editor | null
 }
 
+const frameClass = 'flex min-h-80 flex-col rounded-xl border border-line bg-background text-foreground/90'
+
 export default function TiptapEditor({editor}: TiptapEditorProps) {
-    if (!editor) return null
+    if (!editor) {
+        // Same frame and toolbar height as the editor, so the page doesn't shift once it mounts
+        return (
+            <div aria-hidden="true" className={frameClass}>
+                <div className="h-12 border-b border-line"/>
+            </div>
+        )
+    }
 
     return (
-        <div className="flex min-h-80 flex-col rounded-xl border border-line bg-background text-foreground/90 focus-within:border-line-strong">
+        <div className={`${frameClass} focus-within:border-line-strong`}>
             <MenuBar editor={editor}/>
             <div className="p-4 grow overflow-y-auto">
                 <EditorContent editor={editor} className="tiptap-content h-full"/>
