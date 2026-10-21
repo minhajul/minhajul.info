@@ -1,38 +1,21 @@
 import {ImageResponse} from "next/og";
-import {readFile} from "node:fs/promises";
-import {join} from "node:path";
 import {profile} from "@/data/profile";
 import {linkedInPostFormatter} from "@/data/tools";
 import {colors} from "@/lib/theme";
+import {loadProfilePhoto, OgFrame, ogSize} from "@/lib/og";
 
 export const alt = `${linkedInPostFormatter.title} — a free tool by ${profile.name}`;
-export const size = {width: 1200, height: 630};
+export const size = ogSize;
 export const contentType = "image/png";
 
 const FEATURES = ["Free", "No sign-up", "Live preview"];
 
 export default async function Image() {
-    const photo = await readFile(join(process.cwd(), "public/profile-pic.png"));
-    const photoSrc = `data:image/png;base64,${photo.toString("base64")}`;
+    const photoSrc = await loadProfilePhoto();
 
     return new ImageResponse(
         (
-            <div
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    padding: 72,
-                    background: `radial-gradient(ellipse 80% 60% at 50% -10%, ${colors.glow}, ${colors.background})`,
-                    color: colors.foreground,
-                }}
-            >
-                <div style={{position: "absolute", top: 72, left: 72, display: "flex", fontSize: 28, color: colors.muted}}>
-                    <span style={{color: colors.accent}}>~/</span>minhajul.info/tools
-                </div>
-
+            <OgFrame path="minhajul.info/tools">
                 <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 40}}>
                     <div style={{display: "flex", flexDirection: "column", maxWidth: 560}}>
                         <div style={{fontSize: 68, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05}}>
@@ -116,7 +99,7 @@ export default async function Image() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </OgFrame>
         ),
         size
     );

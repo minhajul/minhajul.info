@@ -4,30 +4,17 @@ import Heading from "@/components/Heading";
 import LinkedInPostFormatter from "@/components/LinkedInPostFormatter";
 import LinkedInFormatterGuide from "@/components/LinkedInFormatterGuide";
 import {linkedInPostFormatter} from "@/data/tools";
-import {profile} from "@/data/profile";
+import {siteOpenGraph, siteTwitter} from "@/lib/metadata";
 import type {Metadata} from "next";
 
 const {title, description, url} = linkedInPostFormatter;
 
-// Setting openGraph/twitter here replaces the layout's, so restate the shared fields
 export const metadata: Metadata = {
     title,
     description,
     alternates: {canonical: url},
-    openGraph: {
-        title,
-        description,
-        url,
-        siteName: profile.name,
-        type: "website",
-        locale: "en_US",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title,
-        description,
-        site: "@minhaj_cse",
-    },
+    openGraph: {...siteOpenGraph, title, description, url},
+    twitter: {...siteTwitter, title, description},
 };
 
 // Everything happens client-side; the post is never sent anywhere

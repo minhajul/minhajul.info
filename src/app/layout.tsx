@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import type {Metadata} from "next";
 import type {ReactNode} from "react";
 import {profile} from "@/data/profile";
+import {siteOpenGraph, siteTwitter} from "@/lib/metadata";
 
 const geistSans = Geist({
     subsets: ["latin"],
@@ -29,17 +30,14 @@ export const metadata: Metadata = {
     },
     description: "Full-stack software engineer with advanced knowledge in DevOps. Building scalable applications with PHP, Python, Go, React, Next.js.",
     twitter: {
-        card: "summary_large_image",
+        ...siteTwitter,
         title: `${profile.name} — ${profile.role}`,
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
-        site: "@minhaj_cse",
     },
     openGraph: {
+        ...siteOpenGraph,
         title: `${profile.name} — ${profile.role}`,
-        siteName: profile.name,
         description: "Full-stack software engineer with advanced knowledge in DevOps.",
-        type: "website",
-        locale: "en_US",
     },
 };
 

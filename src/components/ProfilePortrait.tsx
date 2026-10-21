@@ -21,7 +21,7 @@ export default function ProfilePortrait() {
                     className="absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.05)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
                 />
                 <Image
-                    src="/profile-pic.png"
+                    src={profile.photo}
                     alt={profile.name}
                     width={500}
                     height={500}
