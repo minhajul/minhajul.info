@@ -4,6 +4,9 @@ const nextConfig = {
         browserToTerminal: true
     },
     reactCompiler: true,
+    experimental: {
+        agentUpgrade: 'security',
+    },
     images: {
         minimumCacheTTL: 86400,
     },
