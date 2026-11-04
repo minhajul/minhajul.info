@@ -10,7 +10,7 @@ import type {Metadata} from "next";
 
 export const metadata: Metadata = {
     title: "Contact",
-    description: "Get in touch about freelance, remote, or visa-sponsored software engineering and DevOps roles.",
+    description: "Get in touch about remote, hybrid, or onsite software engineering and DevOps roles.",
 }
 
 export default function Contact() {
@@ -25,8 +25,9 @@ export default function Contact() {
                 <AvailabilityBadge/>
 
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-foreground/90 text-pretty">
-                    I&apos;m looking for freelance or remote opportunities in software engineering, full-stack
-                    development, and DevOps — and I&apos;m open to full-time roles that offer visa sponsorship.
+                    I&apos;m open to remote, hybrid, and onsite roles in software engineering, full-stack
+                    development, and DevOps. For onsite roles abroad, I&apos;m happy to relocate with visa
+                    sponsorship, and I also take on freelance projects.
                 </p>
                 <p className="mt-4 max-w-2xl leading-7 text-muted text-pretty">
                     If you have an opportunity or want to discuss how my experience could support your team,
