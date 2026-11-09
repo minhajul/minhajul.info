@@ -49,13 +49,17 @@ export default function TimezoneOverlapChart({people, offsets, result, now}: Tim
                                 {result.rows[i].map(interval => (
                                     <div
                                         key={interval.start}
-                                        className="absolute inset-y-1 rounded-sm bg-accent/40"
+                                        className="absolute inset-y-1 rounded-sm bg-linear-to-b from-accent/55 to-accent/35"
                                         style={span(interval)}
                                     />
                                 ))}
+                                {/* Drawn per track, so the marker never crosses the row labels */}
+                                {showNow && (
+                                    <div className="absolute inset-y-0 w-0.5 -translate-x-1/2 rounded-full bg-foreground/80" style={{left: `${percent(now)}%`}}/>
+                                )}
                             </div>
                             {/* This zone's local time at the same points on the axis */}
-                            <div className="relative mt-1 h-4 font-mono text-[10px] text-subtle">
+                            <div className="relative mt-1 h-4 font-mono text-xs text-subtle">
                                 {LABEL_HOURS.map(hour => (
                                     <span
                                         key={hour}
@@ -79,15 +83,12 @@ export default function TimezoneOverlapChart({people, offsets, result, now}: Tim
                             style={span(band)}
                         />
                     ))}
-                    {showNow && (
-                        <div className="absolute inset-y-0 w-px bg-foreground/60" style={{left: `${percent(now)}%`}}/>
-                    )}
                 </div>
             </div>
 
             <figcaption className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-subtle">
                 <span className="inline-flex items-center gap-1.5">
-                    <span aria-hidden="true" className="h-2.5 w-4 rounded-sm bg-accent/40"/>
+                    <span aria-hidden="true" className="h-2.5 w-4 rounded-sm bg-accent/45"/>
                     Working hours
                 </span>
                 <span className="inline-flex items-center gap-1.5">
@@ -96,7 +97,7 @@ export default function TimezoneOverlapChart({people, offsets, result, now}: Tim
                 </span>
                 {showNow && (
                     <span className="inline-flex items-center gap-1.5">
-                        <span aria-hidden="true" className="h-2.5 w-px bg-foreground/60"/>
+                        <span aria-hidden="true" className="h-2.5 w-0.5 rounded-full bg-foreground/80"/>
                         Now
                     </span>
                 )}

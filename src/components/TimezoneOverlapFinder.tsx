@@ -106,10 +106,10 @@ function OverlapFinder() {
     return (
         <div className="space-y-6">
             <div className={`${panel} p-5 sm:p-6`}>
-                <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+                <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
                     <h2 className="font-semibold text-foreground">Time zones & working hours</h2>
-                    <div>
-                        <label htmlFor={dateId} className={fieldLabel}>Date</label>
+                    <div className="flex items-center gap-3">
+                        <label htmlFor={dateId} className="text-xs font-medium text-subtle">Date</label>
                         <input
                             id={dateId}
                             type="date"

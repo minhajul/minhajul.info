@@ -31,7 +31,14 @@ const getCurrentMinute = () => Math.floor(Date.now() / 60_000);
 const getServerMinute = () => null;
 
 const dateFormat = new Intl.DateTimeFormat(undefined, {weekday: "short", month: "short", day: "numeric", year: "numeric"});
-const timeFormat = new Intl.DateTimeFormat(undefined, {hour: "numeric", minute: "2-digit"});
+const timeFormat = new Intl.DateTimeFormat(undefined, {hour: "2-digit", minute: "2-digit"});
+
+// Many locales ignore hour: "2-digit", so pad the hour ourselves to keep "09:00" aligned with "10:00"
+function formatTime(date: Date) {
+    return timeFormat.formatToParts(date)
+        .map(part => part.type === "hour" ? part.value.padStart(2, "0") : part.value)
+        .join("");
+}
 
 function timeZoneLabel(at: Date) {
     const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -182,7 +189,7 @@ export default function CronExplainer() {
                                     <li key={run.getTime()} className="flex items-baseline justify-between gap-4 py-2.5">
                                         <span className="text-sm text-muted">{dateFormat.format(run)}</span>
                                         <time dateTime={run.toISOString()} className="font-mono text-foreground">
-                                            {timeFormat.format(run)}
+                                            {formatTime(run)}
                                         </time>
                                     </li>
                                 ))
