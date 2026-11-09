@@ -16,7 +16,14 @@ export const cronExplainer: Tool = {
     "description": "Turn a cron expression into plain English and see its next run times in your timezone."
 };
 
+export const jwtDecoder: Tool = {
+    "title": "JWT Decoder",
+    "url": "/tools/jwt-decoder",
+    "description": "Decode a JSON Web Token's header and payload and check when it expires. Your token never leaves the browser."
+};
+
 export const tools: Tool[] = [
     linkedInPostFormatter,
     cronExplainer,
+    jwtDecoder,
 ];
