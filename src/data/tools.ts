@@ -22,8 +22,15 @@ export const jwtDecoder: Tool = {
     "description": "Decode a JSON Web Token's header and payload and check when it expires. Your token never leaves the browser."
 };
 
+export const timezoneOverlap: Tool = {
+    "title": "Time Zone Overlap Finder",
+    "url": "/tools/timezone-overlap",
+    "description": "Compare working hours across time zones and find the hours you share, for planning remote work and meetings."
+};
+
 export const tools: Tool[] = [
     linkedInPostFormatter,
     cronExplainer,
     jwtDecoder,
+    timezoneOverlap,
 ];
