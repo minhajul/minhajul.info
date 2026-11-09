@@ -1,3 +1,5 @@
+const isProduction = process.env.NODE_ENV === 'production';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     logging: {
@@ -6,6 +8,7 @@ const nextConfig = {
     reactCompiler: true,
     experimental: {
         agentUpgrade: 'security',
+        turbopackFileSystemCacheForDev: false,
     },
     images: {
         minimumCacheTTL: 86400,
@@ -23,10 +26,10 @@ const nextConfig = {
                         key: 'X-Content-Type-Options',
                         value: 'nosniff',
                     },
-                    {
+                    ...(isProduction ? [{
                         key: 'Cache-Control',
                         value: 'public, max-age=86400, stale-while-revalidate=604800',
-                    },
+                    }] : []),
                     // Security headers
                     {
                         key: 'Referrer-Policy',
