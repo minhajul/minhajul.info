@@ -146,8 +146,13 @@ export default function JwtDecoder() {
                         <Signature jwt={jwt}/>
                     </>
                 ) : (
-                    <div className={`${panel} flex min-h-48 items-center justify-center border-dashed p-6 text-center text-sm text-subtle`}>
-                        Paste a token, or try the sample, to see its header, payload and signature here.
+                    <div className={`${panel} flex min-h-48 flex-col items-center justify-center gap-4 border-dashed p-6 text-center text-sm text-subtle lg:h-full`}>
+                        <div aria-hidden="true" className="flex gap-1.5">
+                            {(["header", "payload", "signature"] as const).map((segment) => (
+                                <span key={segment} className={`h-1.5 w-8 rounded-full opacity-60 ${SEGMENTS[segment].dot}`}/>
+                            ))}
+                        </div>
+                        <p className="max-w-xs text-pretty">Paste a token, or try the sample, to see its header, payload and signature here.</p>
                     </div>
                 )}
             </div>
