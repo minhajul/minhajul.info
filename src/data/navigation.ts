@@ -9,3 +9,8 @@ export const navigation: NavItem[] = [
     {name: 'Projects', href: '/projects'},
     {name: 'Contact', href: '/contact'},
 ];
+
+/** Secondary links shown in the footer, kept out of the main header nav. */
+export const footerNavigation: NavItem[] = [
+    {name: 'Tools', href: '/tools'},
+];
