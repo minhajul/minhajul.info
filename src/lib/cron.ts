@@ -63,17 +63,16 @@ export function parseCron(input: string): ParseResult {
     if (!text) return {ok: false, error: "Enter a cron expression, e.g. */15 * * * *"};
 
     if (text.startsWith("@")) {
-        const macro = text.toLowerCase();
+        const [name, ...rest] = text.split(/\s+/);
+        const macro = name.toLowerCase();
         if (macro === "@reboot") return {ok: false, error: "@reboot runs once at startup, so it has no schedule to explain."};
-        if (!MACROS[macro]) return {ok: false, error: `Unknown macro ${text}. Try @yearly, @monthly, @weekly, @daily or @hourly.`};
+        if (!MACROS[macro]) return {ok: false, error: `Unknown macro ${name}. Try @yearly, @monthly, @weekly, @daily or @hourly.`};
+        if (rest.length) return {ok: false, error: `Leave out the command after ${name}.`};
         text = MACROS[macro];
     }
 
     const raws = text.split(/\s+/);
-    if (raws.length !== 5) {
-        const hint = raws.length > 5 ? "Standard cron has no seconds or year field." : "Add the missing fields, or use * for any.";
-        return {ok: false, error: `Expected 5 fields, got ${raws.length}. ${hint}`};
-    }
+    if (raws.length !== 5) return {ok: false, error: `Expected 5 fields, got ${raws.length}. ${fieldCountHint(raws)}`};
 
     try {
         const fields = FIELD_SPECS.map((spec, i) => parseField(spec, raws[i]));
@@ -85,7 +84,21 @@ export function parseCron(input: string): ParseResult {
     }
 }
 
-const PART_PATTERN = /^(\*|[a-z0-9]+(?:-[a-z0-9]+)?)(?:\/([^/]*))?$/i;
+function fieldCountHint(raws: string[]) {
+    if (raws.length < 5) return "Add the missing fields, or use * for any.";
+    // A line copied from a crontab has the command (and in /etc/crontab, a user) after the schedule
+    if (!looksLikeField(raws[5])) return "Leave out the command after the five schedule fields.";
+    return "Standard cron has no seconds or year field.";
+}
+
+const NAMES = new RegExp([...MONTHS, ...WEEKDAYS].map(abbreviate).join("|"), "gi");
+
+/** Could this be a schedule field (Quartz's ?, L, W and # included), rather than a command? */
+function looksLikeField(text: string) {
+    return /^[\d*?,\-/#LW]+$/i.test(text.replace(NAMES, "0"));
+}
+
+const PART_PATTERN =/^(\*|[a-z0-9]+(?:-[a-z0-9]+)?)(?:\/([^/]*))?$/i;
 
 function parseField(spec: FieldSpec, raw: string): CronField {
     const parts = raw.split(",").map(text => parsePart(spec, text));
@@ -108,6 +121,9 @@ function parsePart(spec: FieldSpec, text: string): Part {
     if (stepText !== undefined) {
         step = /^\d+$/.test(stepText) ? Number(stepText) : NaN;
         if (!(step >= 1)) throw new CronError(`${spec.label} step must be a whole number of at least 1, got "${stepText}".`);
+        // */100 in minutes only ever matches minute 0, so it would run hourly while reading as "every 100 minutes"
+        const size = spec.key === "dayOfWeek" ? 7 : spec.max - spec.min + 1;
+        if (step > size) throw new CronError(`${spec.label} step can be at most ${size}, got ${step}.`);
     }
 
     if (base === "*") return {kind: "all", step};
@@ -120,8 +136,21 @@ function parsePart(spec: FieldSpec, text: string): Part {
     }
 
     const end = parseValue(spec, endText);
-    if (start > end) throw new CronError(`${spec.label} range ${base} goes backwards; write it as ${endText}-${startText}.`);
+    if (start > end) {
+        // Swapping the ends would change the schedule (22-2 is the night, 2-22 the day), so split it instead
+        const fix = stepText === undefined ? `write ${wrapAround(spec, start, end)}` : "split it into two ranges";
+        throw new CronError(`${spec.label} range ${base} goes backwards. Ranges can't wrap around, so ${fix}.`);
+    }
     return {kind: "range", start, end, step};
+}
+
+/** A backwards range as two forward ones: hours 22-2 become 22-23,0-2. */
+function wrapAround(spec: FieldSpec, start: number, end: number) {
+    const span = (from: number, to: number) => (from === to ? `${from}` : `${from}-${to}`);
+    if (spec.key !== "dayOfWeek") return `${span(start, spec.max)},${span(spec.min, end)}`;
+    // 7 is Sunday too, so weeks wrap through it: SAT-SUN is 6-7 and FRI-TUE is 5-7,1-2
+    if (start === 7) return span(0, end);
+    return end === 0 ? span(start, 7) : `${span(start, 7)},${span(1, end)}`;
 }
 
 function parseValue(spec: FieldSpec, text: string): number {
@@ -193,7 +222,8 @@ function partPhrase(spec: FieldSpec, part: Part): string {
 
     if (part.kind === "value") return `${the}${fmt(part.value)}`;
     const every = part.step === 1 ? `every ${spec.unit}` : `every ${ordinal(part.step)} ${spec.unit}`;
-    if (part.kind === "all") return every;
+    // Days 0-7 go from Sunday round to Sunday again, which is every day, not "Sunday through Sunday"
+    if (part.kind === "all" || (spec.key === "dayOfWeek" && part.start === 0 && part.end === 7)) return every;
 
     const span = `${the}${fmt(part.start)} through ${fmt(part.end)}`;
     // Numbers need the unit to make sense: "every hour from 9 through 17"
@@ -252,13 +282,64 @@ export function describeCron(cron: Cron): string {
     return `${sentence}.`;
 }
 
-// ---- Scheduling ----
+/**
+ * Classic cron counts any day field starting with `*` as unrestricted, `*\/2` included. Kubernetes
+ * CronJobs (robfig/cron, like most Go schedulers) only count a plain `*`, so for some expressions they
+ * combine the two day fields the other way. Returns how they read it then, or null when both agree.
+ */
+export function kubernetesDayRule(cron: Cron): "both" | "either" | null {
+    const classic = cron.dayOfMonth.star || cron.dayOfWeek.star;
+    const kubernetes = [cron.dayOfMonth, cron.dayOfWeek].some(field => field.parts.some(isEvery));
+    if (classic === kubernetes) return null;
+    return kubernetes ? "both" : "either";
+}
 
-export function dayMatches(cron: Cron, date: Date) {
-    const dom = cron.dayOfMonth.values.has(date.getDate());
-    const dow = cron.dayOfWeek.values.has(date.getDay());
+// ---- Scheduling ----
+//
+// Matching runs on wall-clock time, held in a Date's UTC fields so DST can't move it. Each match is
+// then mapped to the real moments the local clock shows it. Around DST this follows classic cron
+// (Vixie, cronie): a fixed-time job whose time is skipped runs once, right after the jump, and in a
+// repeated hour only jobs with * in the minute or hour run a second time.
+
+const MINUTE_MS = 60_000;
+const DAY_MS = 24 * 60 * MINUTE_MS;
+// DST moves clocks by at most a few hours, which bounds how far wall-clock and real order can disagree
+const MAX_SHIFT_MS = 3 * 60 * MINUTE_MS;
+
+function dayMatches(cron: Cron, wall: Date) {
+    const dom = cron.dayOfMonth.values.has(wall.getUTCDate());
+    const dow = cron.dayOfWeek.values.has(wall.getUTCDay());
     // Classic cron: if either field starts with `*` both must match, otherwise either one is enough
     return cron.dayOfMonth.star || cron.dayOfWeek.star ? dom && dow : dom || dow;
+}
+
+/** The local wall-clock minute at an instant, as a UTC timestamp. */
+function wallAt(instant: number) {
+    const d = new Date(instant);
+    return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes());
+}
+
+const offsetAt = (instant: number) => -new Date(instant).getTimezoneOffset() * MINUTE_MS;
+
+/** The real instants showing a wall-clock minute: usually one, two in a repeated hour, none in a skipped one. */
+function instantsAt(wall: number) {
+    // A day either side is past any switch-over near this time, so these are the offsets in play
+    const offsets = new Set([offsetAt(wall - DAY_MS), offsetAt(wall + DAY_MS)]);
+    return [...offsets].map(offset => wall - offset).filter(instant => wallAt(instant) === wall).sort((a, b) => a - b);
+}
+
+/** The moment of the forward jump that skipped a wall-clock minute. */
+function jumpPast(wall: number) {
+    const after = offsetAt(wall + DAY_MS);
+    // Read with the new offset the skipped time lands before the jump, and with the old one after it
+    let before = wall - after;
+    let past = wall - offsetAt(wall - DAY_MS);
+    while (past - before > MINUTE_MS) {
+        const mid = before + Math.floor((past - before) / 2 / MINUTE_MS) * MINUTE_MS;
+        if (offsetAt(mid) === after) past = mid;
+        else before = mid;
+    }
+    return past;
 }
 
 /** Search window for the next runs. Long enough for leap days, short enough to stop on impossible dates like Feb 30. */
@@ -266,22 +347,37 @@ export const SEARCH_YEARS = 28;
 
 /** The next `count` run times strictly after `from`, in the runtime's local time zone. */
 export function nextRuns(cron: Cron, from: Date, count: number): Date[] {
-    const runs: Date[] = [];
-    const limit = new Date(from.getFullYear() + SEARCH_YEARS, 0, 1).getTime();
-    let d = new Date(from.getFullYear(), from.getMonth(), from.getDate(), from.getHours(), from.getMinutes() + 1);
+    const fixedTime = !cron.minute.star && !cron.hour.star;
+    const runsAt = (wall: number) => {
+        const instants = instantsAt(wall);
+        if (!instants.length) return fixedTime ? [jumpPast(wall)] : [];
+        return fixedTime ? instants.slice(0, 1) : instants;
+    };
+
+    const runs = new Set<number>();
+    let stop = Date.UTC(from.getFullYear() + SEARCH_YEARS, 0, 1);
+    // Start early: after `from` in a repeated hour, the next run can show an earlier clock time
+    let d = new Date(wallAt(from.getTime()) - MAX_SHIFT_MS);
 
     // Each step jumps to the start of the next month, day, hour or minute, so time always moves forward
-    while (runs.length < count && d.getTime() < limit) {
-        if (!cron.month.values.has(d.getMonth() + 1)) {
-            d = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    while (d.getTime() < stop) {
+        if (!cron.month.values.has(d.getUTCMonth() + 1)) {
+            d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1));
         } else if (!dayMatches(cron, d)) {
-            d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
-        } else if (!cron.hour.values.has(d.getHours())) {
-            d = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1);
+            d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1));
+        } else if (!cron.hour.values.has(d.getUTCHours())) {
+            d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours() + 1));
         } else {
-            if (cron.minute.values.has(d.getMinutes()) && d > from) runs.push(d);
-            d = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes() + 1);
+            if (cron.minute.values.has(d.getUTCMinutes())) {
+                for (const instant of runsAt(d.getTime())) if (instant > from.getTime()) runs.add(instant);
+                if (runs.size >= count) {
+                    // A later clock time can still be an earlier moment, so look a little past the last run needed
+                    const last = [...runs].sort((a, b) => a - b)[count - 1];
+                    stop = Math.min(stop, wallAt(last) + MAX_SHIFT_MS + MINUTE_MS);
+                }
+            }
+            d = new Date(d.getTime() + MINUTE_MS);
         }
     }
-    return runs;
+    return [...runs].sort((a, b) => a - b).slice(0, count).map(instant => new Date(instant));
 }

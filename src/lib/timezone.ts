@@ -17,8 +17,6 @@ export type NearMiss = {
     person: number;
     /** Positive means start later, negative means start earlier. */
     shiftMinutes: number;
-    /** Distance between their hours and everyone else's shared hours. */
-    gapMinutes: number;
     /** The overlap the shift would create (up to an hour). */
     overlapMinutes: number;
 };
@@ -35,6 +33,8 @@ export type OverlapResult = {
     totalMinutes: number;
     /** Best suggestions when there is no overlap, smallest shift first (one per person who could fix it). */
     nearMisses: NearMiss[];
+    /** When there is no overlap, the shortest distance between anyone's hours and everyone else's shared hours. */
+    gapMinutes: number | null;
 };
 
 const formatters = new Map<string, Intl.DateTimeFormat>();
@@ -120,21 +120,39 @@ export function addDays(date: string, days: number) {
     return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
 }
 
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+// Date.UTC reads years 0–99 as 1900–1999, so keep well clear of them
+export const MIN_DATE = "1900-01-01";
+export const MAX_DATE = "2199-12-31";
+
+/** A real "YYYY-MM-DD" calendar date the math here can handle: no Feb 30th, no 5-digit years. */
+export function isValidDate(date: string) {
+    // Rolling Feb 30th through Date.UTC gives Mar 2nd, so a real date is one that survives the round trip
+    return DATE_PATTERN.test(date) && date >= MIN_DATE && date <= MAX_DATE && addDays(date, 0) === date;
+}
+
 /** The local date ("YYYY-MM-DD") of an instant in a zone. */
 export function localDate(timeZone: string, instant: number) {
     const p = partsIn(timeZone, instant);
     return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
 }
 
+const DAY = MINUTES_PER_DAY * MINUTE;
+
 /**
  * The UTC instant of a wall-clock time in a zone. `minutes` past 1440 roll into the next day.
- * Times skipped by a DST jump resolve to the instant just after the jump.
+ * A time skipped by a DST jump moves forward by the jump (02:30 becomes 03:30), and a
+ * repeated time picks its first occurrence, the same as JavaScript's Date does.
  */
 export function zonedToUtc(timeZone: string, date: string, minutes: number) {
     const [y, m, d] = date.split("-").map(Number);
     const wall = Date.UTC(y, m - 1, d) + minutes * MINUTE;
-    const guess = wall - offsetMinutes(timeZone, wall) * MINUTE;
-    return wall - offsetMinutes(timeZone, guess) * MINUTE;
+    // A day either side is past any switch-over near this time, so these are the offsets in play
+    const before = offsetMinutes(timeZone, wall - DAY) * MINUTE;
+    const after = offsetMinutes(timeZone, wall + DAY) * MINUTE;
+    const matches = [wall - before, wall - after].filter(instant => instant + offsetMinutes(timeZone, instant) * MINUTE === wall);
+    // No match means the time was skipped. Read with the earlier offset it lands just past the jump.
+    return matches.length ? Math.min(...matches) : wall - before;
 }
 
 export function shiftLength({start, end}: WorkHours) {
@@ -177,10 +195,11 @@ const length = (i: Interval) => (i.end - i.start) / MINUTE;
 const AROUND = [-2, -1, 0, 1, 2];
 const NEAR_MISS_TARGET = 60;
 
-function nearMisses(sets: Interval[][]): NearMiss[] {
-    const best: NearMiss[] = [];
+function nearMisses(sets: Interval[][]): { suggestions: NearMiss[]; gapMinutes: number | null } {
+    const suggestions: NearMiss[] = [];
+    let closest: number | null = null;
+    if (sets.length < 2) return {suggestions, gapMinutes: null};
     sets.forEach((own, person) => {
-        if (sets.length < 2) return;
         const others = intersectAll(sets.filter((_, i) => i !== person));
         let pick: NearMiss | undefined;
         for (const a of own) {
@@ -191,13 +210,16 @@ function nearMisses(sets: Interval[][]): NearMiss[] {
                 if (a.end <= t.start) [gap, direction] = [(t.start - a.end) / MINUTE, 1];
                 else if (a.start >= t.end) [gap, direction] = [(a.start - t.end) / MINUTE, -1];
                 else continue;
-                const candidate = {person, shiftMinutes: direction * (gap + overlap), gapMinutes: gap, overlapMinutes: overlap};
+                // Tracked apart from the pick: a short window can win on shift while sitting further away
+                closest = closest === null ? gap : Math.min(closest, gap);
+                const candidate = {person, shiftMinutes: direction * (gap + overlap), overlapMinutes: overlap};
                 if (!pick || Math.abs(candidate.shiftMinutes) < Math.abs(pick.shiftMinutes)) pick = candidate;
             }
         }
-        if (pick) best.push(pick);
+        if (pick) suggestions.push(pick);
     });
-    return best.sort((p, q) => Math.abs(p.shiftMinutes) - Math.abs(q.shiftMinutes));
+    suggestions.sort((p, q) => Math.abs(p.shiftMinutes) - Math.abs(q.shiftMinutes));
+    return {suggestions, gapMinutes: closest};
 }
 
 /** Compare everyone's working hours on `date` ("YYYY-MM-DD"), laid out on the first person's day. */
@@ -213,13 +235,16 @@ export function findOverlap(people: Person[], date: string): OverlapResult {
     const windows = startingToday.length ? startingToday : shared.filter(w => w.end > axis.start && w.start < axis.end);
     const totalMinutes = windows.reduce((sum, w) => sum + length(w), 0);
 
+    const misses = windows.length ? {suggestions: [], gapMinutes: null} : nearMisses(sets);
+
     return {
         axis,
         rows: sets.map(set => clip(set, axis)),
         bands: clip(shared, axis),
         windows,
         totalMinutes,
-        nearMisses: windows.length ? [] : nearMisses(sets),
+        nearMisses: misses.suggestions,
+        gapMinutes: misses.gapMinutes,
     };
 }
 
@@ -260,7 +285,6 @@ export function formatDuration(minutes: number) {
 
 // --- Shareable URL state ------------------------------------------------------
 
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const HOURS_PATTERN = /^(\d{2})(\d{2})-(\d{2})(\d{2})$/;
 
 const toParam = (minutes: number) => formatClock(minutes).replace(":", "");
@@ -295,5 +319,5 @@ export function fromQuery(search: string, maxPeople: number) {
         .filter((p): p is Person => p.timeZone !== null)
         .slice(0, maxPeople);
     const date = params.get("date");
-    return {people, date: date && DATE_PATTERN.test(date) && !isNaN(Date.parse(date)) ? date : null};
+    return {people, date: date && isValidDate(date) ? date : null};
 }

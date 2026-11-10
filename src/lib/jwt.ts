@@ -6,6 +6,10 @@ export type JsonObject = Record<string, unknown>;
 export type DecodedJwt = {
     header: JsonObject;
     payload: JsonObject;
+    /** Header and payload JSON exactly as written in the token, indented for reading. */
+    json: { header: string; payload: string };
+    /** The payload's top-level numbers as written. JSON.parse rounds integers past 2^53, like 64-bit IDs. */
+    payloadNumbers: ReadonlyMap<string, string>;
     /** The raw, still-encoded signature segment. */
     signature: string;
     /** The three encoded segments, for colour-coding the token. */
@@ -14,7 +18,7 @@ export type DecodedJwt = {
 
 export type DecodeResult = { ok: true; jwt: DecodedJwt } | { ok: false; error: string };
 
-export type TokenStatus = "valid" | "expired" | "not-yet-valid";
+export type TokenStatus = "valid" | "expired" | "not-yet-valid" | "invalid-time";
 
 /** The registered claims from RFC 7519, in the order they're usually read. */
 export const STANDARD_CLAIMS = [
@@ -46,7 +50,7 @@ function base64UrlToBytes(segment: string): Uint8Array | null {
     return Uint8Array.from(binary, (char) => char.charCodeAt(0));
 }
 
-function decodeJsonSegment(segment: string, name: "header" | "payload"): JsonObject | string {
+function decodeJsonSegment(segment: string, name: "header" | "payload"): { value: JsonObject; text: string } | string {
     const label = `The ${name}`;
     if (!segment) return `${label} is empty.`;
 
@@ -71,7 +75,61 @@ function decodeJsonSegment(segment: string, name: "header" | "payload"): JsonObj
         const kind = Array.isArray(value) ? "an array" : value === null ? "null" : `a ${typeof value}`;
         return `${label} must be a JSON object, but it's ${kind}.`;
     }
-    return value as JsonObject;
+    return {value: value as JsonObject, text};
+}
+
+// A string, a punctuation mark, or a run of anything else (a number, true, false or null).
+// Only ever run on text JSON.parse has already accepted.
+const JSON_TOKEN = /"(?:[^"\\]|\\.)*"|[{}[\],:]|[^\s{}[\],:"]+/g;
+
+/**
+ * Indent JSON the way JSON.stringify(value, null, 2) does, but working on the text itself, so
+ * numbers past 2^53, duplicate keys and key order all show exactly as they are in the token.
+ */
+export function formatJson(text: string): string {
+    const tokens = text.match(JSON_TOKEN) ?? [];
+    let depth = 0;
+    let out = "";
+    const newline = () => "\n" + "  ".repeat(depth);
+    for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+        if (token === "{" || token === "[") {
+            // Empty objects and arrays stay on one line, as JSON.stringify prints them
+            if (tokens[i + 1] === (token === "{" ? "}" : "]")) {
+                out += token + tokens[++i];
+            } else {
+                depth++;
+                out += token + newline();
+            }
+        } else if (token === "}" || token === "]") {
+            depth--;
+            out += newline() + token;
+        } else if (token === ",") {
+            out += "," + newline();
+        } else {
+            out += token === ":" ? ": " : token;
+        }
+    }
+    return out;
+}
+
+function topLevelNumbers(text: string): Map<string, string> {
+    const tokens = text.match(JSON_TOKEN) ?? [];
+    const numbers = new Map<string, string>();
+    let depth = 0;
+    for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+        if (token === "{" || token === "[") depth++;
+        else if (token === "}" || token === "]") depth--;
+        else if (depth === 1 && tokens[i + 1] === ":") {
+            // A repeated key keeps its last value, as in JSON.parse
+            const key = JSON.parse(token) as string;
+            const value = tokens[i + 2];
+            if (/^-?\d/.test(value)) numbers.set(key, value);
+            else numbers.delete(key);
+        }
+    }
+    return numbers;
 }
 
 /** Decode a token's header and payload. Returns null for empty input. */
@@ -99,12 +157,25 @@ export function decodeJwt(input: string): DecodeResult | null {
         return {ok: false, error: "The signature isn't valid base64url. It may have been cut short."};
     }
 
-    return {ok: true, jwt: {header, payload, signature: parts[2], parts: parts as [string, string, string]}};
+    return {
+        ok: true,
+        jwt: {
+            header: header.value,
+            payload: payload.value,
+            json: {header: formatJson(header.text), payload: formatJson(payload.text)},
+            payloadNumbers: topLevelNumbers(payload.text),
+            signature: parts[2],
+            parts: parts as [string, string, string],
+        },
+    };
 }
 
 /** Time-based validity from exp and nbf. Says nothing about the signature. */
 export function tokenStatus(payload: JsonObject, nowSeconds: number): TokenStatus {
     const {exp, nbf} = payload;
+    // RFC 7519 times must be numbers, so a server rejects a token whose exp or nbf is a string or null
+    const isTime = (value: unknown) => typeof value === "number" && Number.isFinite(value);
+    if (("exp" in payload && !isTime(exp)) || ("nbf" in payload && !isTime(nbf))) return "invalid-time";
     if (typeof exp === "number" && nowSeconds >= exp) return "expired";
     if (typeof nbf === "number" && nowSeconds < nbf) return "not-yet-valid";
     return "valid";

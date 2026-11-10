@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useId, useState, useSyncExternalStore} from "react";
+import {useSearchParams} from "next/navigation";
 import {CheckIcon, LinkIcon, PlusIcon, XMarkIcon} from "@heroicons/react/20/solid";
 import TimezonePicker, {type ZoneOption} from "@/components/TimezonePicker";
 import TimezoneOverlapChart from "@/components/TimezoneOverlapChart";
@@ -16,8 +17,11 @@ import {
     formatOffset,
     formatTimeIn,
     fromQuery,
+    isValidDate,
     listTimeZones,
     localDate,
+    MAX_DATE,
+    MIN_DATE,
     offsetMinutes,
     type OverlapResult,
     type Person,
@@ -29,7 +33,8 @@ const MIN_ROWS = 2;
 const MAX_ROWS = 5;
 // Offered in this order when adding a row, skipping zones already on the list
 const SUGGESTED_ZONES = ["America/New_York", "Europe/London", "Asia/Dhaka", "America/Los_Angeles", "Europe/Berlin", "Asia/Singapore", "Australia/Sydney", "UTC"];
-const HALF_HOURS = Array.from({length: 48}, (_, i) => i * 30);
+// Quarter hours, because some zones sit 45 minutes off the hour (Kathmandu, Chatham) and suggestions follow them
+const QUARTER_HOURS = Array.from({length: 96}, (_, i) => i * 15);
 
 type Row = Person & { id: number };
 
@@ -39,9 +44,9 @@ const fieldLabel = "mb-1.5 block text-xs font-medium text-subtle";
 const nextZone = (taken: string[]) => SUGGESTED_ZONES.find(zone => !taken.includes(zone)) ?? "UTC";
 
 /** Read the shared link if there is one, otherwise start from the viewer's zone and New York (or London). */
-function initialState() {
+function initialState(search: string) {
     const browserZone = canonicalTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone) ?? "UTC";
-    const fromUrl = fromQuery(window.location.search, MAX_ROWS);
+    const fromUrl = fromQuery(search, MAX_ROWS);
     const people = fromUrl.people.length ? fromUrl.people : [{timeZone: browserZone, hours: DEFAULT_HOURS}];
     while (people.length < MIN_ROWS) {
         people.push({timeZone: nextZone(people.map(p => p.timeZone)), hours: DEFAULT_HOURS});
@@ -61,7 +66,9 @@ export default function TimezoneOverlapFinder() {
 }
 
 function OverlapFinder() {
-    const [{rows, date}, setState] = useState(initialState);
+    // Not window.location: after a client-side navigation it still holds the previous page's URL during render
+    const searchParams = useSearchParams();
+    const [{rows, date}, setState] = useState(() => initialState(searchParams.toString()));
     const [now] = useState(Date.now);
     const {copied, copy} = useCopyToClipboard();
     const dateId = useId();
@@ -110,11 +117,20 @@ function OverlapFinder() {
                     <h2 className="font-semibold text-foreground">Time zones & working hours</h2>
                     <div className="flex items-center gap-3">
                         <label htmlFor={dateId} className="text-xs font-medium text-subtle">Date</label>
+                        {/* Uncontrolled, so half-typed years (0002 on the way to 2027) stay in the field without being used */}
                         <input
                             id={dateId}
                             type="date"
-                            value={date}
-                            onChange={event => event.target.value && setState(s => ({...s, date: event.target.value}))}
+                            defaultValue={date}
+                            min={MIN_DATE}
+                            max={MAX_DATE}
+                            onChange={event => {
+                                const value = event.target.value;
+                                if (isValidDate(value)) setState(s => ({...s, date: value}));
+                            }}
+                            onBlur={event => {
+                                if (!isValidDate(event.target.value)) event.target.value = date;
+                            }}
                             className={`${field} font-mono`}
                         />
                     </div>
@@ -227,11 +243,13 @@ type HourSelectProps = {
 };
 
 function HourSelect({id, label, value, onChange}: HourSelectProps) {
+    // A shared link can hold any minute (09:10). List it too, or the select would show 00:00 instead.
+    const choices = QUARTER_HOURS.includes(value) ? QUARTER_HOURS : [...QUARTER_HOURS, value].sort((a, b) => a - b);
     return (
         <div className="min-w-0">
             <label htmlFor={id} className={`${fieldLabel} truncate`}>{label}</label>
             <select id={id} value={value} onChange={event => onChange(Number(event.target.value))} className={`${field} font-mono`}>
-                {HALF_HOURS.map(minutes => (
+                {choices.map(minutes => (
                     <option key={minutes} value={minutes}>{formatClock(minutes)}</option>
                 ))}
             </select>
@@ -288,9 +306,9 @@ function Summary({people, date, result}: SummaryProps) {
         <div aria-live="polite">
             <p className="text-2xl font-semibold tracking-tight text-foreground">No overlap on this day</p>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-muted text-pretty">
-                {best ? (
+                {best && result.gapMinutes !== null ? (
                     <>
-                        The closest working hours are <span className="text-foreground">{formatDuration(best.gapMinutes)}</span> apart.{" "}
+                        The closest working hours are <span className="text-foreground">{formatDuration(result.gapMinutes)}</span> apart.{" "}
                         {describe(best)}
                         {people.length === 2 && alternative ? `, or ${describe(alternative)}.` : "."}
                     </>

@@ -1,8 +1,8 @@
 "use client"
 
 import {useState, useSyncExternalStore} from "react";
-import {CheckIcon, ClipboardIcon, ExclamationCircleIcon} from "@heroicons/react/20/solid";
-import {describeCron, FIELD_SPECS, nextRuns, parseCron, SEARCH_YEARS} from "@/lib/cron";
+import {CheckIcon, ClipboardIcon, ExclamationCircleIcon, InformationCircleIcon} from "@heroicons/react/20/solid";
+import {describeCron, FIELD_SPECS, kubernetesDayRule, nextRuns, parseCron, SEARCH_YEARS} from "@/lib/cron";
 import {buttonPrimary, panel} from "@/lib/styles";
 import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
 
@@ -75,6 +75,7 @@ export default function CronExplainer() {
 
     const now = currentMinute === null ? null : new Date(currentMinute * 60_000);
     const runs = now && shown.ok ? nextRuns(shown.cron, now, RUN_COUNT) : [];
+    const kubernetesRule = shown.ok ? kubernetesDayRule(shown.cron) : null;
 
     return (
         <div className="space-y-6">
@@ -159,6 +160,15 @@ export default function CronExplainer() {
                         <p className="mt-3 text-xl font-medium text-foreground text-pretty sm:text-2xl">
                             {describeCron(shown.cron)}
                         </p>
+                        {kubernetesRule && (
+                            <p className="mt-3 flex gap-2 text-sm leading-6 text-muted text-pretty">
+                                <InformationCircleIcon aria-hidden="true" className="mt-1 size-4 shrink-0 text-amber-400"/>
+                                <span>
+                                    Kubernetes CronJobs read the day fields differently here and run on days
+                                    matching {kubernetesRule === "both" ? "both of them" : "either one"}. The next runs follow crontab.
+                                </span>
+                            </p>
+                        )}
                         <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-3">
                             {FIELD_SPECS.map(({key, label}) => (
                                 <div key={key} className="min-w-0 rounded-xl border border-line bg-background/40 p-3">

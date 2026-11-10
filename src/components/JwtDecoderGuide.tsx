@@ -34,7 +34,7 @@ const FAQS = [
     },
     {
         question: "What do Valid, Expired and Not yet valid mean?",
-        answer: "They compare the exp and nbf claims with your device's clock, and update live. A Valid token may still be rejected, for example if its signature or audience is wrong or it has been revoked.",
+        answer: "They compare the exp and nbf claims with your device's clock, and update live. A Valid token may still be rejected, for example if its signature or audience is wrong or it has been revoked. If exp or nbf isn't a number (a quoted \"1600000000\", say), the badge reads Invalid exp or nbf instead, because servers reject those tokens outright.",
     },
     {
         question: "Can it decode an encrypted token (JWE)?",
