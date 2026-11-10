@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useId, useState, useSyncExternalStore} from "react";
+import {useSearchParams} from "next/navigation";
 import {CheckIcon, LinkIcon, PlusIcon, XMarkIcon} from "@heroicons/react/20/solid";
 import TimezonePicker, {type ZoneOption} from "@/components/TimezonePicker";
 import TimezoneOverlapChart from "@/components/TimezoneOverlapChart";
@@ -42,9 +43,9 @@ const fieldLabel = "mb-1.5 block text-xs font-medium text-subtle";
 const nextZone = (taken: string[]) => SUGGESTED_ZONES.find(zone => !taken.includes(zone)) ?? "UTC";
 
 /** Read the shared link if there is one, otherwise start from the viewer's zone and New York (or London). */
-function initialState() {
+function initialState(search: string) {
     const browserZone = canonicalTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone) ?? "UTC";
-    const fromUrl = fromQuery(window.location.search, MAX_ROWS);
+    const fromUrl = fromQuery(search, MAX_ROWS);
     const people = fromUrl.people.length ? fromUrl.people : [{timeZone: browserZone, hours: DEFAULT_HOURS}];
     while (people.length < MIN_ROWS) {
         people.push({timeZone: nextZone(people.map(p => p.timeZone)), hours: DEFAULT_HOURS});
@@ -64,7 +65,9 @@ export default function TimezoneOverlapFinder() {
 }
 
 function OverlapFinder() {
-    const [{rows, date}, setState] = useState(initialState);
+    // Not window.location: after a client-side navigation it still holds the previous page's URL during render
+    const searchParams = useSearchParams();
+    const [{rows, date}, setState] = useState(() => initialState(searchParams.toString()));
     const [now] = useState(Date.now);
     const {copied, copy} = useCopyToClipboard();
     const dateId = useId();
