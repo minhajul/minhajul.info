@@ -1,4 +1,4 @@
-import {ChevronDownIcon} from "@heroicons/react/20/solid";
+import FaqSection, {type Faq} from "@/components/FaqSection";
 import SectionHeading from "@/components/SectionHeading";
 import {panel} from "@/lib/styles";
 import {LINKEDIN_CHARACTER_LIMIT} from "@/lib/TiptapTextFormatter";
@@ -18,7 +18,7 @@ const STEPS = [
     },
 ];
 
-const FAQS = [
+const FAQS: Faq[] = [
     {
         question: "How does the formatting work if LinkedIn doesn't support it?",
         answer: "LinkedIn posts are plain text, so the tool swaps your letters for look-alike Unicode characters, such as 𝗯𝗼𝗹𝗱 and 𝘪𝘵𝘢𝘭𝘪𝘤. They show up formatted anywhere that supports Unicode, including the LinkedIn apps.",
@@ -55,20 +55,7 @@ export default function LinkedInFormatterGuide() {
                 </ol>
             </section>
 
-            <section>
-                <SectionHeading eyebrow="FAQ" title="Good to know"/>
-                <div className={`${panel} divide-y divide-line`}>
-                    {FAQS.map((faq) => (
-                        <details key={faq.question} className="group px-5 py-4 sm:px-6">
-                            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-foreground [&::-webkit-details-marker]:hidden">
-                                {faq.question}
-                                <ChevronDownIcon aria-hidden="true" className="size-5 shrink-0 text-subtle transition-transform group-open:rotate-180"/>
-                            </summary>
-                            <p className="mt-3 max-w-3xl text-sm leading-6 text-muted text-pretty">{faq.answer}</p>
-                        </details>
-                    ))}
-                </div>
-            </section>
+            <FaqSection faqs={FAQS}/>
         </>
     );
 }

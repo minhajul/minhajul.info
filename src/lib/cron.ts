@@ -2,7 +2,7 @@
 
 export type FieldKey = "minute" | "hour" | "dayOfMonth" | "month" | "dayOfWeek";
 
-type FieldSpec = {
+export type FieldSpec = {
     key: FieldKey;
     label: string;
     min: number;
@@ -153,10 +153,16 @@ function wrapAround(spec: FieldSpec, start: number, end: number) {
     return end === 0 ? span(start, 7) : `${span(start, 7)},${span(1, end)}`;
 }
 
+/** The values a field accepts, e.g. "0–59" or "1–12 or JAN–DEC". */
+export function fieldValues(spec: FieldSpec) {
+    if (!spec.names) return `${spec.min}–${spec.max}`;
+    // Day 7 is Sunday again, so the names stop at SAT
+    const last = spec.names[spec.names.length - (spec.key === "dayOfWeek" ? 2 : 1)];
+    return `${spec.min}–${spec.max} or ${spec.names[0]}–${last}`;
+}
+
 function parseValue(spec: FieldSpec, text: string): number {
-    const range = spec.names
-        ? `${spec.min}–${spec.max} or ${spec.names[0]}–${spec.names[spec.names.length - (spec.key === "dayOfWeek" ? 2 : 1)]}`
-        : `${spec.min}–${spec.max}`;
+    const range = fieldValues(spec);
 
     let value: number;
     if (/^\d+$/.test(text)) {

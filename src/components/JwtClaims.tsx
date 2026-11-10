@@ -1,30 +1,8 @@
 "use client"
 
-import {useSyncExternalStore} from "react";
 import {formatRelativeTime, type JsonObject, STANDARD_CLAIMS, TIME_CLAIMS, tokenStatus, type TokenStatus} from "@/lib/jwt";
 import {panel} from "@/lib/styles";
-
-// A once-per-second clock. The server snapshot is null, so anything time-based
-// renders only on the client and can't cause a hydration mismatch.
-const currentSeconds = () => Math.floor(Date.now() / 1000);
-let now = currentSeconds();
-let subscribers = 0;
-
-function subscribe(onChange: () => void) {
-    subscribers++;
-    const id = setInterval(() => {
-        now = currentSeconds();
-        onChange();
-    }, 1000);
-    return () => {
-        subscribers--;
-        clearInterval(id);
-    };
-}
-
-// While nothing is ticking, read the real time so the first render isn't stale
-const getSnapshot = () => (subscribers === 0 ? (now = currentSeconds()) : now);
-const getServerSnapshot = () => null;
+import {useNow} from "@/lib/useNow";
 
 const STATUS: Record<TokenStatus, { label: string; className: string }> = {
     "valid": {label: "Valid", className: "border-success/30 bg-success/10 text-success"},
@@ -69,7 +47,9 @@ type JwtClaimsProps = {
 };
 
 export default function JwtClaims({payload, numbers}: JwtClaimsProps) {
-    const nowSeconds = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+    // Ticks every second so the status and relative times stay live. Null on the server, so they render in the browser only.
+    const now = useNow(1000);
+    const nowSeconds = now === null ? null : now / 1000;
     const claims = STANDARD_CLAIMS.filter(({key}) => key in payload);
     const status = nowSeconds === null ? null : STATUS[tokenStatus(payload, nowSeconds)];
 
