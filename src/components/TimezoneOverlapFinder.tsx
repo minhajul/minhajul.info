@@ -239,11 +239,13 @@ type HourSelectProps = {
 };
 
 function HourSelect({id, label, value, onChange}: HourSelectProps) {
+    // A shared link can hold any minute (09:10). List it too, or the select would show 00:00 instead.
+    const choices = HALF_HOURS.includes(value) ? HALF_HOURS : [...HALF_HOURS, value].sort((a, b) => a - b);
     return (
         <div className="min-w-0">
             <label htmlFor={id} className={`${fieldLabel} truncate`}>{label}</label>
             <select id={id} value={value} onChange={event => onChange(Number(event.target.value))} className={`${field} font-mono`}>
-                {HALF_HOURS.map(minutes => (
+                {choices.map(minutes => (
                     <option key={minutes} value={minutes}>{formatClock(minutes)}</option>
                 ))}
             </select>
