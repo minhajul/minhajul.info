@@ -63,17 +63,16 @@ export function parseCron(input: string): ParseResult {
     if (!text) return {ok: false, error: "Enter a cron expression, e.g. */15 * * * *"};
 
     if (text.startsWith("@")) {
-        const macro = text.toLowerCase();
+        const [name, ...rest] = text.split(/\s+/);
+        const macro = name.toLowerCase();
         if (macro === "@reboot") return {ok: false, error: "@reboot runs once at startup, so it has no schedule to explain."};
-        if (!MACROS[macro]) return {ok: false, error: `Unknown macro ${text}. Try @yearly, @monthly, @weekly, @daily or @hourly.`};
+        if (!MACROS[macro]) return {ok: false, error: `Unknown macro ${name}. Try @yearly, @monthly, @weekly, @daily or @hourly.`};
+        if (rest.length) return {ok: false, error: `Leave out the command after ${name}.`};
         text = MACROS[macro];
     }
 
     const raws = text.split(/\s+/);
-    if (raws.length !== 5) {
-        const hint = raws.length > 5 ? "Standard cron has no seconds or year field." : "Add the missing fields, or use * for any.";
-        return {ok: false, error: `Expected 5 fields, got ${raws.length}. ${hint}`};
-    }
+    if (raws.length !== 5) return {ok: false, error: `Expected 5 fields, got ${raws.length}. ${fieldCountHint(raws)}`};
 
     try {
         const fields = FIELD_SPECS.map((spec, i) => parseField(spec, raws[i]));
@@ -85,7 +84,21 @@ export function parseCron(input: string): ParseResult {
     }
 }
 
-const PART_PATTERN = /^(\*|[a-z0-9]+(?:-[a-z0-9]+)?)(?:\/([^/]*))?$/i;
+function fieldCountHint(raws: string[]) {
+    if (raws.length < 5) return "Add the missing fields, or use * for any.";
+    // A line copied from a crontab has the command (and in /etc/crontab, a user) after the schedule
+    if (!looksLikeField(raws[5])) return "Leave out the command after the five schedule fields.";
+    return "Standard cron has no seconds or year field.";
+}
+
+const NAMES = new RegExp([...MONTHS, ...WEEKDAYS].map(abbreviate).join("|"), "gi");
+
+/** Could this be a schedule field (Quartz's ?, L, W and # included), rather than a command? */
+function looksLikeField(text: string) {
+    return /^[\d*?,\-/#LW]+$/i.test(text.replace(NAMES, "0"));
+}
+
+const PART_PATTERN =/^(\*|[a-z0-9]+(?:-[a-z0-9]+)?)(?:\/([^/]*))?$/i;
 
 function parseField(spec: FieldSpec, raw: string): CronField {
     const parts = raw.split(",").map(text => parsePart(spec, text));
