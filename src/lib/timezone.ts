@@ -100,11 +100,13 @@ export function canonicalTimeZone(timeZone: string) {
     }
 }
 
+let zoneList: readonly string[] | undefined;
+
 /** All IANA zones the runtime knows under their current names, plus UTC (some engines leave it out). */
-export function listTimeZones(): string[] {
-    const zones = new Set(Intl.supportedValuesOf("timeZone").map(modernName));
-    zones.add("UTC");
-    return [...zones];
+export function listTimeZones(): readonly string[] {
+    // The list can't change while the page is open, so work it out once
+    zoneList ??= [...new Set([...Intl.supportedValuesOf("timeZone").map(modernName), "UTC"])];
+    return zoneList;
 }
 
 /** The zone's offset from UTC at an instant, in minutes (Dhaka is 360). */

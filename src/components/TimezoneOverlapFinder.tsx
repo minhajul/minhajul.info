@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useId, useState, useSyncExternalStore} from "react";
+import {useEffect, useId, useMemo, useState, useSyncExternalStore} from "react";
 import {useSearchParams} from "next/navigation";
 import {CheckIcon, LinkIcon, PlusIcon, XMarkIcon} from "@heroicons/react/20/solid";
 import TimezonePicker, {type ZoneOption} from "@/components/TimezonePicker";
@@ -44,6 +44,19 @@ const fieldLabel = "mb-1.5 block text-xs font-medium text-subtle";
 
 const nextZone = (taken: string[]) => SUGGESTED_ZONES.find(zone => !taken.includes(zone)) ?? "UTC";
 
+// Offsets depend on the date because of DST; noon UTC keeps clear of most switch-overs
+const noonOf = (date: string) => Date.parse(`${date}T12:00:00Z`);
+
+/** Every zone as a picker option, labelled and sorted by its offset at `instant`. */
+function zoneOptionsAt(instant: number, rowZones: string[]): ZoneOption[] {
+    // Include the rows' own zones, in case the browser reports an alias that isn't in the list
+    const zones = new Set([...listTimeZones(), ...rowZones]);
+    return [...zones]
+        .map(timeZone => ({timeZone, offset: offsetMinutes(timeZone, instant)}))
+        .sort((a, b) => a.offset - b.offset || a.timeZone.localeCompare(b.timeZone))
+        .map(({timeZone, offset}) => ({timeZone, label: `${cityName(timeZone)} (${formatOffset(offset)})`}));
+}
+
 /** Read the shared link if there is one, otherwise start from the viewer's zone and New York (or London). */
 function initialState(search: string) {
     const browserZone = canonicalTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone) ?? "UTC";
@@ -80,15 +93,10 @@ function OverlapFinder() {
         window.history.replaceState(null, "", `?${query}`);
     }, [query]);
 
-    // Offsets depend on the date because of DST; noon UTC keeps clear of most switch-overs
-    const noon = Date.parse(`${date}T12:00:00Z`);
-    const offsetLabel = (timeZone: string) => formatOffset(offsetMinutes(timeZone, noon));
-    // Include the rows' own zones, in case the browser reports an alias that isn't in the list
-    const zones = new Set([...listTimeZones(), ...rows.map(row => row.timeZone)]);
-    const zoneOptions: ZoneOption[] = [...zones]
-        .map(timeZone => ({timeZone, offset: offsetMinutes(timeZone, noon)}))
-        .sort((a, b) => a.offset - b.offset || a.timeZone.localeCompare(b.timeZone))
-        .map(({timeZone, offset}) => ({timeZone, label: `${cityName(timeZone)} (${formatOffset(offset)})`}));
+    const offsetLabel = (timeZone: string) => formatOffset(offsetMinutes(timeZone, noonOf(date)));
+    // ~420 offset lookups and a sort: redo them when the date or the chosen zones change, not on every hour edit
+    const zoneKey = rows.map(row => row.timeZone).join(",");
+    const zoneOptions = useMemo(() => zoneOptionsAt(noonOf(date), zoneKey.split(",")), [date, zoneKey]);
 
     const result = findOverlap(rows, date);
 
