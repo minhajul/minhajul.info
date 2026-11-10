@@ -32,7 +32,7 @@ const FAQS = [
     },
     {
         question: "What if I set both day of month and day of week?",
-        answer: "Then a day matches if either field matches, so 0 0 1 * MON runs on the 1st and on every Monday. If either field starts with *, both have to match instead. It's a long-standing cron quirk, and the explainer follows it.",
+        answer: "Then a day matches if either field matches, so 0 0 1 * MON runs on the 1st and on every Monday. If either field starts with *, both have to match instead. It's a long-standing cron quirk, and the explainer follows it. Kubernetes CronJobs only count a plain * for this, not a step like */2, so the explainer flags expressions they would read differently.",
     },
     {
         question: "Does it support seconds, L, W, # or ?",

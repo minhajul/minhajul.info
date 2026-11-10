@@ -265,6 +265,18 @@ export function describeCron(cron: Cron): string {
     return `${sentence}.`;
 }
 
+/**
+ * Classic cron counts any day field starting with `*` as unrestricted, `*\/2` included. Kubernetes
+ * CronJobs (robfig/cron, like most Go schedulers) only count a plain `*`, so for some expressions they
+ * combine the two day fields the other way. Returns how they read it then, or null when both agree.
+ */
+export function kubernetesDayRule(cron: Cron): "both" | "either" | null {
+    const classic = cron.dayOfMonth.star || cron.dayOfWeek.star;
+    const kubernetes = [cron.dayOfMonth, cron.dayOfWeek].some(field => field.parts.some(isEvery));
+    if (classic === kubernetes) return null;
+    return kubernetes ? "both" : "either";
+}
+
 // ---- Scheduling ----
 //
 // Matching runs on wall-clock time, held in a Date's UTC fields so DST can't move it. Each match is
