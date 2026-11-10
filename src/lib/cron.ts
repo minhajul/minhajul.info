@@ -108,6 +108,9 @@ function parsePart(spec: FieldSpec, text: string): Part {
     if (stepText !== undefined) {
         step = /^\d+$/.test(stepText) ? Number(stepText) : NaN;
         if (!(step >= 1)) throw new CronError(`${spec.label} step must be a whole number of at least 1, got "${stepText}".`);
+        // */100 in minutes only ever matches minute 0, so it would run hourly while reading as "every 100 minutes"
+        const size = spec.key === "dayOfWeek" ? 7 : spec.max - spec.min + 1;
+        if (step > size) throw new CronError(`${spec.label} step can be at most ${size}, got ${step}.`);
     }
 
     if (base === "*") return {kind: "all", step};
