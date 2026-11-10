@@ -5,7 +5,8 @@ type TimezoneOverlapChartProps = {
     /** Offset labels, e.g. "UTC+6", one per person. */
     offsets: string[];
     result: OverlapResult;
-    now: number;
+    /** Null hides the "Now" marker. */
+    now: number | null;
 };
 
 const HOUR = 3_600_000;
@@ -20,7 +21,7 @@ export default function TimezoneOverlapChart({people, offsets, result, now}: Tim
         left: `${percent(interval.start)}%`,
         width: `${percent(interval.end) - percent(interval.start)}%`,
     });
-    const showNow = now >= axis.start && now < axis.end;
+    const showNow = now !== null && now >= axis.start && now < axis.end;
 
     return (
         <figure>

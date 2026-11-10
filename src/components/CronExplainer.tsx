@@ -1,10 +1,11 @@
 "use client"
 
-import {useState, useSyncExternalStore} from "react";
+import {useState} from "react";
 import {CheckIcon, ClipboardIcon, ExclamationCircleIcon, InformationCircleIcon} from "@heroicons/react/20/solid";
 import {describeCron, FIELD_SPECS, kubernetesDayRule, nextRuns, parseCron, SEARCH_YEARS} from "@/lib/cron";
 import {buttonPrimary, panel} from "@/lib/styles";
 import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
+import {useNow} from "@/lib/useNow";
 
 const DEFAULT_EXPRESSION = "*/15 9-17 * * MON-FRI";
 const RUN_COUNT = 5;
@@ -20,15 +21,6 @@ const PRESETS = [
     {label: "First of the month", expression: "0 0 1 * *"},
     {label: "Every quarter", expression: "0 0 1 */3 *"},
 ];
-
-// The next runs depend on the current time and zone, so they only render in the browser.
-// The server snapshot is null, and the client one changes once a minute to keep the list current.
-const subscribeToClock = (onTick: () => void) => {
-    const id = setInterval(onTick, 1000);
-    return () => clearInterval(id);
-};
-const getCurrentMinute = () => Math.floor(Date.now() / 60_000);
-const getServerMinute = () => null;
 
 const dateFormat = new Intl.DateTimeFormat(undefined, {weekday: "short", month: "short", day: "numeric", year: "numeric"});
 const timeFormat = new Intl.DateTimeFormat(undefined, {hour: "2-digit", minute: "2-digit"});
@@ -52,7 +44,8 @@ export default function CronExplainer() {
     const [expression, setExpression] = useState(DEFAULT_EXPRESSION);
     // While the input is invalid, keep showing the last good result (dimmed) so the layout doesn't jump
     const [lastValid, setLastValid] = useState(DEFAULT_EXPRESSION);
-    const currentMinute = useSyncExternalStore(subscribeToClock, getCurrentMinute, getServerMinute);
+    // The next runs depend on the current time and zone, so they only render in the browser, updating each minute
+    const currentMinute = useNow(60_000);
     const {copied, copy} = useCopyToClipboard();
 
     const result = parseCron(expression);
@@ -73,7 +66,7 @@ export default function CronExplainer() {
         }
     };
 
-    const now = currentMinute === null ? null : new Date(currentMinute * 60_000);
+    const now = currentMinute === null ? null : new Date(currentMinute);
     const runs = now && shown.ok ? nextRuns(shown.cron, now, RUN_COUNT) : [];
     const kubernetesRule = shown.ok ? kubernetesDayRule(shown.cron) : null;
 

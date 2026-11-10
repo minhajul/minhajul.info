@@ -7,6 +7,7 @@ import TimezonePicker, {type ZoneOption} from "@/components/TimezonePicker";
 import TimezoneOverlapChart from "@/components/TimezoneOverlapChart";
 import {buttonPrimary, buttonSecondary, panel} from "@/lib/styles";
 import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
+import {useNow} from "@/lib/useNow";
 import {
     canonicalTimeZone,
     cityName,
@@ -69,7 +70,8 @@ function OverlapFinder() {
     // Not window.location: after a client-side navigation it still holds the previous page's URL during render
     const searchParams = useSearchParams();
     const [{rows, date}, setState] = useState(() => initialState(searchParams.toString()));
-    const [now] = useState(Date.now);
+    // Moves the chart's "Now" marker along each minute
+    const now = useNow(60_000);
     const {copied, copy} = useCopyToClipboard();
     const dateId = useId();
 
