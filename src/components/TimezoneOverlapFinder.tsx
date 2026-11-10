@@ -16,8 +16,11 @@ import {
     formatOffset,
     formatTimeIn,
     fromQuery,
+    isValidDate,
     listTimeZones,
     localDate,
+    MAX_DATE,
+    MIN_DATE,
     offsetMinutes,
     type OverlapResult,
     type Person,
@@ -110,11 +113,20 @@ function OverlapFinder() {
                     <h2 className="font-semibold text-foreground">Time zones & working hours</h2>
                     <div className="flex items-center gap-3">
                         <label htmlFor={dateId} className="text-xs font-medium text-subtle">Date</label>
+                        {/* Uncontrolled, so half-typed years (0002 on the way to 2027) stay in the field without being used */}
                         <input
                             id={dateId}
                             type="date"
-                            value={date}
-                            onChange={event => event.target.value && setState(s => ({...s, date: event.target.value}))}
+                            defaultValue={date}
+                            min={MIN_DATE}
+                            max={MAX_DATE}
+                            onChange={event => {
+                                const value = event.target.value;
+                                if (isValidDate(value)) setState(s => ({...s, date: value}));
+                            }}
+                            onBlur={event => {
+                                if (!isValidDate(event.target.value)) event.target.value = date;
+                            }}
                             className={`${field} font-mono`}
                         />
                     </div>
