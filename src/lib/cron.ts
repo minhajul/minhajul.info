@@ -209,7 +209,8 @@ function partPhrase(spec: FieldSpec, part: Part): string {
 
     if (part.kind === "value") return `${the}${fmt(part.value)}`;
     const every = part.step === 1 ? `every ${spec.unit}` : `every ${ordinal(part.step)} ${spec.unit}`;
-    if (part.kind === "all") return every;
+    // Days 0-7 go from Sunday round to Sunday again, which is every day, not "Sunday through Sunday"
+    if (part.kind === "all" || (spec.key === "dayOfWeek" && part.start === 0 && part.end === 7)) return every;
 
     const span = `${the}${fmt(part.start)} through ${fmt(part.end)}`;
     // Numbers need the unit to make sense: "every hour from 9 through 17"
