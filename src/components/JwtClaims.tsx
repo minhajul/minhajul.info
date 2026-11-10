@@ -33,7 +33,9 @@ const STATUS: Record<TokenStatus, { label: string; className: string }> = {
     "invalid-time": {label: "Invalid exp or nbf", className: "border-red-400/30 bg-red-400/10 text-red-400"},
 };
 
-function formatValue(value: unknown) {
+function formatValue(value: unknown, source?: string) {
+    // The number as written in the token, since parsing rounds integers past 2^53
+    if (typeof value === "number" && source) return source;
     if (typeof value === "string") return value;
     if (Array.isArray(value) && value.every((item) => typeof item === "string")) return value.join(", ");
     return JSON.stringify(value);
@@ -60,7 +62,13 @@ function TimeValue({seconds, nowSeconds}: { seconds: unknown; nowSeconds: number
     );
 }
 
-export default function JwtClaims({payload}: { payload: JsonObject }) {
+type JwtClaimsProps = {
+    payload: JsonObject;
+    /** Top-level numbers as written in the token. */
+    numbers: ReadonlyMap<string, string>;
+};
+
+export default function JwtClaims({payload, numbers}: JwtClaimsProps) {
     const nowSeconds = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const claims = STANDARD_CLAIMS.filter(({key}) => key in payload);
     const status = nowSeconds === null ? null : STATUS[tokenStatus(payload, nowSeconds)];
@@ -88,7 +96,7 @@ export default function JwtClaims({payload}: { payload: JsonObject }) {
                             <dd className="min-w-0 text-foreground wrap-anywhere">
                                 {TIME_CLAIMS.has(key)
                                     ? nowSeconds !== null && <TimeValue seconds={payload[key]} nowSeconds={nowSeconds}/>
-                                    : formatValue(payload[key])}
+                                    : formatValue(payload[key], numbers.get(key))}
                             </dd>
                         </div>
                     ))}

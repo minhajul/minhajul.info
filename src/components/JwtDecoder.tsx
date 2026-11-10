@@ -3,7 +3,7 @@
 import {useState, type ReactNode} from "react";
 import {CheckIcon, ClipboardIcon, ExclamationTriangleIcon, LockClosedIcon} from "@heroicons/react/20/solid";
 import JwtClaims from "@/components/JwtClaims";
-import {createSampleToken, decodeJwt, type DecodedJwt, type JsonObject} from "@/lib/jwt";
+import {createSampleToken, decodeJwt, type DecodedJwt} from "@/lib/jwt";
 import {JWT_SEGMENTS as SEGMENTS, type JwtSegment as Segment} from "@/lib/jwtSegments";
 import {panel} from "@/lib/styles";
 import {useCopyToClipboard} from "@/lib/useCopyToClipboard";
@@ -41,8 +41,7 @@ function Section({segment, copyText, children}: { segment: Segment; copyText: st
     );
 }
 
-function JsonSection({segment, value}: { segment: "header" | "payload"; value: JsonObject }) {
-    const json = JSON.stringify(value, null, 2);
+function JsonSection({segment, json}: { segment: "header" | "payload"; json: string }) {
     return (
         <Section segment={segment} copyText={json}>
             <pre className={`${codeBlock} ${SEGMENTS[segment].text}`}>{json}</pre>
@@ -135,14 +134,14 @@ export default function JwtDecoder() {
                     </p>
                 </div>
 
-                {jwt && <JwtClaims payload={jwt.payload}/>}
+                {jwt && <JwtClaims payload={jwt.payload} numbers={jwt.payloadNumbers}/>}
             </div>
 
             <div className="min-w-0 space-y-6">
                 {jwt ? (
                     <>
-                        <JsonSection segment="header" value={jwt.header}/>
-                        <JsonSection segment="payload" value={jwt.payload}/>
+                        <JsonSection segment="header" json={jwt.json.header}/>
+                        <JsonSection segment="payload" json={jwt.json.payload}/>
                         <Signature jwt={jwt}/>
                     </>
                 ) : (
