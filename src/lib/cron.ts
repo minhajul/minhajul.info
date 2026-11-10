@@ -120,8 +120,21 @@ function parsePart(spec: FieldSpec, text: string): Part {
     }
 
     const end = parseValue(spec, endText);
-    if (start > end) throw new CronError(`${spec.label} range ${base} goes backwards; write it as ${endText}-${startText}.`);
+    if (start > end) {
+        // Swapping the ends would change the schedule (22-2 is the night, 2-22 the day), so split it instead
+        const fix = stepText === undefined ? `write ${wrapAround(spec, start, end)}` : "split it into two ranges";
+        throw new CronError(`${spec.label} range ${base} goes backwards. Ranges can't wrap around, so ${fix}.`);
+    }
     return {kind: "range", start, end, step};
+}
+
+/** A backwards range as two forward ones: hours 22-2 become 22-23,0-2. */
+function wrapAround(spec: FieldSpec, start: number, end: number) {
+    const span = (from: number, to: number) => (from === to ? `${from}` : `${from}-${to}`);
+    if (spec.key !== "dayOfWeek") return `${span(start, spec.max)},${span(spec.min, end)}`;
+    // 7 is Sunday too, so weeks wrap through it: SAT-SUN is 6-7 and FRI-TUE is 5-7,1-2
+    if (start === 7) return span(0, end);
+    return end === 0 ? span(start, 7) : `${span(start, 7)},${span(1, end)}`;
 }
 
 function parseValue(spec: FieldSpec, text: string): number {
