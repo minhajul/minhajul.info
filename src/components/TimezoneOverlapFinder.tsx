@@ -33,7 +33,8 @@ const MIN_ROWS = 2;
 const MAX_ROWS = 5;
 // Offered in this order when adding a row, skipping zones already on the list
 const SUGGESTED_ZONES = ["America/New_York", "Europe/London", "Asia/Dhaka", "America/Los_Angeles", "Europe/Berlin", "Asia/Singapore", "Australia/Sydney", "UTC"];
-const HALF_HOURS = Array.from({length: 48}, (_, i) => i * 30);
+// Quarter hours, because some zones sit 45 minutes off the hour (Kathmandu, Chatham) and suggestions follow them
+const QUARTER_HOURS = Array.from({length: 96}, (_, i) => i * 15);
 
 type Row = Person & { id: number };
 
@@ -243,7 +244,7 @@ type HourSelectProps = {
 
 function HourSelect({id, label, value, onChange}: HourSelectProps) {
     // A shared link can hold any minute (09:10). List it too, or the select would show 00:00 instead.
-    const choices = HALF_HOURS.includes(value) ? HALF_HOURS : [...HALF_HOURS, value].sort((a, b) => a - b);
+    const choices = QUARTER_HOURS.includes(value) ? QUARTER_HOURS : [...QUARTER_HOURS, value].sort((a, b) => a - b);
     return (
         <div className="min-w-0">
             <label htmlFor={id} className={`${fieldLabel} truncate`}>{label}</label>
@@ -305,9 +306,9 @@ function Summary({people, date, result}: SummaryProps) {
         <div aria-live="polite">
             <p className="text-2xl font-semibold tracking-tight text-foreground">No overlap on this day</p>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-muted text-pretty">
-                {best ? (
+                {best && result.gapMinutes !== null ? (
                     <>
-                        The closest working hours are <span className="text-foreground">{formatDuration(best.gapMinutes)}</span> apart.{" "}
+                        The closest working hours are <span className="text-foreground">{formatDuration(result.gapMinutes)}</span> apart.{" "}
                         {describe(best)}
                         {people.length === 2 && alternative ? `, or ${describe(alternative)}.` : "."}
                     </>

@@ -17,8 +17,6 @@ export type NearMiss = {
     person: number;
     /** Positive means start later, negative means start earlier. */
     shiftMinutes: number;
-    /** Distance between their hours and everyone else's shared hours. */
-    gapMinutes: number;
     /** The overlap the shift would create (up to an hour). */
     overlapMinutes: number;
 };
@@ -35,6 +33,8 @@ export type OverlapResult = {
     totalMinutes: number;
     /** Best suggestions when there is no overlap, smallest shift first (one per person who could fix it). */
     nearMisses: NearMiss[];
+    /** When there is no overlap, the shortest distance between anyone's hours and everyone else's shared hours. */
+    gapMinutes: number | null;
 };
 
 const formatters = new Map<string, Intl.DateTimeFormat>();
@@ -195,10 +195,11 @@ const length = (i: Interval) => (i.end - i.start) / MINUTE;
 const AROUND = [-2, -1, 0, 1, 2];
 const NEAR_MISS_TARGET = 60;
 
-function nearMisses(sets: Interval[][]): NearMiss[] {
-    const best: NearMiss[] = [];
+function nearMisses(sets: Interval[][]): { suggestions: NearMiss[]; gapMinutes: number | null } {
+    const suggestions: NearMiss[] = [];
+    let closest: number | null = null;
+    if (sets.length < 2) return {suggestions, gapMinutes: null};
     sets.forEach((own, person) => {
-        if (sets.length < 2) return;
         const others = intersectAll(sets.filter((_, i) => i !== person));
         let pick: NearMiss | undefined;
         for (const a of own) {
@@ -209,13 +210,16 @@ function nearMisses(sets: Interval[][]): NearMiss[] {
                 if (a.end <= t.start) [gap, direction] = [(t.start - a.end) / MINUTE, 1];
                 else if (a.start >= t.end) [gap, direction] = [(a.start - t.end) / MINUTE, -1];
                 else continue;
-                const candidate = {person, shiftMinutes: direction * (gap + overlap), gapMinutes: gap, overlapMinutes: overlap};
+                // Tracked apart from the pick: a short window can win on shift while sitting further away
+                closest = closest === null ? gap : Math.min(closest, gap);
+                const candidate = {person, shiftMinutes: direction * (gap + overlap), overlapMinutes: overlap};
                 if (!pick || Math.abs(candidate.shiftMinutes) < Math.abs(pick.shiftMinutes)) pick = candidate;
             }
         }
-        if (pick) best.push(pick);
+        if (pick) suggestions.push(pick);
     });
-    return best.sort((p, q) => Math.abs(p.shiftMinutes) - Math.abs(q.shiftMinutes));
+    suggestions.sort((p, q) => Math.abs(p.shiftMinutes) - Math.abs(q.shiftMinutes));
+    return {suggestions, gapMinutes: closest};
 }
 
 /** Compare everyone's working hours on `date` ("YYYY-MM-DD"), laid out on the first person's day. */
@@ -231,13 +235,16 @@ export function findOverlap(people: Person[], date: string): OverlapResult {
     const windows = startingToday.length ? startingToday : shared.filter(w => w.end > axis.start && w.start < axis.end);
     const totalMinutes = windows.reduce((sum, w) => sum + length(w), 0);
 
+    const misses = windows.length ? {suggestions: [], gapMinutes: null} : nearMisses(sets);
+
     return {
         axis,
         rows: sets.map(set => clip(set, axis)),
         bands: clip(shared, axis),
         windows,
         totalMinutes,
-        nearMisses: windows.length ? [] : nearMisses(sets),
+        nearMisses: misses.suggestions,
+        gapMinutes: misses.gapMinutes,
     };
 }
 
