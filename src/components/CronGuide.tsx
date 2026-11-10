@@ -1,14 +1,13 @@
 import FaqSection, {type Faq} from "@/components/FaqSection";
 import SectionHeading from "@/components/SectionHeading";
+import {FIELD_SPECS, fieldValues, MACROS} from "@/lib/cron";
 import {panel} from "@/lib/styles";
 
-const FIELDS = [
-    {name: "Minute", values: "0–59"},
-    {name: "Hour", values: "0–23"},
-    {name: "Day of month", values: "1–31"},
-    {name: "Month", values: "1–12 or JAN–DEC"},
-    {name: "Day of week", values: "0–7 or SUN–SAT (0 and 7 are Sunday)"},
-];
+// Read from the parser, so the cheat sheet always matches what the explainer accepts
+const FIELDS = FIELD_SPECS.map((spec) => ({
+    name: spec.label,
+    values: fieldValues(spec) + (spec.key === "dayOfWeek" ? " (0 and 7 are Sunday)" : ""),
+}));
 
 const SYMBOLS = [
     {symbol: "*", title: "Any value", example: "* in hour", body: "Matches every value of the field."},
@@ -17,13 +16,19 @@ const SYMBOLS = [
     {symbol: "/", title: "Step", example: "*/15 or 10-30/5", body: "Takes every nth value of the range: minutes 0, 15, 30, 45."},
 ];
 
-const MACROS = [
-    {macro: "@yearly", same: "0 0 1 1 *"},
-    {macro: "@monthly", same: "0 0 1 * *"},
-    {macro: "@weekly", same: "0 0 * * 0"},
-    {macro: "@daily", same: "0 0 * * *"},
-    {macro: "@hourly", same: "0 * * * *"},
-];
+// Each schedule once, under its first name. Any later name for the same schedule is an alias.
+const SHORTCUTS = Object.entries(MACROS).reduce<{ macro: string; same: string; aliases: string[] }[]>((list, [macro, same]) => {
+    const first = list.find((item) => item.same === same);
+    if (first) first.aliases.push(macro);
+    else list.push({macro, same, aliases: []});
+    return list;
+}, []);
+
+// "@annually is the same as @yearly, and @midnight the same as @daily"
+const ALIAS_NOTE = SHORTCUTS
+    .flatMap(({macro, aliases}) => aliases.map((alias) => ({alias, macro})))
+    .map(({alias, macro}, i, all) => `${i > 0 && i === all.length - 1 ? "and " : ""}${alias} ${i === 0 ? "is " : ""}the same as ${macro}`)
+    .join(", ");
 
 const FAQS: Faq[] = [
     {
@@ -78,11 +83,10 @@ export default function CronGuide() {
                 <div className={`${panel} mt-6 p-5 sm:p-6`}>
                     <h3 className="font-semibold text-foreground">Shortcuts</h3>
                     <p className="mt-2 text-sm leading-6 text-muted text-pretty">
-                        Most crons accept these in place of the five fields. @annually is the same as @yearly, and
-                        @midnight the same as @daily.
+                        Most crons accept these in place of the five fields. {ALIAS_NOTE}.
                     </p>
                     <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-                        {MACROS.map((item) => (
+                        {SHORTCUTS.map((item) => (
                             <div key={item.macro} className="rounded-xl border border-line bg-background/40 p-3">
                                 <dt className="font-mono text-sm text-accent">{item.macro}</dt>
                                 <dd className="mt-1 font-mono text-sm text-muted">{item.same}</dd>
