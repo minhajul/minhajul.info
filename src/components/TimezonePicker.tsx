@@ -17,18 +17,20 @@ type TimezonePickerProps = {
     onChange: (timeZone: string) => void;
 };
 
-// Rendering all ~420 zones at once makes typing sluggish; a search narrows it down anyway
-const MAX_RESULTS = 60;
+// A virtual list only renders what's visible, so it has no room for a separate empty message.
+// This stands in as a disabled option instead.
+const NO_MATCH: ZoneOption = {timeZone: "", label: "No matching time zones"};
+const isNoMatch = (option: ZoneOption | null) => option === NO_MATCH;
 
 export default function TimezonePicker({label, value, options, onChange}: TimezonePickerProps) {
     const [query, setQuery] = useState("");
     const selected = options.find(option => option.timeZone === value) ?? null;
 
     const needle = query.trim().toLowerCase().replace(/\s+/g, "_");
-    const results = (needle
-            ? options.filter(o => `${o.timeZone} ${o.label.replace(/\s+/g, "_")}`.toLowerCase().includes(needle))
-            : options
-    ).slice(0, MAX_RESULTS);
+    const matches = needle
+        ? options.filter(o => `${o.timeZone} ${o.label.replace(/\s+/g, "_")}`.toLowerCase().includes(needle))
+        : options;
+    const results = matches.length ? matches : [NO_MATCH];
 
     return (
         <Field className="min-w-0">
@@ -38,6 +40,8 @@ export default function TimezonePicker({label, value, options, onChange}: Timezo
                 by="timeZone"
                 onChange={option => option && onChange(option.timeZone)}
                 onClose={() => setQuery("")}
+                // All ~420 zones are in the list, but only the visible ones render, so typing stays quick
+                virtual={{options: results, disabled: isNoMatch}}
             >
                 <div className="relative">
                     <ComboboxInput
@@ -56,11 +60,14 @@ export default function TimezonePicker({label, value, options, onChange}: Timezo
                     anchor="bottom start"
                     className="z-20 max-h-72 w-(--input-width) min-w-64 overflow-y-auto rounded-xl border border-line-strong bg-surface p-1.5 shadow-2xl shadow-black/50 [--anchor-gap:0.375rem] empty:invisible"
                 >
-                    {results.map(option => (
+                    {({option}: { option: ZoneOption }) => isNoMatch(option) ? (
+                        <ComboboxOption value={option} className="w-full px-2.5 py-2 text-sm text-subtle">
+                            {option.label}
+                        </ComboboxOption>
+                    ) : (
                         <ComboboxOption
-                            key={option.timeZone}
                             value={option}
-                            className="group flex cursor-pointer items-center gap-2 rounded-lg px-2.5 py-2 text-sm data-focus:bg-white/10"
+                            className="group flex w-full cursor-pointer items-center gap-2 rounded-lg px-2.5 py-2 text-sm data-focus:bg-white/10"
                         >
                             <CheckIcon aria-hidden="true" className="invisible size-4 shrink-0 text-accent group-data-selected:visible"/>
                             <span className="min-w-0">
@@ -68,9 +75,6 @@ export default function TimezonePicker({label, value, options, onChange}: Timezo
                                 <span className="block truncate font-mono text-xs text-subtle">{option.timeZone}</span>
                             </span>
                         </ComboboxOption>
-                    ))}
-                    {needle && results.length === 0 && (
-                        <p className="px-2.5 py-2 text-sm text-subtle">No matching time zones</p>
                     )}
                 </ComboboxOptions>
             </Combobox>
