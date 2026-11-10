@@ -1,4 +1,4 @@
-import {ChevronDownIcon} from "@heroicons/react/20/solid";
+import FaqSection, {type Faq} from "@/components/FaqSection";
 import SectionHeading from "@/components/SectionHeading";
 import {panel} from "@/lib/styles";
 
@@ -25,7 +25,7 @@ const MACROS = [
     {macro: "@hourly", same: "0 * * * *"},
 ];
 
-const FAQS = [
+const FAQS: Faq[] = [
     {
         question: "Which time zone are the next runs in?",
         answer: "Your browser's. The machine that runs your job uses its own time zone, which on servers and CI is often UTC, so check it before you rely on a schedule.",
@@ -92,20 +92,7 @@ export default function CronGuide() {
                 </div>
             </section>
 
-            <section>
-                <SectionHeading eyebrow="FAQ" title="Good to know"/>
-                <div className={`${panel} divide-y divide-line`}>
-                    {FAQS.map((faq) => (
-                        <details key={faq.question} className="group px-5 py-4 sm:px-6">
-                            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-foreground [&::-webkit-details-marker]:hidden">
-                                {faq.question}
-                                <ChevronDownIcon aria-hidden="true" className="size-5 shrink-0 text-subtle transition-transform group-open:rotate-180"/>
-                            </summary>
-                            <p className="mt-3 max-w-3xl text-sm leading-6 text-muted text-pretty">{faq.answer}</p>
-                        </details>
-                    ))}
-                </div>
-            </section>
+            <FaqSection faqs={FAQS}/>
         </>
     );
 }
