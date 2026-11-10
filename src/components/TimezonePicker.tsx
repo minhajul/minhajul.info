@@ -56,9 +56,11 @@ export default function TimezonePicker({label, value, options, onChange}: Timezo
                         <ChevronUpDownIcon aria-hidden="true" className="size-5"/>
                     </ComboboxButton>
                 </div>
+                {/* The anchor sets max-height inline from the space below the input, so a max-h class can't cap it.
+                    --anchor-max-height does. */}
                 <ComboboxOptions
                     anchor="bottom start"
-                    className="z-20 max-h-72 w-(--input-width) min-w-64 overflow-y-auto rounded-xl border border-line-strong bg-surface p-1.5 shadow-2xl shadow-black/50 [--anchor-gap:0.375rem] empty:invisible"
+                    className="z-20 w-(--input-width) min-w-64 overflow-y-auto rounded-xl border border-line-strong bg-surface p-1.5 shadow-2xl shadow-black/50 [--anchor-gap:0.375rem] [--anchor-max-height:18rem] empty:invisible"
                 >
                     {({option}: { option: ZoneOption }) => isNoMatch(option) ? (
                         <ComboboxOption value={option} className="w-full px-2.5 py-2 text-sm text-subtle">
