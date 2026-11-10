@@ -14,7 +14,7 @@ export type DecodedJwt = {
 
 export type DecodeResult = { ok: true; jwt: DecodedJwt } | { ok: false; error: string };
 
-export type TokenStatus = "valid" | "expired" | "not-yet-valid";
+export type TokenStatus = "valid" | "expired" | "not-yet-valid" | "invalid-time";
 
 /** The registered claims from RFC 7519, in the order they're usually read. */
 export const STANDARD_CLAIMS = [
@@ -105,6 +105,9 @@ export function decodeJwt(input: string): DecodeResult | null {
 /** Time-based validity from exp and nbf. Says nothing about the signature. */
 export function tokenStatus(payload: JsonObject, nowSeconds: number): TokenStatus {
     const {exp, nbf} = payload;
+    // RFC 7519 times must be numbers, so a server rejects a token whose exp or nbf is a string or null
+    const isTime = (value: unknown) => typeof value === "number" && Number.isFinite(value);
+    if (("exp" in payload && !isTime(exp)) || ("nbf" in payload && !isTime(nbf))) return "invalid-time";
     if (typeof exp === "number" && nowSeconds >= exp) return "expired";
     if (typeof nbf === "number" && nowSeconds < nbf) return "not-yet-valid";
     return "valid";
