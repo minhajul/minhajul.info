@@ -120,6 +120,17 @@ export function addDays(date: string, days: number) {
     return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
 }
 
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+// Date.UTC reads years 0–99 as 1900–1999, so keep well clear of them
+export const MIN_DATE = "1900-01-01";
+export const MAX_DATE = "2199-12-31";
+
+/** A real "YYYY-MM-DD" calendar date the math here can handle: no Feb 30th, no 5-digit years. */
+export function isValidDate(date: string) {
+    // Rolling Feb 30th through Date.UTC gives Mar 2nd, so a real date is one that survives the round trip
+    return DATE_PATTERN.test(date) && date >= MIN_DATE && date <= MAX_DATE && addDays(date, 0) === date;
+}
+
 /** The local date ("YYYY-MM-DD") of an instant in a zone. */
 export function localDate(timeZone: string, instant: number) {
     const p = partsIn(timeZone, instant);
@@ -260,7 +271,6 @@ export function formatDuration(minutes: number) {
 
 // --- Shareable URL state ------------------------------------------------------
 
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const HOURS_PATTERN = /^(\d{2})(\d{2})-(\d{2})(\d{2})$/;
 
 const toParam = (minutes: number) => formatClock(minutes).replace(":", "");
@@ -295,5 +305,5 @@ export function fromQuery(search: string, maxPeople: number) {
         .filter((p): p is Person => p.timeZone !== null)
         .slice(0, maxPeople);
     const date = params.get("date");
-    return {people, date: date && DATE_PATTERN.test(date) && !isNaN(Date.parse(date)) ? date : null};
+    return {people, date: date && isValidDate(date) ? date : null};
 }
