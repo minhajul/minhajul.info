@@ -137,15 +137,22 @@ export function localDate(timeZone: string, instant: number) {
     return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
 }
 
+const DAY = MINUTES_PER_DAY * MINUTE;
+
 /**
  * The UTC instant of a wall-clock time in a zone. `minutes` past 1440 roll into the next day.
- * Times skipped by a DST jump resolve to the instant just after the jump.
+ * A time skipped by a DST jump moves forward by the jump (02:30 becomes 03:30), and a
+ * repeated time picks its first occurrence, the same as JavaScript's Date does.
  */
 export function zonedToUtc(timeZone: string, date: string, minutes: number) {
     const [y, m, d] = date.split("-").map(Number);
     const wall = Date.UTC(y, m - 1, d) + minutes * MINUTE;
-    const guess = wall - offsetMinutes(timeZone, wall) * MINUTE;
-    return wall - offsetMinutes(timeZone, guess) * MINUTE;
+    // A day either side is past any switch-over near this time, so these are the offsets in play
+    const before = offsetMinutes(timeZone, wall - DAY) * MINUTE;
+    const after = offsetMinutes(timeZone, wall + DAY) * MINUTE;
+    const matches = [wall - before, wall - after].filter(instant => instant + offsetMinutes(timeZone, instant) * MINUTE === wall);
+    // No match means the time was skipped. Read with the earlier offset it lands just past the jump.
+    return matches.length ? Math.min(...matches) : wall - before;
 }
 
 export function shiftLength({start, end}: WorkHours) {
