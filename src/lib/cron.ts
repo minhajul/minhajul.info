@@ -253,12 +253,51 @@ export function describeCron(cron: Cron): string {
 }
 
 // ---- Scheduling ----
+//
+// Matching runs on wall-clock time, held in a Date's UTC fields so DST can't move it. Each match is
+// then mapped to the real moments the local clock shows it. Around DST this follows classic cron
+// (Vixie, cronie): a fixed-time job whose time is skipped runs once, right after the jump, and in a
+// repeated hour only jobs with * in the minute or hour run a second time.
 
-export function dayMatches(cron: Cron, date: Date) {
-    const dom = cron.dayOfMonth.values.has(date.getDate());
-    const dow = cron.dayOfWeek.values.has(date.getDay());
+const MINUTE_MS = 60_000;
+const DAY_MS = 24 * 60 * MINUTE_MS;
+// DST moves clocks by at most a few hours, which bounds how far wall-clock and real order can disagree
+const MAX_SHIFT_MS = 3 * 60 * MINUTE_MS;
+
+function dayMatches(cron: Cron, wall: Date) {
+    const dom = cron.dayOfMonth.values.has(wall.getUTCDate());
+    const dow = cron.dayOfWeek.values.has(wall.getUTCDay());
     // Classic cron: if either field starts with `*` both must match, otherwise either one is enough
     return cron.dayOfMonth.star || cron.dayOfWeek.star ? dom && dow : dom || dow;
+}
+
+/** The local wall-clock minute at an instant, as a UTC timestamp. */
+function wallAt(instant: number) {
+    const d = new Date(instant);
+    return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes());
+}
+
+const offsetAt = (instant: number) => -new Date(instant).getTimezoneOffset() * MINUTE_MS;
+
+/** The real instants showing a wall-clock minute: usually one, two in a repeated hour, none in a skipped one. */
+function instantsAt(wall: number) {
+    // A day either side is past any switch-over near this time, so these are the offsets in play
+    const offsets = new Set([offsetAt(wall - DAY_MS), offsetAt(wall + DAY_MS)]);
+    return [...offsets].map(offset => wall - offset).filter(instant => wallAt(instant) === wall).sort((a, b) => a - b);
+}
+
+/** The moment of the forward jump that skipped a wall-clock minute. */
+function jumpPast(wall: number) {
+    const after = offsetAt(wall + DAY_MS);
+    // Read with the new offset the skipped time lands before the jump, and with the old one after it
+    let before = wall - after;
+    let past = wall - offsetAt(wall - DAY_MS);
+    while (past - before > MINUTE_MS) {
+        const mid = before + Math.floor((past - before) / 2 / MINUTE_MS) * MINUTE_MS;
+        if (offsetAt(mid) === after) past = mid;
+        else before = mid;
+    }
+    return past;
 }
 
 /** Search window for the next runs. Long enough for leap days, short enough to stop on impossible dates like Feb 30. */
@@ -266,22 +305,37 @@ export const SEARCH_YEARS = 28;
 
 /** The next `count` run times strictly after `from`, in the runtime's local time zone. */
 export function nextRuns(cron: Cron, from: Date, count: number): Date[] {
-    const runs: Date[] = [];
-    const limit = new Date(from.getFullYear() + SEARCH_YEARS, 0, 1).getTime();
-    let d = new Date(from.getFullYear(), from.getMonth(), from.getDate(), from.getHours(), from.getMinutes() + 1);
+    const fixedTime = !cron.minute.star && !cron.hour.star;
+    const runsAt = (wall: number) => {
+        const instants = instantsAt(wall);
+        if (!instants.length) return fixedTime ? [jumpPast(wall)] : [];
+        return fixedTime ? instants.slice(0, 1) : instants;
+    };
+
+    const runs = new Set<number>();
+    let stop = Date.UTC(from.getFullYear() + SEARCH_YEARS, 0, 1);
+    // Start early: after `from` in a repeated hour, the next run can show an earlier clock time
+    let d = new Date(wallAt(from.getTime()) - MAX_SHIFT_MS);
 
     // Each step jumps to the start of the next month, day, hour or minute, so time always moves forward
-    while (runs.length < count && d.getTime() < limit) {
-        if (!cron.month.values.has(d.getMonth() + 1)) {
-            d = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    while (d.getTime() < stop) {
+        if (!cron.month.values.has(d.getUTCMonth() + 1)) {
+            d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1));
         } else if (!dayMatches(cron, d)) {
-            d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
-        } else if (!cron.hour.values.has(d.getHours())) {
-            d = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 1);
+            d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1));
+        } else if (!cron.hour.values.has(d.getUTCHours())) {
+            d = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours() + 1));
         } else {
-            if (cron.minute.values.has(d.getMinutes()) && d > from) runs.push(d);
-            d = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes() + 1);
+            if (cron.minute.values.has(d.getUTCMinutes())) {
+                for (const instant of runsAt(d.getTime())) if (instant > from.getTime()) runs.add(instant);
+                if (runs.size >= count) {
+                    // A later clock time can still be an earlier moment, so look a little past the last run needed
+                    const last = [...runs].sort((a, b) => a - b)[count - 1];
+                    stop = Math.min(stop, wallAt(last) + MAX_SHIFT_MS + MINUTE_MS);
+                }
+            }
+            d = new Date(d.getTime() + MINUTE_MS);
         }
     }
-    return runs;
+    return [...runs].sort((a, b) => a - b).slice(0, count).map(instant => new Date(instant));
 }
